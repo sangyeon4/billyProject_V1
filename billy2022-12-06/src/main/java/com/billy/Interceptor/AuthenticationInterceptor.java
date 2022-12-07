@@ -8,24 +8,26 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
-	
+	// ì¸í„°ì…‰í„° ê¸°ëŠ¥ì„ í™œìš©í•˜ê¸° ìœ„í•´ì„œ ìƒì†ë°›ìŒ
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		//·Î±×ÀÎÀ» ¾ÈÇÑ°æ¿ì´Â ·Î±×ÀÎÀ» ÇÏµµ·Ï ÇÑ´Ù.
-		//¼¼¼ÇÀ» °Ë»çÈÄ..
-		//Å¬¶óÀÌ¾ğÆ®¸¶´Ù ¼¼¼ÇÀÌ ÀÖ´Ù.. Å¬¶óÀÌ¾ğÆ®°¡ º¸³½ ÄíÅ°ÀÇ ¾ÆÀÌµğ¿Í ÀÏÄ¡ÇÏ´Â ¼¼¼ÇÀÇ °´Ã¼¸¦ °¡Á®¿Í¶ó
+
+		// ë¡œê·¸ì¸ì„ ì•ˆí•œ ê²½ìš°ëŠ” ë¡œê·¸ì¸ì„ í•˜ë„ë¡í•œë‹¤. ê¸€ì“°ê¸°,ê¸€ìì„¸íˆë³´ê¸°ëŠ” ë¡œê·¸ì¸ì„ í•´ì•¼ë§Œ!!!ì ‘ê·¼í•  ìˆ˜ ìˆë‹¤.
+		// ì„¸ì…˜ ê²€ì‚¬ í›„
+		// í´ë¼ì´ì–¸íŠ¸ë§ˆë‹¤ ì„¸ì…˜ì´ ìˆë‹¤. í´ë¼ì´ì–¸íŠ¸ê°€ ë³´ë‚¸ ì¿ í‚¤ì˜ ì•„ì´ë””ì™€ ì¼ì¹˜í•˜ëŠ” ì„¸ì…˜ì˜ ê°ì²´ë¥¼ ê°€ì ¸ì™€ë¼
 		HttpSession session = request.getSession();
-		//°¡Á®¿Â ¼¼¼Ç¿¡¼­ login º¯¼ö¸¦ Ã£¾Æ¼­ ¸®ÅÏ¹Ş¾Æ¶ó ±×·±µ¥ loginº¯¼öÀÇ ¸®ÅÏÅ¸ÀÔÀ» ¸ğ¸£´Ï ¸ğµçº¯¼öÀÇ ÃÖ»óÀ§ÀÎ Object·Î È£Ãâ
+		// ê°€ì ¸ì˜¨ ì„¸ì…˜ì—ì„œ loginì´ë¼ëŠ” ë³€ìˆ˜ë¥¼ ì°¾ì•„ì„œ ë¦¬í„´ë°›ì•„ë¼.
+		// ê·¸ëŸ°ë° loginë³€ìˆ˜ì˜ ë¦¬í„´íƒ€ì…ì„ ëª¨ë¥´ë‹ˆ ëª¨ë“  ë³€ìˆ˜ì˜ ìµœìƒìœ„ì¸ Objectë¡œ ë°›ìŒ
 		Object obj = session.getAttribute("login");
-		if(obj== null) {//·Î±×ÀÎ ¾ÈÇÑ °æ¿ì
-			response.sendRedirect(request.getContextPath()+"/login"); // ÄÁÆ®·Ñ·¯·Î °æ·Î ¹Ù²Ş
+		if (obj == null) {//ë¡œê·¸ì¸ ì•ˆí•œê²½ìš°
+			response.sendRedirect(request.getContextPath() + "/login"); //ë©”ì¸í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ë¼ - ê²½ë¡œë°”ê¿ˆ
 			return false;
 		}
-		return true;//°¡´ø±æ °¡¶ó
+		return true;//ê°€ê³ ì‹¶ì€ ê²½ë¡œë¡œ ê°€ë¼
 	}
-	
-	//ÄÁÆ®·Ñ·¯°¡ ³¡³¯¶§ µ¿ÀÛ
+
+
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

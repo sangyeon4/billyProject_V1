@@ -17,21 +17,21 @@ public class BillyDAOImpl implements IF_billyDAO{
    private SqlSession sqlSession;
    
    @Override
-   public void insertOne(BillyGoodsVO bvo) throws Exception {
-      sqlSession.insert(mapperQuery + ".insertOne",bvo); //Äõ¸® ¸ÅÇÎ ¹× ½ÇÇà
-      System.out.println(bvo.getId()+"-------DAOµğ¹ö±ë");
+   public void insertBilly(BillyGoodsVO bvo) throws Exception {
+      sqlSession.insert(mapperQuery + ".insertBilly",bvo); //billyë§µí•‘
+      System.out.println(bvo.getId()+"-------DAO(billyë“±ë¡ ë””ë²„ê¹…)");
    }
 
    @Override
-   public int selectMaxCnt() throws Exception { //¸¶Áö¸· ±Û ¹øÈ£ºÒ·¯¿À±â
-      System.out.println(sqlSession.selectOne(mapperQuery+".selectMaxCnt")+"---DAOµğ¹ö±ë(±Û¹øÈ£)");
+   public int selectMaxCnt() throws Exception { 
+      System.out.println(sqlSession.selectOne(mapperQuery+".selectMaxCnt")+"-------DAO(ê¸€ë²ˆí˜¸ë§ˆì§€ë§‰ ë””ë²„ê¹…)");
       return sqlSession.selectOne(mapperQuery+".selectMaxCnt");
    }
 
    @Override
    public void insertAttach(String filename) throws Exception {
       sqlSession.insert(mapperQuery+".billy_attach",filename);      
-      
+      System.out.println(sqlSession.insert(mapperQuery+".billy_attach",filename)+"-------DAO(íŒŒì¼ë„¤ì„ ë””ë²„ê¹…)");
    }
 
 }

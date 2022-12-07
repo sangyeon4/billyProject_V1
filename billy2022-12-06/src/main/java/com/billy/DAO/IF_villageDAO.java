@@ -6,11 +6,11 @@ import com.billy.VO.VillageVO;
 
 public interface IF_villageDAO {
 	
-	public void insertOne(VillageVO vvo);
+	public void insertVillage(VillageVO vvo);
 	
-	public List<VillageVO> selectAll();
+	public List<VillageVO> selectAllVillage();
 	
 	public int selectNum();
 	
-	public VillageVO selectOne(int vNum);
+	public VillageVO selectOneVillage(int vNum);
 }

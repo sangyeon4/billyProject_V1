@@ -1,19 +1,19 @@
 package com.billy.VO;
 
 public class BillyGoodsVO {
-   private String id; //¾ÆÀÌµğ
-   private int gNum; //±Û¹øÈ£
-   private String gTitle; //±Û Á¦¸ñ
-   private int cateNum; //Ä«µ¥°í¸®¹øÈ£
-   private String gName; //»óÇ°ÀÌ¸§
-   private String sido1; //Áö¿ªÀÌ¸§1
-   private String gugun1; //Áö¿ªÀÌ¸§2
-   private String gLoc;   //ÃÖÁ¾ Áö¿ªÀÌ¸§
-   private String gStrDate; //½ÃÀÛÀÏ
-   private String gEndDate; //Á¾·áÀÏ
-   private int gPrice; //°¡°İ 
+   private String id; 
+   private int gNum; 
+   private String gTitle; 
+   private int cateNum; 
+   private String gName; 
+   private String sido1; //ì‹œ
+   private String gugun1; //êµ°êµ¬
+   private String gLoc;   //ì‹œ+êµ°êµ¬ (ì£¼ì†Œ)
+   private String gStrDate; //ì‹œì‘ì¼
+   private String gEndDate; //ì¢…ë£Œì¼
+   private int gPrice; 
    private String gText;
-   private String[] files;   //Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍ ÆÄÀÏÀ» ¹Ù·Î ÀúÀåÇÏ´Â°ÍÀÌ ¾Æ´Ï¶ó, ÄÁÆ®·Ñ·¯°¡ ÀÛ¾÷ÇØ¼­ ¼¼ÆÃÇÑ´Ù.
+   private String[] files;   //íŒŒì¼ì´ë¦„ (ë°°ì—´)
    
    public String[] getFiles() {
       return files;

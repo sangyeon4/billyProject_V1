@@ -16,13 +16,13 @@ public class VillageServiceImpl implements IF_villageService{
 	private IF_villageDAO villageDao;
 
 	@Override
-	public void insertOne(VillageVO vvo) {
-		villageDao.insertOne(vvo);
+	public void insertVillage(VillageVO vvo) {
+		villageDao.insertVillage(vvo);
 	}
 
 	@Override
-	public List<VillageVO> selectAll() {
-		return villageDao.selectAll();
+	public List<VillageVO> selectAllVillage() {
+		return villageDao.selectAllVillage();
 	}
 
 	@Override
@@ -31,8 +31,8 @@ public class VillageServiceImpl implements IF_villageService{
 	}
 
 	@Override
-	public VillageVO selectOne(int vNum) {
-		return villageDao.selectOne(vNum);
+	public VillageVO selectOneVillage(int vNum) {
+		return villageDao.selectOneVillage(vNum);
 	}
 
 }

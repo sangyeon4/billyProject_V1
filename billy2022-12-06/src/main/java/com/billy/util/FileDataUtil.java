@@ -21,8 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileDataUtil {
    
-   //È®ÀåÀÚ Àú 3°³¸¸ °¡´ÉÇÏ°Ô ÇÏ°Ú´Ù°í Á¤ÀÇÇÑ°ÅÀÓ. 
-   //Çã¿ëÇÏ´Â È®ÀåÀÚ Á¤ÀÇ¸¦ ÇÑ °Í.(½ÇÁ¦ ½Ç½À¿¡¼­´Â »ç¿ëÇÏÁö ¾Ê°Ú½À´Ï´Ù~)
+	//í™•ì¥ì ì € 3ê°œë§Œ ê°€ëŠ¥í•˜ê²Œ í•˜ê² ë‹¤ê³  ì •ì˜í•œê±°ì„. 
+	//í—ˆìš©í•˜ëŠ” í™•ì¥ì ì •ì˜ë¥¼ í•œ ê²ƒ.(ì‹¤ì œ ì‹¤ìŠµì—ì„œëŠ” ì‚¬ìš©í•˜ì§€ ì•Šê² ìŠµë‹ˆë‹¤~)
    private ArrayList<String> extNameArray = new ArrayList<String>() 
    {
       {
@@ -30,9 +30,9 @@ public class FileDataUtil {
          add("jpg");
          add("png");
       }
-   };   //<-- ÇöÀç ÄÚµå¿¡¼­´Â È°¿ëÇÏÁö¾Ê´Â´Ù. ¼±¾ğ¸¸ ÇßÀ»»Ó, µ¿ÀÛÇÏÁö ¾Ê´Â´Ù. Àı´ë ¹Ì¸® ¿¹Ãø±İÁö!!! 
+   };   //<-- í˜„ì¬ ì½”ë“œì—ì„œëŠ” í™œìš©í•˜ì§€ì•ŠëŠ”ë‹¤. ì„ ì–¸ë§Œ í–ˆì„ë¿, ë™ì‘í•˜ì§€ ì•ŠëŠ”ë‹¤. ì ˆëŒ€ ë¯¸ë¦¬ ì˜ˆì¸¡ê¸ˆì§€!!! 
    
-   //Ã·ºÎÆÄÀÏ ¾÷·Îµå °æ·Î º¯¼ö°ªÀ¸·Î °¡Á®¿È servlet-context.xml
+   //ì²¨ë¶€íŒŒì¼ ì—…ë¡œë“œ ê²½ë¡œ ë³€ìˆ˜ê°’ìœ¼ë¡œ ê°€ì ¸ì˜´ servlet-context.xml
    @Resource(name="uploadPath")
    private String uploadPath;
    
@@ -43,12 +43,11 @@ public class FileDataUtil {
    public void setUploadPath(String uploadPath) {
       this.uploadPath = uploadPath;
    }
-
    /**
-    * °Ô½Ã¹° »ó¼¼º¸±â¿¡¼­ Ã·ºÎÆÄÀÏ ´Ù¿î·Îµå ¸Ş¼­µå ±¸Çö(°øÅë)
+    * ê²Œì‹œë¬¼ ìƒì„¸ë³´ê¸°ì—ì„œ ì²¨ë¶€íŒŒì¼ ë‹¤ìš´ë¡œë“œ ë©”ì„œë“œ êµ¬í˜„(ê³µí†µ)
     */
    @RequestMapping(value="/download", method=RequestMethod.GET)
-   @ResponseBody  //¾î¶² µ¥ÀÌÅÍ¸¦ body¿¡ Æ÷ÇÔÇÏ¿© Àü¼ÛÇÏ°íÀÚÇÒ¶§ ¾¸. view ÁöÁ¤ÇÏÁö¾Ê°í ¹Ù·Î Å¬¶óÀÌ¾ğÆ®¿äÃ»À¸·Î ÀÀ´ä/
+   @ResponseBody  //ì–´ë–¤ ë°ì´í„°ë¥¼ bodyì— í¬í•¨í•˜ì—¬ ì „ì†¡í•˜ê³ ìí• ë•Œ ì”€. view ì§€ì •í•˜ì§€ì•Šê³  ë°”ë¡œ í´ë¼ì´ì–¸íŠ¸ìš”ì²­ìœ¼ë¡œ ì‘ë‹µ/
    public FileSystemResource fileDownload(@RequestParam("filename") String fileName, HttpServletResponse response) {
       File file = new File(uploadPath + "/" + fileName);
       response.setContentType("application/download; utf-8");
@@ -57,24 +56,24 @@ public class FileDataUtil {
    }
    
    /**
-    * ÆÄÀÏ ¾÷·Îµå ¸Ş¼­µå(°øÅë)
+    * íŒŒì¼ ì—…ë¡œë“œ ë©”ì„œë“œ(ê³µí†µ)
     * @throws IOException 
     */
    public String[] fileUpload(MultipartFile[] file) throws IOException {
-      String[] files = new String[file.length];
-      for(int i = 0 ; i < file.length ; i++) {
-        if(file[i].getOriginalFilename()!="") {   //½ÇÁ¦ file°´Ã¼°¡ Á¸ÀçÇÑ´Ù¸é
-           String originalName = file[i].getOriginalFilename();//È®ÀåÀÚ¸¦ °¡Á®¿À±âÀ§ÇØ ÀüÃ¼ ÆÄÀÏ¸íÀ» °¡Á®¿È
-            UUID uid = UUID.randomUUID();//·£´ı¹®ÀÚ ±¸ÇÏ±â(°°ÀºÆÄÀÏ¸í°¡Áø ÆÄÀÏÀ» ´Ù¸£°Ô ÀúÀåÇÏ±â À§ÇØ)
-            String saveName = uid.toString() + "." + originalName.split("\\.")[1];//ÇÑ±Û ÆÄÀÏ¸í Ã³¸® ¶§¹®¿¡...  
-            //String[] files = new String[] {saveName};//Çüº¯È¯ files[0]¿¡ ÆÄÀÏ¸íÀÌ µé¾î°£´Ù.
-            byte[] fileData = file[i].getBytes();
-            File target = new File(uploadPath, saveName);
-            FileCopyUtils.copy(fileData, target);   // /tmp·Î Ä«ÇÇÇß´Ù
-            files[i]=saveName; 
-        }        
-     }      
-      return files;   //ÄÁÆ®·Ñ·¯·Î ³Ñ°Ü¶ó
+	   String[] files = new String[file.length];
+	   for(int i = 0 ; i < file.length ; i++) {
+		  if(file[i].getOriginalFilename()!="") {	//ì‹¤ì œ fileê°ì²´ê°€ ì¡´ì¬í•œë‹¤ë©´
+			  String originalName = file[i].getOriginalFilename();//í™•ì¥ìë¥¼ ê°€ì ¸ì˜¤ê¸°ìœ„í•´ ì „ì²´ íŒŒì¼ëª…ì„ ê°€ì ¸ì˜´
+		      UUID uid = UUID.randomUUID();//ëœë¤ë¬¸ì êµ¬í•˜ê¸°(ê°™ì€íŒŒì¼ëª…ê°€ì§„ íŒŒì¼ì„ ë‹¤ë¥´ê²Œ ì €ì¥í•˜ê¸° ìœ„í•´)
+		      String saveName = uid.toString() + "." + originalName.split("\\.")[1];//í•œê¸€ íŒŒì¼ëª… ì²˜ë¦¬ ë•Œë¬¸ì—...  
+		      //String[] files = new String[] {saveName};//í˜•ë³€í™˜ files[0]ì— íŒŒì¼ëª…ì´ ë“¤ì–´ê°„ë‹¤.
+		      byte[] fileData = file[i].getBytes();
+		      File target = new File(uploadPath, saveName);
+		      FileCopyUtils.copy(fileData, target);	// /tmpë¡œ ì¹´í”¼í–ˆë‹¤
+		      files[i]=saveName; 
+		  }		  
+	  }      
+      return files;	//ì»¨íŠ¸ë¡¤ëŸ¬ë¡œ ë„˜ê²¨ë¼
    }
 
    public ArrayList<String> getExtNameArray() {

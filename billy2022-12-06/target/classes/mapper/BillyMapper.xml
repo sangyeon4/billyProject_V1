@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.billy.DAO.IF_billyDAO">
 
-   <insert id="insertOne" parameterType="com.billy.VO.BillyGoodsVO">
+   <insert id="insertBilly" parameterType="com.billy.VO.BillyGoodsVO">
       insert into billyGoods values(#{id},#{gNum},#{cateNum},#{gName},#{gLoc},#{gStrDate},#{gEndDate},#{gPrice},#{gText}) 
    </insert>
    <insert id="billy_attach" parameterType="String">
