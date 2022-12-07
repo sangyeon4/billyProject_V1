@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.billy.DAO.IF_villageDAO">
+	<insert id="insertOne" parameterType="com.billy.VO.VillageVO">
+		insert into villageBoard values(#{vNum},#{vTitle},#{vText},#{vId},default,default)
+	</insert>
+	
+	<insert id="insertAttach" parameterType="String">
+		insert into villageAttach values ((select max(vNum) from villageBoard), #{fName},default)
+	</insert>
+	
+	<select id="selectAll" resultType="com.billy.VO.VillageVO">
+		select * from villageBoard
+	</select>
+	
+	<select id="selectNum" resultType="int">
+		select max(vNum) from villageBoard
+	</select>
+	
+	<select id="selectAttach" resultType="String">
+		select fName from villageAttach where vNum = #{vNum}
+	</select>
+	
+	<select id="selectOne" resultType="com.billy.VO.VillageVO">
+		select * from villageBoard where vNum = #{vNum}
+	</select>
+</mapper>
