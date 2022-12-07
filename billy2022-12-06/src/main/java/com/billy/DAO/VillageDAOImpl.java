@@ -18,23 +18,29 @@ public class VillageDAOImpl implements IF_villageDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public void insertOne(VillageVO vvo) {
-		sqlSession.insert(mapperQuery + ".insertOne",vvo);
+	public void insertVillage(VillageVO vvo) {
+		sqlSession.insert(mapperQuery + ".insertVillage",vvo);
+		System.out.println(sqlSession.insert(mapperQuery + ".insertVillage",vvo)+"--DAO단 빌리지인서트 디버깅");
+		
 	}
 
 	@Override
-	public List<VillageVO> selectAll() {
-		return sqlSession.selectList(mapperQuery + ".selectAll");
+	public List<VillageVO> selectAllVillage() {
+		System.out.println(sqlSession.selectList(mapperQuery + ".selectAllVillage")+"--DAO단 빌리지전체보기 디버깅");
+		return sqlSession.selectList(mapperQuery + ".selectAllVillage");	
 	}
 
 	@Override
 	public int selectNum() {
+		System.out.println(sqlSession.selectOne(mapperQuery + ".selectNum")+"--DAO단 글번호가져오기 디버깅");
 		return sqlSession.selectOne(mapperQuery + ".selectNum");
+	
 	}
 
 	@Override
-	public VillageVO selectOne(int vNum) {
-		return sqlSession.selectOne(mapperQuery + ".selectOne",vNum);
+	public VillageVO selectOneVillage(int vNum) {
+		System.out.println(sqlSession.selectOne(mapperQuery + ".selectOneVillage",vNum)+"--DAO단 글자세히보기 디버깅");
+		return sqlSession.selectOne(mapperQuery + ".selectOneVillage",vNum);
 	}
 
 }

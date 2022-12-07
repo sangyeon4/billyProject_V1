@@ -13,14 +13,14 @@ public class BillyMemberServiceImpl implements IF_billyMemberService{
    @Inject
    private IF_billyMemberDAO bmdao;
    @Override
-   public void insertOne(BillyMemberVO bmvo) throws Exception {
-      System.out.println(bmvo.getEmail()+"--¼­ºñ½º´Üinsert");
-      bmdao.insertOne(bmvo);
+   public void insertMember(BillyMemberVO bmvo) throws Exception {
+      System.out.println(bmvo.getEmail()+"--serviceë‹¨ íšŒì›ê°€ì… ë””ë²„ê¹…");
+      bmdao.insertMember(bmvo);
       
    }
    @Override
    public int chkId(String id) throws Exception {
-      System.out.println(id+"--¼­ºñ½º´ÜidÁßº¹");
+      System.out.println(id+"--serviceë‹¨ ì•„ì´ë”” ì¤‘ë³µì²´í¬");
       return bmdao.chkId(id);
    }
 

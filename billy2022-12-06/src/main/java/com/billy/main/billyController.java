@@ -42,7 +42,7 @@ public class billyController {
       //객체로 받을 때는 파라미터 이름과 객체의 변수의 이름이 일치하고  getter,setter가 있어야한다.>>자동매핑
       System.out.println(bmvo.getName()+"---디버깅용도");
       
-      bmsv.insertOne(bmvo);
+      bmsv.insertMember(bmvo);
       return "redirect:/home";
    }
     
@@ -83,7 +83,7 @@ public class billyController {
       System.out.println(bvo.getgPrice());
       String[] fileNames = fileDataUtil.fileUpload(file);
       bvo.setFiles(fileNames);
-      bsrv.insertOne(bvo);         
+      bsrv.insertBilly(bvo);         
 //      return "redirect:/billyViewAll";
       return "billy/login";
    }

@@ -16,15 +16,15 @@ public class BillyMemberDAOImpl implements IF_billyMemberDAO {
    private SqlSession sqlSession;
    
    @Override
-   public void insertOne(BillyMemberVO bmvo) throws Exception {
-      System.out.println(bmvo.getId()+"---dao�� �μ�Ʈüũ");
-      sqlSession.insert(mapperQuery+".insertOne",bmvo);
+   public void insertMember(BillyMemberVO bmvo) throws Exception {
+      System.out.println(bmvo.getId()+"---dao단 회원가입 디버깅");
+      sqlSession.insert(mapperQuery+".insertMember",bmvo);
       
    }
 
    @Override
    public int chkId(String id) throws Exception {   
-      System.out.println(id+"---dao�� idüũ");
+      System.out.println(id+"---dao단 id중복체크 디버깅");
       return sqlSession.selectOne(mapperQuery+".chkId",id);
    }
    

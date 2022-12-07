@@ -21,7 +21,7 @@ public class villageController {
 	
 	@RequestMapping(value = "/villageBoard", method = RequestMethod.GET)
 	public String villageBoard(Locale locale, Model model) {
-		List<VillageVO> list = ivs.selectAll();
+		List<VillageVO> list = ivs.selectAllVillage();
 		model.addAttribute("vList",list);
 		return "billy/villageBoard";
 	}
@@ -35,13 +35,13 @@ public class villageController {
 	
 	@RequestMapping(value = "/villageAction", method = RequestMethod.POST)
 	public String villageAction(Locale locale, Model model, VillageVO vvo) {
-		ivs.insertOne(vvo);
+		ivs.insertVillage(vvo);
 		return "redirect:/villageBoard";
 	}
 	
 	@RequestMapping(value = "/villageView", method = RequestMethod.GET)
 	public String villageView(Locale locale, Model model, int vNum) {
-		VillageVO vvo = ivs.selectOne(vNum);
+		VillageVO vvo = ivs.selectOneVillage(vNum);
 		model.addAttribute("vvo",vvo);
 		return "village/villageView";
 	}

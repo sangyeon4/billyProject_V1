@@ -11,13 +11,13 @@ import com.billy.VO.BillyGoodsVO;
 @Service
 public class BillyServiceImpl implements IF_billyService {
    
-   @Inject   //≥™ dao¥‹¿Ã « ø‰«ÿ ¡÷¿‘«ÿ¡‡
+   @Inject   
    private IF_billyDAO billyDao;
 
    @Override
-   public void insertOne(BillyGoodsVO bvo) throws Exception { //∫Ù∏ÆµÓ∑œ
-      billyDao.insertOne(bvo);   
-      System.out.println(bvo.getId()+"-------serviceµπˆ±Î");
+   public void insertBilly(BillyGoodsVO bvo) throws Exception { 
+      billyDao.insertBilly(bvo);   
+      System.out.println(bvo.getId()+"-------serviceÎã® ÎπåÎ¶¨Îì±Î°ù ÎîîÎ≤ÑÍπÖ");
       String [] fname= bvo.getFiles();
       if(fname != null) {
          for(int i = 0 ; i < fname.length; i++) {
@@ -31,8 +31,8 @@ public class BillyServiceImpl implements IF_billyService {
 
    @Override
    public int selectMaxCnt() throws Exception {
-      System.out.println(billyDao.selectMaxCnt()+"---serviceµπˆ±Î");
-      return billyDao.selectMaxCnt()+1; //∏∂¡ˆ∏∑ ±€π¯»£ø°º≠ +1
+      System.out.println(billyDao.selectMaxCnt()+"---service ÎπåÎ¶¨ Í∏ÄÎ≤àÌò∏ ÎîîÎ≤ÑÍπÖ");
+      return billyDao.selectMaxCnt()+1; //DBÏóêÏÑú Í∞ÄÏ†∏Ïò® Í∞íÏóêÏÑú +1
    }
 
 }

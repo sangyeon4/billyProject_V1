@@ -20,7 +20,7 @@ public class userLoginController {
 			}
 			session.setAttribute("login", id);
 		}else {
-			System.out.println("·Î±×ÀÎ ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 		}
 		return "redirect:/home";
 	}
