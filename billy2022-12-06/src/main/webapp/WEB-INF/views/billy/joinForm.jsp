@@ -63,7 +63,6 @@
                   class="form-text"> ID는 8-20자, 문자와 숫자를 포함하여야 합니다. </span></td>
                   <td>
                   <input type="button" class="btn btn-primary" id="idChk"value="아이디 중복확인">
-                  <img src="resources/img/chk.png" id="id_check_sucess" width="30 height="30" style="display: none;">
                   </td>
 
             </tr>
@@ -91,7 +90,9 @@
                <td align=center>별명</td>
                <td><input type="text" name="name" id="name"
                   class="form-control" aria-describedby="nameHelpInline"> <span
-                  id="nameHelpInline" class="form-text"></span></td></td>
+                  id="nameHelpInline" class="form-text"></span></td>
+                  <td><input type="button" class="btn btn-primary" id="nameChk" value="닉네임 중복확인">
+            	  </td>
             </tr>
             <tr>
                <td align=center>Email</td>
@@ -159,102 +160,146 @@
         }).open();
     }
      //-----------------------유효성 검사 완료해야 회원가입되게---------------------------------//
-    function joinform_check(){
+     var idChkFlag = false;
+     var nameChkFlag = false;
+     function joinform_check(){
+    	
+    	 //--id
         var inID = document.getElementById('id').value;
-        if(inID==""){   //아이디값이 없다면
+        if(inID==""){   //아이디값이 없다면 넘어가지않게
            document.getElementById('idHelpInline').innerHTML="<span style='color: red;'>ID를 입력해주세요.</span>"
            return false;
-        }
+        }        
         var chkWord = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{8,20}$/;
-        if(!chkWord.test(inID)){   //유효성이 어긋나면
+        if(!chkWord.test(inID)){   //유효성이 어긋나면 넘어가지않게
            document.getElementById('idHelpInline').innerHTML="<span style='color: red;'>ID는 8-20자, 문자와 숫자를 포함하여야 합니다.</span>"
            return false;
         }
+       	if(idChkFlag==false){	//중복확인을 안하면 넘어가지않게
+       		alert('ID중복확인이 필요합니다');
+       		return false;
+       	}
         
+        //--비밀번호
         var inPwd = document.getElementById('pwd').value;
-        if(inPwd==""){   //비밀번호값이 없다면
+        if(inPwd==""){   //비밀번호값이 없다면 넘어가지않게
            document.getElementById('pwdHelpInline').innerHTML="<span style='color: red;'>비밀번호를 입력해주세요.</span>";
            return false;
         }
         var chkPwd =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$!@#$%/^&*?<>|+=}{])[A-Za-z\d$!@#$%/^&*?<>|+=}{]{8,20}$/;
-        if(!chkPwd.test(inPwd)){   //유효성 어긋나면
+        if(!chkPwd.test(inPwd)){   //유효성 어긋나면 넘어가지않게
            document.getElementById('pwdHelpInline').innerHTML="<span style='color: red;'>비밀번호형식이 맞지않습니다.</span>";
            return false;
         }
         
+        //--비밀번호확인
         var inPwdChk = document.getElementById('pwdChk').value;
-        if(inPwdChk==""){   //비밀번호확인값이 없다면
+        if(inPwdChk==""){   //비밀번호확인값이 없다면 넘어가지않게
            document.getElementById('pwdChkHelpInline').innerHTML ="<span style='color: red;'>비밀번호를 한번 더 입력해주세요.</span>";
            return false;
         }
-        if(inPwd!=inPwd){   //일치하지않는다면
+        if(inPwd!=inPwd){   //일치하지않는다면 넘어가지않게
            document.getElementById('pwdChkHelpInline').innerHTML ="<span style='color: red;'>비밀번호가 일치하지 않습니다!</span>";
            return false;
         }
         
+        //--전화번호
         var inTel = document.getElementById('tel').value;
-        if(inTel==""){   //전화번호값이 없다면
+        if(inTel==""){   //전화번호값이 없다면 넘어가지않게
            document.getElementById('telHelpInline').innerHTML ="<span style='color: red;'>전화번호를 입력해주세요.</span>";
            return false;
         }
-      var chkTel =  /^010([0-9]{8})$/;
-        if(!chkTel.test(inTel)){   //전화번호유효성이 안맞다면
+      	var chkTel =  /^010([0-9]{8})$/;
+        if(!chkTel.test(inTel)){   //전화번호유효성이 안맞다면 넘어가지않게
            document.getElementById('telHelpInline').innerHTML ="<span style='color: red;'>전화번호 형식이 올바르지 않습니다!</span>";
            return false;
         }
         
+        //--별명(공사중)
         var inName = document.getElementById('name').value;
-        if(inName==""){   //닉네임 값이 없다면
-           document.getElementById('nameHelpInline').innerHTML ="<span style='color: red;'>닉네임을 입력해주세요</span>";
+        if(inName==""){   //값이 없다면 넘어가지않게
+           document.getElementById('idHelpInline').innerHTML="<span style='color: red;'>닉네임을 입력해주세요.</span>"
            return false;
-        }else{         //값이 있다면
-           document.getElementById('nameHelpInline').innerHTML ="<span style='color: green;'>사용가능</span>";
         }
+        if(nameChkFlag==false){	//중복확인을 안하면 넘어가지않게
+       		alert('닉네임 중복확인이 필요합니다');
+       		return false;
+       	}
         
+        //--주소
         var inLoc = document.getElementById('sample5_address').value;
-        if(inLoc==""){   //지역값이없다면
+        if(inLoc==""){   //주소값이없다면 넘어가지않게
            document.getElementById('locHelpInline').innerHTML ="<span style='color: red;'>주소를 입력해주세요</span>";
            return false;
+        }else{
+        	document.getElementById('locHelpInline').innerHTML ="";
         }
-              
+        
+        //--이메일
         var inEmail = document.getElementById('email').value;
-        if(inEmail==""){   //이메일값이 없다면
+        if(inEmail==""){   //이메일값이 없다면 넘어가지않게
            document.getElementById('emailHelpInline').innerHTML ="<span style='color: red;'>이메일을 입력해주세요</span>";
            return false;
         }
         var chkEmail =  /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;;
-        if(!chkEmail.test(inEmail)){
+        if(!chkEmail.test(inEmail)){	//이메일 유효성맞지않으면 넘어가지않게
            document.getElementById('emailHelpInline').innerHTML ="<span style='color: red;'>이메일 형식이 맞지않습니다!</span>";
            return false;
         }else{
            document.getElementById('emailHelpInline').innerHTML ="<span style='color: green;'>사용가능</span>";
         }
         
+        //--비밀번호질문
         var inPwdQuiz = document.getElementById('pwdQuiz').value;
-        if(inPwdQuiz==""){
+        if(inPwdQuiz==""){	//질문을 선택하지않으면 넘어가지않게
            alert('비밀번호 찾기 질문을 선택후 답을 입력해주세요.');
            return false;
         }
+        
+        //--비밀번호질문 답변
         var inPwdAnswer = document.getElementById('answer').value;
-        if(inPwdAnswer==""){
+        if(inPwdAnswer==""){	//비밀번호 질문 답변을 입력하지않으면 넘어가지않게
            document.getElementById('answerHelpInline').innerHTML ="<span style='color: red;'>질문의 답을 입력해주세요.</span>";
            return false;
         }else{
            document.getElementById('answerHelpInline').innerHTML ="";
         } 
         
+        //--모든게 만족하면 submit해라
         document.frm.submit();
      }
-     
-     
-     
+         
      
     //-----------------------id유효성체크---------------------------------//
     document.getElementById('id').onchange = () =>{
         var inID = document.getElementById('id').value;       
         var chkWord = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{8,20}$/;
-        if(chkWord.test(inID)){         
-           document.getElementById('idHelpInline').innerHTML ="<span style='color: green;'>사용가능</span>";
+        if(chkWord.test(inID)){      
+           document.getElementById('idHelpInline').innerHTML ="<span style='color: green;'>ID중복검사를 해주세요</span>";
+          //--------유효성 검사를 통과하면 id중복체크가 가능하게-------//
+           $('#idChk').click(function() {
+               var id = $('#id').val(); 
+               var data = {
+                  id : id
+               } 
+               $.ajax({
+                  type : "post",
+                  url : "chkId",
+                  data : data,
+                  success : function(result) {
+                     if (result != 'fail') {
+                        document.getElementById('idHelpInline').innerHTML ="<span style='color: green;'>사용가능한 아이디입니다</span>";
+                        document.getElementById('id').readOnly=true;
+                        idChkFlag = true;
+                        $('#idChk').hide();
+                     }else {
+                        document.getElementById('idHelpInline').innerHTML ="<span style='color: red;'>이미 사용중인 ID입니다!</span>";
+                     }// success 종료
+                  }
+               }); // ajax 종료   
+
+            });// function 종료
+            
         }else if(inID==''){
            document.getElementById('idHelpInline').innerHTML="<span style='color: red;'>ID는 8-20자, 문자와 숫자를 포함하여야 합니다.</span>";
     
@@ -263,35 +308,6 @@
            inID.value='';
         }
      }
-  //-----------------------id중복체크---------------------------------//
-      $('#idChk').click(function() {
-         console.log("keyup 테스트");
-         var id = $('#id').val(); // .id_input에 입력되는 값
-         var data = {
-            id : id
-         } // '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
-         if ($('#id').val() == '') {
-            document.getElementById('idHelpInline').innerHTML ="<span style='color: red;'>이미 존재하는 ID입니다!</span>";
-             return;
-           }
-         $.ajax({
-            type : "post",
-            url : "idChk",
-            data : data,
-            success : function(result) {
-               if (result != 'fail') {
-                  document.getElementById('idHelpInline').innerHTML ="<span style='color: green;'>사용가능한 아이디입니다</span>";
-                  document.getElementById('id').readOnly=true;
-                  $('#id_check_sucess').show();
-                  $('#idChk').hide();
-               } else {
-                  document.getElementById('idHelpInline').innerHTML ="<span style='color: red;'>ID를 입력하세요!</span>";
-               }// success 종료
-            }
-         }); // ajax 종료   
-
-      });// function 종료
-
     
    //-----------------------비밀번호 유효성체크 & 비밀번호 확인---------------------------------//
    document.getElementById('pwd').onchange = () =>{
@@ -325,12 +341,42 @@
          } 
    }
    
+  //-----------------------닉네임 유효성체크---------------------------------//
+  document.getElementById('name').onchange = () =>{
+	  var inName = document.getElementById('name').value;
+	  if(inName!=""){
+		  document.getElementById('nameHelpInline').innerHTML ="<span style='color: green;'>닉네임 중복확인을 해주세요</span>"; 
+		  $('#nameChk').click(function() {
+              var name = $('#name').val();
+              var data = {
+              	name : name
+              } 
+              $.ajax({
+                 type : "post",
+                 url : "chkName",
+                 data : data,
+                 success : function(result) {
+                    if (result != 'fail') {
+                       document.getElementById('nameHelpInline').innerHTML ="<span style='color: green;'>사용가능한 닉네임입니다</span>";
+                       document.getElementById('name').readOnly=true;
+                       nameChkFlag = true;
+                       $('#nameChk').hide();
+                    }else {
+                       document.getElementById('nameHelpInline').innerHTML ="<span style='color: red;'>이미 사용중인 닉네임입니다!</span>";
+                    }// success 종료
+                 }
+              }); // ajax 종료   
+
+           });// function 종료
+	  }
+  	}
+  
   //-----------------------Email 유효성체크---------------------------------//
    document.getElementById('email').onchange = () =>{
       var inEmail = document.getElementById('email').value;
       var chkEmail =  /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;;
       if(chkEmail.test(inEmail)){
-         document.getElementById('emialHelpInline').innerHTML ="<span style='color: green;'>사용가능</span>";
+         document.getElementById('emailHelpInline').innerHTML ="<span style='color: green;'>사용가능</span>";
       }else{
          document.getElementById('emailHelpInline').innerHTML ="<span style='color: red;'>이메일 형식이 올바르지 않습니다!</span>";
       }  

@@ -24,12 +24,13 @@ public class billyController {
    
    @Inject      // 나 서비스 주입
    private IF_billyService bsrv;
-   
+
    @Inject      // 나 서비스 주입
    private IF_billyMemberService bmsv;
    
+
    @Inject
-   private FileDataUtil fileDataUtil;
+   private FileDataUtil1 fileDataUtil1;
 
    @RequestMapping(value = "/joinForm", method = RequestMethod.GET)
    public String joinForm(Locale locale, Model model) {
@@ -64,6 +65,7 @@ public class billyController {
       return "billy/login";
    }
    
+
    @RequestMapping(value = "/billyForm", method = RequestMethod.GET)
    public String billyForm(Locale locale, Model model) throws Exception {
       int billyGnum=bsrv.selectMaxCnt();
@@ -81,7 +83,7 @@ public class billyController {
       System.out.println(bvo.getgLoc());
       System.out.println(bvo.getCateNum());
       System.out.println(bvo.getgPrice());
-      String[] fileNames = fileDataUtil.fileUpload(file);
+      String[] fileNames = fileDataUtil1.fileUpload(file);
       bvo.setFiles(fileNames);
       bsrv.insertBilly(bvo);         
 //      return "redirect:/billyViewAll";
