@@ -27,8 +27,7 @@ public class billyController {
 
    @Inject      // 나 서비스 주입
    private IF_billyMemberService bmsv;
-   
-
+  
    @Inject
    private FileDataUtil1 fileDataUtil1;
 
