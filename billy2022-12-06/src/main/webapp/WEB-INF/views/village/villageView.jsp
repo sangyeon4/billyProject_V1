@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 }
 
 #joinTop {
-	margin-left: 500px;
+	margin-left: 250px;
 }
 
 </style>
@@ -44,12 +45,19 @@
             </tr>
             <tr>
                <th>내용</th>
-               <td><input type="text" name="vText" class="form-control" value="${vvo.vText}" readonly></td>
+               <td class="form-control">
+                ${vvo.vText}
+                <br>
+                <c:forEach items="${attach}" var="fname">
+               		<img src="download2?filename=${fname}">
+               		<br>
+               	</c:forEach>
+               </td>
             </tr>
          </table>
          <br>
          <br>
-         <input type="button" class="btn btn-primary" value="창닫기" onclick="location.href='villageBoard'">
+         <input type="button" class="btn btn-primary" value="창닫기" onclick="window.close()">
    </div>
 </body>
 </html>

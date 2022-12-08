@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class FileDataUtil {
+public class FileDataUtil2 {
    
 	//확장자 저 3개만 가능하게 하겠다고 정의한거임. 
 	//허용하는 확장자 정의를 한 것.(실제 실습에서는 사용하지 않겠습니다~)
@@ -33,24 +32,24 @@ public class FileDataUtil {
    };   //<-- 현재 코드에서는 활용하지않는다. 선언만 했을뿐, 동작하지 않는다. 절대 미리 예측금지!!! 
    
    //첨부파일 업로드 경로 변수값으로 가져옴 servlet-context.xml
-   @Resource(name="uploadPath")
-   private String uploadPath;
+   @Resource(name="uploadPath2")
+   private String uploadPath2;
    
-   public String getUploadPath() {
-      return uploadPath;
+   public String getuploadPath2() {
+      return uploadPath2;
    }
 
-   public void setUploadPath(String uploadPath) {
-      this.uploadPath = uploadPath;
+   public void setuploadPath2(String uploadPath2) {
+      this.uploadPath2 = uploadPath2;
    }
    /**
     * 게시물 상세보기에서 첨부파일 다운로드 메서드 구현(공통)
     */
-   @RequestMapping(value="/download", method=RequestMethod.GET)
+   @RequestMapping(value="/download2", method=RequestMethod.GET)
    @ResponseBody  //어떤 데이터를 body에 포함하여 전송하고자할때 씀. view 지정하지않고 바로 클라이언트요청으로 응답/
    public FileSystemResource fileDownload(@RequestParam("filename") String fileName, HttpServletResponse response) {
-      File file = new File(uploadPath + "/" + fileName);
-      response.setContentType("application/download; utf-8");
+      File file = new File(uploadPath2 + "/" + fileName);
+      response.setContentType("application/download2; utf-8");
       response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
       return new FileSystemResource(file);
    }
@@ -68,7 +67,7 @@ public class FileDataUtil {
 		      String saveName = uid.toString() + "." + originalName.split("\\.")[1];//한글 파일명 처리 때문에...  
 		      //String[] files = new String[] {saveName};//형변환 files[0]에 파일명이 들어간다.
 		      byte[] fileData = file[i].getBytes();
-		      File target = new File(uploadPath, saveName);
+		      File target = new File(uploadPath2, saveName);
 		      FileCopyUtils.copy(fileData, target);	// /tmp로 카피했다
 		      files[i]=saveName; 
 		  }		  

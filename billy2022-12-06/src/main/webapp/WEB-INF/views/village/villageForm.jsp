@@ -45,7 +45,7 @@
          	</tr>
          	<tr>
          		<th>아이디</th>
-         		<td><input type="text" class="form-control" name="vId"></td>
+         		<td><input type="text" class="form-control" name="vId" value="${login}"></td>
          	</tr>
             <tr>
                <th>제목</th>
@@ -58,8 +58,8 @@
             <tr>
             	<td colspan="2">
             		<div class="mb-3">
-						<input type="file" class="form-control" name="file"> 
-						<input type="file"  class="form-control" name="file">
+						<input type="file" class="form-control" name="file" accept="image/gif, image/jpeg, image/png"> 
+						<input type="file"  class="form-control" name="file" accept="image/gif, image/jpeg, image/png">
 					</div>
 				</td>
             </tr>

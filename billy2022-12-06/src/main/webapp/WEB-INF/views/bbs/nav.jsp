@@ -31,7 +31,7 @@
         <a class="nav-link" href="villageBoard">빌리지</a>
       </li>
      <li class="nav-item">
-        <a class="nav-link" href="#">개발진</a>
+        <a class="nav-link" href="member">개발진</a>
       </li>
     </ul>
     <hr>

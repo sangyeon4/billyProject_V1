@@ -16,7 +16,7 @@ import com.billy.Service.IF_billyMemberService;
 import com.billy.Service.IF_billyService;
 import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyMemberVO;
-import com.billy.util.FileDataUtil;
+import com.billy.util.FileDataUtil1;
 
 @Controller
 public class billyController {
@@ -28,7 +28,7 @@ public class billyController {
    private IF_billyMemberService bmsv;
    
    @Inject
-   private FileDataUtil fileDataUtil;
+   private FileDataUtil1 fileDataUtil;
 
    
    @RequestMapping(value = "/joinForm", method = RequestMethod.GET)
@@ -93,5 +93,11 @@ public class billyController {
    public String billyViewAll(Locale locale, Model model) {
       
       return "billy/billyViewAll";
+   }
+   
+   @RequestMapping(value = "/member", method = RequestMethod.GET)
+   public String member(Locale locale, Model model) {
+
+      return "billy/member";
    }
 }
