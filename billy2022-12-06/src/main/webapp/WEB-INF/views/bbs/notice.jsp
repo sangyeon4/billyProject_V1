@@ -12,7 +12,7 @@
             height: 30px;
             text-align: center;
             border: 1px solid #848484;
-            margin-left : 110px;
+            margin-left : 200px;
             border-radius : 9px;
         }
 

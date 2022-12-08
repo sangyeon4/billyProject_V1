@@ -17,7 +17,7 @@ import com.billy.Service.IF_billyMemberService;
 import com.billy.Service.IF_billyService;
 import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyMemberVO;
-import com.billy.util.FileDataUtil;
+import com.billy.util.FileDataUtil1;
 
 @Controller
 public class billyController {
@@ -28,10 +28,9 @@ public class billyController {
    @Inject      // 나 서비스 주입
    private IF_billyMemberService bmsv;
    
-   @Inject      // 나 파일유틸 주입
+   @Inject
    private FileDataUtil fileDataUtil;
 
-   
    @RequestMapping(value = "/joinForm", method = RequestMethod.GET)
    public String joinForm(Locale locale, Model model) {
       
@@ -96,5 +95,11 @@ public class billyController {
 	  System.out.println(bList+"----컨트롤러단 빌리전체보기 디버깅");
 	  model.addAttribute("bList",bList);	  
       return "billy/billyViewAll";
+   }
+   
+   @RequestMapping(value = "/member", method = RequestMethod.GET)
+   public String member(Locale locale, Model model) {
+
+      return "billy/member";
    }
 }
