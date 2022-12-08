@@ -43,8 +43,19 @@
       <beans:property name="maxUploadSize" value="10485760"></beans:property><!-- 10메가 제한 -->
    </beans:bean>
    
-   <beans:bean class="java.lang.String" id="uploadPath">
+   <!-- billyGoods 첨부파일 -->
+   <beans:bean class="java.lang.String" id="uploadPath1">
       <beans:constructor-arg value="/billyFile"></beans:constructor-arg>
+   </beans:bean>
+   
+   <!-- village 첨부파일 -->
+   <beans:bean class="java.lang.String" id="uploadPath2">
+      <beans:constructor-arg value="/village"></beans:constructor-arg>
+   </beans:bean>
+   
+   <!-- billyMember 첨부파일 -->
+   <beans:bean class="java.lang.String" id="uploadPath3">
+      <beans:constructor-arg value="/billyMember"></beans:constructor-arg>
    </beans:bean>
    
    <context:component-scan base-package="com.billy.main" />  <!--지정된 패키지에 있는 모든 소스파일을 스캔해서 bean으로 만들어달라  -->

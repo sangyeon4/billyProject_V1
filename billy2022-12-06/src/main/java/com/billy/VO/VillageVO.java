@@ -7,8 +7,15 @@ public class VillageVO {
 	private String vId;
 	private String vIndate;
 	private int vCnt;
+	private String[] files;
 	
 	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	public int getvNum() {
 		return vNum;
 	}

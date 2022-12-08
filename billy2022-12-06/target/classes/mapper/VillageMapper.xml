@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectAllVillage" resultType="com.billy.VO.VillageVO">
-		select * from villageBoard
+		select * from villageBoard order by vNum asc
 	</select>
 	
 	<select id="selectNum" resultType="int">
-		select max(vNum) from villageBoard
+		select count(vNum) from villageBoard
 	</select>
 	
 	<select id="selectAttach_v" resultType="String">
