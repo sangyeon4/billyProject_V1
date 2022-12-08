@@ -23,5 +23,15 @@ public class BillyMemberServiceImpl implements IF_billyMemberService{
       System.out.println(id+"--service단 아이디 중복체크");
       return bmdao.chkId(id);
    }
+@Override
+public int chkName(String name) throws Exception {
+	System.out.println(name+"--service단 별명 중복체크");
+	return bmdao.chkName(name);
+}
+@Override
+public int memberLoginChk(BillyMemberVO bmvo) throws Exception {
+	System.out.println(bmvo.getId()+"--service단 로그인 디버깅");
+	return bmdao.memberLoginChk(bmvo);
+}
 
 }
