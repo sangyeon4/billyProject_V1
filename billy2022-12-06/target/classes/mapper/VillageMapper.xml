@@ -12,12 +12,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into villageAttach values ((select max(vNum) from villageBoard), #{fName},default)
 	</insert>
 	
+	<insert id="insertVillageReply_1" parameterType="com.billy.VO.VillageReplyVO">
+		insert into villageReply_1 values (#{vNum},#{r1Num},#{r1Id},#{r1Text},default)
+	</insert>
+	
+	<update id="updateVillageCnt">
+		update villageBoard set vCnt = vCnt+1 where vNum = #{vNum}
+	</update>
+	
 	<select id="selectAllVillage" resultType="com.billy.VO.VillageVO">
-		select * from villageBoard order by vNum asc
+		select t.* from (select sub.*, rownum as rnum from (select * from villageBoard order by vNum DESC) sub) t 
+        where rnum between #{startNo} and #{endNo}
 	</select>
 	
 	<select id="selectNum" resultType="int">
 		select count(vNum) from villageBoard
+	</select>
+	
+	<select id="selectReplyNum" resultType="int">
+		select count(vNum) from villageReply_1 where vNum = #{vNum}
 	</select>
 	
 	<select id="selectAttach_v" resultType="String">
@@ -26,5 +39,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectOneVillage" resultType="com.billy.VO.VillageVO">
 		select * from villageBoard where vNum = #{vNum}
+	</select>
+	
+	<select id="selectVillageReply_1" resultType="com.billy.VO.VillageReplyVO">
+		select * from villageReply_1 where vNum = #{vNum} order by r1Num asc
+	</select>
+	
+	<select id="selectVillgeBoardCnt" resultType="int">
+		select count(*) from villageBoard
 	</select>
 </mapper>

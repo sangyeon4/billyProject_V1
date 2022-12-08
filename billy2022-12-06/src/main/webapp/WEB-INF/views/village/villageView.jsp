@@ -23,6 +23,10 @@
 </style>
 
 <body>
+<%@ page import="java.util.*"%>
+<%@ page import="com.billy.VO.*"%>
+<%@ include file="../bbs/header.jsp"%>
+<%@ include file="../bbs/nav.jsp"%>
 <br>
 	<div id="joinTop">
 			<img src="resources/img/logo.png" alt="Logo" width="100" height="50">
@@ -56,8 +60,42 @@
             </tr>
          </table>
          <br>
+         <hr>
+         ${replyNum-1}개의 댓글<br>
+         <form action="villageReply_1Action" method="post">
+         <input type="text" class="form-control" name="r1Text" placeholder="댓글을 작성해 주세요" style="width:550px;float:left;margin-left:310px;">
+         <input type="submit" value="작성" class="btn btn-primary" style="float:left">
+         <input type="hidden" value="${vvo.vNum}" name="vNum">
+         <input type="hidden" value="ttt" name="r1Id">
+         <input type="hidden" value="${replyNum}" name="r1Num">
+         </form>
+         <br><br><hr>
+         <c:forEach items="${replyList}" var="rList">
+         <table class="form-control" style="width:600px">
+         	<tr>
+         		<td>
+         		${rList.r1Id}
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         		${rList.r1Indate}
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         		${rList.r1Text}
+         		</td>
+         	</tr>
+         </table>
          <br>
-         <input type="button" class="btn btn-primary" value="창닫기" onclick="window.close()">
+         </c:forEach>
+         <input type="button" class="btn btn-primary" value="목록" onclick='location.href="villageBoard"'/>
    </div>
+   <br>
+   <%@ include file="../bbs/footer.jsp"%>
 </body>
+<script>
+function 
+</script>
 </html>

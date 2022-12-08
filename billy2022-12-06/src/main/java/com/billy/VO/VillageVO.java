@@ -9,7 +9,6 @@ public class VillageVO {
 	private int vCnt;
 	private String[] files;
 	
-	
 	public String[] getFiles() {
 		return files;
 	}

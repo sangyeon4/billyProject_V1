@@ -17,6 +17,9 @@
 	h3{
 		margin-left:200px;
 	}
+	#page{
+		margin-left:550px;
+	}
 </style>
 
 
@@ -39,7 +42,7 @@
 		<c:forEach items="${vList}" var="vvo">         
                <tr class='record'>
 	               <td>${vvo.vNum}</td>   
-	               <td><a href="#" onclick='window.open("villageView?vNum=${vvo.vNum}","","top=200px, left=200px, width=800px, height=600px")'>${vvo.vTitle}</a></td>
+	               <td><a href="villageView?vNum=${vvo.vNum}">${vvo.vTitle}</a></td>
 	               <td>${vvo.vId}</td>
 	               <td>${vvo.vIndate.substring(0,10)}</td>
 	               <td>${vvo.vCnt}</td>
@@ -48,6 +51,29 @@
 		
 			
 	</table>
+	<div id="page">
+		<nav aria-label="...">
+			<ul class="pagination">
+				<li class="page-item">
+					<c:if test="${pageVO.prev}">
+						<a class="page-link" href="villageBoard?page=${pageVO.startPage - 1}">[이전페이지그룹]</a>
+					</c:if>
+				</li>
+				<li class="page-item"><a class="page-link" href='villageBoard?page=${pageVO.page-1}'>이전</a></li>
+				<c:forEach begin="${pageVO.startPage}" end="${pageVO.endPage}" var="idx">
+					<li class="page-item active">
+						<c:if test="${pageVO.page == idx}"></c:if>
+						<a class="page-link" href="villageBoard?page=${idx}"> ${idx} </a>
+					</li>
+				</c:forEach>
+				
+				<li class="page-item"><a class="page-link" href='villageBoard?page=${pageVO.page+1}'>다음</a></li>
+				<c:if test="${pageVO.next}">
+					<a class="page-link" href="villageBoard?page=${pageVO.endPage + 1}">[다음페이지그룹]</a>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
 	<%@ include file="../bbs/footer.jsp"%>
 </body>
 </html>
