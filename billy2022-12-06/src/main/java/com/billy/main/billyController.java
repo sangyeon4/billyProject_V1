@@ -1,5 +1,6 @@
 package com.billy.main;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -27,7 +28,7 @@ public class billyController {
    @Inject      // 나 서비스 주입
    private IF_billyMemberService bmsv;
    
-   @Inject
+   @Inject      // 나 파일유틸 주입
    private FileDataUtil fileDataUtil;
 
    
@@ -91,7 +92,9 @@ public class billyController {
    
    @RequestMapping(value = "/billyViewAll", method = RequestMethod.GET)
    public String billyViewAll(Locale locale, Model model) {
-      
+	  List<BillyGoodsVO> bList=bsrv.selectBillyAll();
+	  System.out.println(bList+"----컨트롤러단 빌리전체보기 디버깅");
+	  model.addAttribute("bList",bList);	  
       return "billy/billyViewAll";
    }
 }

@@ -15,5 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="selectMaxCnt" resultType="int">
       select max(gNum) as maxNum from billygoods   
    </select>
+   <select id="selectAllBilly" resultType="com.billy.VO.BillyGoodsVO">
+   		select * from billygoods
+   </select>
+     <select id="selectAllBilly_attach" resultType="com.billy.VO.BillyGoods_attachVO">
+   		select * from billyAttach
+   </select>
+   <select id="selectOneBilly_attach" parameterType="int" resultType="String">
+   		select fName from billyAttach where gNum=#{gNum}
+   </select>
 
 </mapper>
