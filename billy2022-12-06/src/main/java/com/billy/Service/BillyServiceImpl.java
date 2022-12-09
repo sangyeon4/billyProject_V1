@@ -73,5 +73,10 @@ public class BillyServiceImpl implements IF_billyService {
 		}
 		return bvo;
 	}
+	@Override
+	public void updateBilly(BillyGoodsVO bvo) throws Exception {
+		billyDao.updateBilly(bvo);
+		System.out.println(bvo.getgNum()+"---servicc단 빌리 수정하기 디버깅");		
+	}
 
 }

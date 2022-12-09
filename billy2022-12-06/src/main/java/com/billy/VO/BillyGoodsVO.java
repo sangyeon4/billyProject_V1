@@ -7,12 +7,13 @@ public class BillyGoodsVO {
    private String gName; 
    private String sido1; //시
    private String gugun1; //군구
-   private String gLoc;   //시+군구 (주소)
+   private String gLoca;   //시+군구 (주소)
    private String gStrDate; //시작일
    private String gEndDate; //종료일
    private int gPrice; 
    private String gText;
    private String[] files;   //파일이름 (배열)
+   
 public String getId() {
 	return id;
 }
@@ -49,11 +50,12 @@ public String getGugun1() {
 public void setGugun1(String gugun1) {
 	this.gugun1 = gugun1;
 }
-public String getgLoc() {
-	return gLoc;
+
+public String getgLoca() {
+	return gLoca;
 }
-public void setgLoc(String gLoc) {
-	this.gLoc = gLoc;
+public void setgLoca(String gLoca) {
+	this.gLoca = gLoca;
 }
 public String getgStrDate() {
 	return gStrDate;

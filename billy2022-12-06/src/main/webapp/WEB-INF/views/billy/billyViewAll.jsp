@@ -24,12 +24,14 @@
 
 		<a href='billyViewOne?vno=${bvo.getgNum()}' style="float: left; margin: 50px;  ">
 			<div class="card" style="width: 18rem; height: 18rem;">
+		
+			<!-- 사진 파일유무 파악 -->			
 				<c:choose>
 					<c:when test="${bvo.getFiles()[0] ne null}">
 						<img src="download1?filename=${bvo.getFiles()[0]}"
 							class="card-img-top" alt="..." style="width:300px; height:200px;">
 					</c:when>
-					<c:otherwise>
+					<c:otherwise>					
 						  <img src="resources/img/no_img.jpg" class="card-img-top" alt="..." >
 					</c:otherwise>
 				</c:choose>
