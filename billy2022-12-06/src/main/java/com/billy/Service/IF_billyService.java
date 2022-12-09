@@ -9,4 +9,5 @@ public interface IF_billyService {
 
 	public int selectMaxCnt() throws Exception;
 	public List<BillyGoodsVO> selectBillyAll();
+	public BillyGoodsVO selectBillyOne(String vno);
 }

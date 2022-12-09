@@ -3,7 +3,6 @@ package com.billy.VO;
 public class BillyGoodsVO {
    private String id; 
    private int gNum; 
-
    private int cateNum; 
    private String gName; 
    private String sido1; //시

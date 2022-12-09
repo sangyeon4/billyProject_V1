@@ -28,6 +28,7 @@ public class billyController {
    @Inject
    private FileDataUtil1 fileDataUtil1;
 
+
    @RequestMapping(value = "/billyForm", method = RequestMethod.GET)
    public String billyForm(Locale locale, Model model) throws Exception {
       int billyGnum=bsrv.selectMaxCnt();
@@ -56,9 +57,19 @@ public class billyController {
    @RequestMapping(value = "/billyViewAll", method = RequestMethod.GET)
    public String billyViewAll(Locale locale, Model model) {
 	  List<BillyGoodsVO> bList=bsrv.selectBillyAll();
-	  System.out.println(bList+"----컨트롤러단 빌리전체보기 디버깅");
+
+	  System.out.println(bList.get(0).getgName()+"----컨트롤러단 빌리전체보기 디버깅");
 	  model.addAttribute("bList",bList);	  
       return "billy/billyViewAll";
+   }
+   
+   @RequestMapping(value = "/billyViewOne", method = RequestMethod.GET)
+   public String billyViewOne(Locale locale, Model model, @RequestParam("vno") String vno, MultipartFile[] file) throws Exception{
+      //객체로 받을 때는 파라미터 이름과 객체의 변수의 이름이 일치하고  getter,setter가 있어야한다.>>자동매핑
+	  BillyGoodsVO bvo=bsrv.selectBillyOne(vno);
+	  System.out.println(bvo.getgNum()+"---컨트롤러단 빌리자세히보기 디버깅");
+	  model.addAttribute("bvo", bvo);
+      return "billy/billyViewOne";
    }
    
    @RequestMapping(value = "/member", method = RequestMethod.GET)
