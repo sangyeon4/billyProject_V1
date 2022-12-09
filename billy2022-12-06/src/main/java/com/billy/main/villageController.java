@@ -43,7 +43,7 @@ public class villageController {
 	@RequestMapping(value = "/villageForm", method = RequestMethod.GET)
 	public String villageForm(Locale locale, Model model) {
 		int num = ivs.selectNum();
-		model.addAttribute("num",num+1);
+		model.addAttribute("vNum",num+1);
 		return "village/villageForm";
 	}
 	
@@ -61,7 +61,7 @@ public class villageController {
 		VillageVO vvo = ivs.selectOneVillage(vNum);
 		List<String> attach = ivs.selectAttach_v(vNum);
 		List<VillageReplyVO> replyList = ivs.selectVillageReply_1(vNum);
-		int replyNum = ivs.selectReplyNum(vNum);
+		Integer replyNum = ivs.selectReplyNum(vNum);
 		model.addAttribute("vvo",vvo);
 		model.addAttribute("attach",attach);
 		model.addAttribute("replyList",replyList);
@@ -74,5 +74,18 @@ public class villageController {
 		System.out.println(vrvo.getvNum());
 		ivs.insertVillageReply_1(vrvo);
 		return "redirect:/villageView?vNum="+vrvo.getvNum();
+	}
+	
+	@RequestMapping(value = "/villageBoardDelAction", method = RequestMethod.GET)
+	public String villageBoardDelAction(Locale locale, Model model, int vNum) {
+		System.out.println(vNum);
+		ivs.deleteVillageBoard(vNum);
+		return "redirect:/villageBoard";
+	}
+	
+	@RequestMapping(value = "/villageBoardModBtn", method = RequestMethod.GET)
+	public String villageBoardModAction(Locale locale, Model model, int vNum) {
+		model.addAttribute("vNum", vNum);
+		return "village/villageMod";
 	}
 }

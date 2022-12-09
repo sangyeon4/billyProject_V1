@@ -83,4 +83,10 @@ public class VillageDAOImpl implements IF_villageDAO {
 		System.out.println("--DAO단 빌리지 개수 가져오기 디버깅");
 		return sqlSession.selectOne(mapperQuery + ".selectVillgeBoardCnt");
 	}
+
+	@Override
+	public void deleteVillageBoard(int vNum) {
+		System.out.println("--DAO단 빌리지 삭제 디버깅");
+		sqlSession.update(mapperQuery + ".deleteVillageBoard", vNum);
+	}
 }

@@ -29,4 +29,6 @@ public interface IF_villageDAO {
 	public void updateVillageCnt(int vNum);
 	
 	public int selectVillgeBoardCnt();
+	
+	public void deleteVillageBoard(int vNum);
 }

@@ -30,4 +30,5 @@ public interface IF_villageService {
 	
 	public int selectVillgeBoardCnt();
 	
+	public void deleteVillageBoard(int vNum);
 }

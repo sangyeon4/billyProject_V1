@@ -93,4 +93,10 @@ public class VillageServiceImpl implements IF_villageService{
 		System.out.println("서비스단 빌리지 개수 셀렉트 디버깅");
 		return villageDao.selectVillgeBoardCnt();
 	}
+
+	@Override
+	public void deleteVillageBoard(int vNum) {
+		villageDao.deleteVillageBoard(vNum);
+		System.out.println("서비스단 빌리지 삭제 디버깅");
+	}
 }
