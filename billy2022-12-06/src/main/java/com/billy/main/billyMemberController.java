@@ -25,13 +25,13 @@ public class billyMemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) throws Exception {
 
-		return "billy/login";
+		return "billyMember/login";
 	}
 
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm(Locale locale, Model model) {
 
-		return "billy/joinForm";
+		return "billyMember/joinForm";
 	}
 
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
@@ -67,25 +67,48 @@ public class billyMemberController {
 		}
 	}
 	
-	@RequestMapping(value="/loginAction", method=RequestMethod.POST)
-	public String loginAction(HttpSession session,BillyMemberVO bmvo,
+	@RequestMapping(value="/loginAction", method=RequestMethod.POST)                                                                                                                                                                                                                                                                       
+	public String loginAction(HttpSession session,BillyMemberVO bmvo) throws Exception {
+		int result = bmsv.memberLoginChk(bmvo);
+		System.out.println(result);		
+		if(result==1) {	
+			if(session.getAttribute("login") != null) {
+				session.removeAttribute("login"); 	//이전 로그인 세션 정보 제거
+			}		
+			session.setAttribute("login", bmvo.getId());
+		}
+		return "home";		
+	}
+	
+	@RequestMapping(value="/loginChk", method=RequestMethod.POST)
+	@ResponseBody                                                                                                                                                                                                                                                                         
+	public String loginChk(HttpSession session,BillyMemberVO bmvo,
 						@RequestParam("id") String id, 
 						@RequestParam("pwd") String pwd) throws Exception {
-		System.out.println(id+"--로그인 아이디넘어가는지 디버깅");
-		System.out.println(pwd+"--로그인 비밀번호넘어가는지 디버깅");
+		System.out.println(id+"dkdiel---");
+		System.out.println(pwd+"로그인액션에서 패스워드---");
 		bmvo.setId(id);
 		bmvo.setPwd(pwd);
 		int result = bmsv.memberLoginChk(bmvo);
 		System.out.println(result);
-		if (result == 1) {
-			return "redirect:/home"; // 가입정보가 존재
+		if (result != 0) {
+			return "fail"; // 중복 아이디가 존재
 		} else {
-			return "success"; // 가입정보가 없음
+			return "success"; // 중복 아이디 x
 		}
 	}
+
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home";
 	}
+	
+	@RequestMapping(value="/myPage", method=RequestMethod.GET)
+	public String myPage(HttpSession session) {
+
+		return "billyMember/myPage_Member_Info";
+	}
+	
+	
 }
