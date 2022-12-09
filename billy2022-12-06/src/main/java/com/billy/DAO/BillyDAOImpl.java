@@ -61,4 +61,11 @@ public class BillyDAOImpl implements IF_billyDAO {
 		System.out.println(vno+"----DAO단 빌리자세히보기(파일)글번호값 디버깅");
 		return sqlSession.selectList(mapperQuery+".selectOneBilly_attach",vno);
 	}
+
+	@Override
+	public void updateBilly(BillyGoodsVO bvo) throws Exception {
+		sqlSession.update(mapperQuery+".updateBilly", bvo);
+		System.out.println(bvo.getgNum()+"----DAO단 빌리수정 글번호 디버깅");
+		
+	}
 }

@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.billy.DAO.IF_billyDAO">
 
    <insert id="insertBilly" parameterType="com.billy.VO.BillyGoodsVO">
-      insert into billyGoods values(#{id},#{gNum},#{cateNum},#{gName},#{gLoc},#{gStrDate},#{gEndDate},#{gPrice},#{gText}) 
+      insert into billyGoods values(#{id},#{gNum},#{cateNum},#{gName},#{gLoca},#{gStrDate},#{gEndDate},#{gPrice},#{gText}) 
    </insert>
    <insert id="billy_attach" parameterType="String">
    insert into billyAttach values((select max(gNum) from billyGoods), #{filename},
@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="selectOneBilly_attach" parameterType="String" resultType="com.billy.VO.BillyGoods_attachVO">
    		select fName from billyAttach where gNum=#{vno}
    </select>
+   
+   <update id="updateBilly" parameterType="com.billy.VO.BillyGoodsVO">
+		update billyGoods set 
+		cateNum=#{cateNum},gName=#{gName},gLoca=#{gLoca},gStrDate=#{gStrDate},gEndDate=#{gEndDate},
+		gPrice=#{gPrice}, gText=#{gText} where gNum=#{gNum}
+   </update>
    
   
 

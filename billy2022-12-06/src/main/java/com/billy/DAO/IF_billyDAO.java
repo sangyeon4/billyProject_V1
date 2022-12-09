@@ -14,4 +14,5 @@ public interface IF_billyDAO {
 	public List<BillyGoods_attachVO> selectBilly_attach();
 	public BillyGoodsVO selectBillyOne(String vno);
 	public List<BillyGoods_attachVO>selectOneBilly_attach(String vno);
+	public void updateBilly(BillyGoodsVO bvo) throws Exception;
 }

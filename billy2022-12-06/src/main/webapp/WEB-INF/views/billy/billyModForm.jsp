@@ -14,13 +14,42 @@
    <%@ include file="../bbs/header.jsp"%>
    <%@ include file="../bbs/nav.jsp"%>
    <%@ include file="../bbs/notice.jsp"%>
-   
 
-   <form name="frm" method="POST" action="billeyAction"
+	<h1>글번호:${bvo.getgNum()} 수정하기</h1>
+   <form name="frm" method="POST" action="billeyModAction"
       encType="multipart/form-data">
       <div class="mb-3">
-         <label for="cateNumLB" class="form-label">카테고리</label> 
-         <select name="cateNum" class="form-control">	
+         <label for="cateNumLB" class="form-label">카테고리</label> <select
+				name="cateNum" class="form-control">
+				<c:choose>
+					<c:when test="${bvo.getCateNum()==1}">
+						<option value="1">디지털기기</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==2}">
+						<option value="2">생활가전</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==2}">
+						<option value="2">생활가전</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==3}">
+						<option value="3">가구/인테리어</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==4}">
+						<option value="4">생활/주방</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==5}">
+						<option value="5">유아동</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==6}">
+						<option value="6">스포츠/레저</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==7}">
+						<option value="7">취미/게임</option>
+					</c:when>
+					<c:when test="${bvo.getCateNum()==8}">
+						<option value="8">기타</option>
+					</c:when>
+				</c:choose>
 				<option value="1">디지털기기</option>
 				<option value="2">생활가전</option>
 				<option value="3">가구/인테리어</option>
@@ -31,35 +60,37 @@
 				<option value="8">기타</option>
 			</select>
 		</div>
-      <div>
-         <!-- 글정보 -->
-       <input type="hidden" name="gNum" value="${billyGnum}">
-            <input type="hidden" name="id" value="${login}">
-      </div>
-      <div class="mb-3">
-         <label for="gNameLB" class="form-label">상품이름</label> <input
-            type="text" class="form-control" name="gName" >
-      </div>
-     	<div class="mb-3">
+		<div>
+			<!-- 글정보 -->
+			<input type="hidden" name="gNum" value="${bvo.getgNum()}"> <input
+				type="hidden" name="id" value="${bvo.getId()}">
+		</div>
+		<div class="mb-3">
+			<label for="gNameLB" class="form-label">상품이름</label> <input
+				type="text" class="form-control" name="gName"
+				value="${bvo.getgName()}">
+		</div>
+		<div class="mb-3">
 			<label for="gLocaLB" class="form-label">지역 선택 </label> <input
-				type="text" class="form-control" id="sample5_address" placeholder="주소"
+				type="text" class="form-control" id="sample5_address"
 				onclick="sample5_execDaumPostcode()" name="gLoca"
-				aria-describedby="locHelpInline"><span
+				aria-describedby="locHelpInline" value="${bvo.getgLoca()}"><span
 				id="locHelpInline" class="form-text"></span>
 		</div>
-      <div class="mb-3">
-         <label for="dateSelect" class="form-label">날짜 선택 </label><br> <input
-            type="text" name="gStrDate" id="from" autocomplete="off"
-            placeholder="시작일"> <input type="text" name="gEndDate"
-            id="to" autocomplete="off" placeholder="종료일">
-      </div>
-      <div class="mb-3">
+		<div class="mb-3">
+			<label for="dateSelect" class="form-label">날짜 선택 </label><br> <input
+				type="text" name="gStrDate" id="from" autocomplete="off"
+				placeholder="${bvo.getgStrDate()}"> <input type="text"
+				name="gEndDate" id="to" autocomplete="off"
+				placeholder="${bvo.getgEndDate()}">
+		</div>
+		<div class="mb-3">
          <label for="gPriceLB" class="form-label">가격</label> <input
-            type="number" class="form-control" name="gPrice">
+            type="number" class="form-control" name="gPrice" value="${bvo.getgPrice()}">
       </div>
       <div class="mb-3">
          <label for="gTextLB" class="form-label">내용</label>
-         <textarea class="form-control" name="gText"></textarea>
+         <textarea class="form-control" name="gText" >${bvo.getgText()}</textarea>
       </div>
       <div class="mb-3">
          <label for="goodsFile" class="form-label">사진올리기</label> <input
@@ -75,7 +106,6 @@
 <script
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-
 function sample5_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
