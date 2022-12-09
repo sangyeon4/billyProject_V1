@@ -15,6 +15,7 @@ public class BillyServiceImpl implements IF_billyService {
 
 	@Inject
 	private IF_billyDAO billyDao;
+	
 
 	@Override
 	public void insertBilly(BillyGoodsVO bvo) throws Exception {
@@ -56,6 +57,21 @@ public class BillyServiceImpl implements IF_billyService {
 			}			
 		}
 		return null;
+	}
+	@Override
+	public BillyGoodsVO selectBillyOne(String vno) {
+		System.out.println(billyDao.selectBillyOne(vno).getgNum()+"service단 빌리자세히보기 디버깅");		
+		BillyGoodsVO bvo=billyDao.selectBillyOne(vno);
+		List<BillyGoods_attachVO>baList=billyDao.selectOneBilly_attach(vno);
+		System.out.println(baList.size()+"----service단 빌리 자세히보기(파일)사이즈 디버깅");
+		if(baList.size()!=0) {
+			String[] temp= new String[2];
+			for(int i=0; i<baList.size();i++) {
+				temp[i]=baList.get(i).getfName();				
+			}
+			bvo.setFiles(temp);
+		}
+		return bvo;
 	}
 
 }

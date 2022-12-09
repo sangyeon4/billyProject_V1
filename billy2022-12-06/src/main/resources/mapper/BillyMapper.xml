@@ -18,11 +18,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="selectAllBilly" resultType="com.billy.VO.BillyGoodsVO">
    		select * from billygoods
    </select>
+    <select id="selectOneBilly" parameterType="String" resultType="com.billy.VO.BillyGoodsVO">
+   		select * from billygoods where gNum= #{vno}
+   </select>
      <select id="selectAllBilly_attach" resultType="com.billy.VO.BillyGoods_attachVO">
    		select * from billyAttach
    </select>
-   <select id="selectOneBilly_attach" parameterType="int" resultType="String">
-   		select fName from billyAttach where gNum=#{gNum}
+   <select id="selectOneBilly_attach" parameterType="String" resultType="com.billy.VO.BillyGoods_attachVO">
+   		select fName from billyAttach where gNum=#{vno}
    </select>
+   
+  
 
 </mapper>

@@ -12,5 +12,6 @@ public interface IF_billyDAO {
 	public int selectMaxCnt() throws Exception;
 	public List<BillyGoodsVO> selectBillyAll();
 	public List<BillyGoods_attachVO> selectBilly_attach();
-
+	public BillyGoodsVO selectBillyOne(String vno);
+	public List<BillyGoods_attachVO>selectOneBilly_attach(String vno);
 }
