@@ -44,7 +44,7 @@ h4 {
 	<div id="loginArea">
 		<h4>로그인</h4>
 		<br>
-		<form action="loginAction" method="post">
+		<form name="loginForm" action="loginAction" method="post">
 			<div class="form-floating">
 				<input type="text" class="form-control" placeholder="아이디" name="id"
 					id="id"> <label for="floatingInput"> <font
@@ -72,44 +72,44 @@ h4 {
 
 </body>
 <script>
-var idChkFlag = false;
-function loginChk() {
-   var id = $('#id').val();
-   var data = {
-      id: id
-   }
-   $.ajax({
-      type: "post",
-      url: "chkId",
-      data: data,
-      success: function (result) {
-         if (result != 'fail') {	//아이디가 없다면            	
-            alert('해당ID로 가입된 정보가 없습니다');
-            idChkFlag = false;
-         } else {					//아이디가 있다면
-            idChkFlag = true;
-         }
-         if (idChkFlag == true) {	// 아이디가 있다면
-            console.log("aa");
-            var pwd = $('#pwd').val();
-            var data = {
-               pwd: pwd,
-               id: id
-            }
-            $.ajax({
-               type: "post",
-               url: "loginAction",
-               data: data,
-               success: function (result) {
-                  if (result == 'success') {	//정보가없다면
-					alert('가입된 정보가 없습니다.');
-                  } // success 종료
-               }
-            }); // ajax 종료
-         }// success 종료
-      }
-   }); // ajax 종료
-}// function 종료
-
-  </script>
+	var idChkFlag = false;
+	function loginChk() {
+		var id = $('#id').val();
+		var data = {
+			id : id
+		}
+		$.ajax({
+			type : "post",
+			url : "chkId",
+			data : data,
+			success : function(result) {
+				if (result != 'fail') { //아이디가 없다면            	
+					alert('해당ID로 가입된 정보가 없습니다');
+					idChkFlag = false;
+				} else { //아이디가 있다면
+					idChkFlag = true;
+				}
+				if (idChkFlag == true) { // 아이디가 있다면
+					var pwd = $('#pwd').val();
+					var data2 = {
+						pwd : pwd,
+						id : id
+					}
+					$.ajax({
+						type : "post",
+						url : "loginChk",
+						data : data2,
+						success : function(result) {
+							if (result != 'fail') { //아이디가 없다면            	
+								alert('비밀번호가 틀렸습니다');
+							}else{
+								document.loginForm.submit();
+							}
+						}
+					}); // ajax 종료				
+				}// success 종료
+			}
+		}); // ajax 종료
+	}// function 종료
+</script>
 </html>

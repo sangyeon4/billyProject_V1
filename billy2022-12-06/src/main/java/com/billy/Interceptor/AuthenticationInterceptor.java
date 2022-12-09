@@ -21,7 +21,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		// 그런데 login변수의 리턴타입을 모르니 모든 변수의 최상위인 Object로 받음
 		Object obj = session.getAttribute("login");
 		if (obj == null) {//로그인 안한경우
-			response.sendRedirect(request.getContextPath() + "/login"); //메인화면으로 돌아가라 - 경로바꿈
+			response.sendRedirect(request.getContextPath() + "/home"); //메인화면으로 돌아가라 - 경로바꿈
 			return false;
 		}
 		return true;//가고싶은 경로로 가라
