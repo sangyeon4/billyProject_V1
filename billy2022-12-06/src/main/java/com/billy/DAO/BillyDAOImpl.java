@@ -47,4 +47,18 @@ public class BillyDAOImpl implements IF_billyDAO {
 		System.out.println(sqlSession.selectList(mapperQuery+".selectAllBilly_attach")+"DAO단 All빌리첨부파일 디버깅");		
 		return sqlSession.selectList(mapperQuery+".selectAllBilly_attach");
 	}
+	
+
+	@Override
+	public BillyGoodsVO selectBillyOne(String vno) {
+	System.out.println(sqlSession.selectOne(mapperQuery+".selectOneBilly", vno)+"DAO단 빌리자세히보기 디버깅");
+		return sqlSession.selectOne(mapperQuery+".selectOneBilly", vno);
+	}
+
+
+	@Override
+	public List<BillyGoods_attachVO> selectOneBilly_attach(String vno) {
+		System.out.println(vno+"----DAO단 빌리자세히보기(파일)글번호값 디버깅");
+		return sqlSession.selectList(mapperQuery+".selectOneBilly_attach",vno);
+	}
 }
