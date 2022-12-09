@@ -36,8 +36,11 @@
 			<exclude-mapping path="/joinForm**"/>
 			<exclude-mapping path="/joinAction**"/>
 			<exclude-mapping path="/chkId**"/>
+			<exclude-mapping path="/chkName**"/>
 			<exclude-mapping path="/billyViewAll**"/>	
 			<exclude-mapping path="/resources/**" />
+			<exclude-mapping path="/billyMemberModAction/**"/>
+			<exclude-mapping path="/myPage/**"/>
 			<beans:ref bean="authenInterceptor"/>
 			</interceptor>
 	</interceptors>

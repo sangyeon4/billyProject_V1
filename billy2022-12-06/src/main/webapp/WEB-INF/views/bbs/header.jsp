@@ -29,7 +29,7 @@
       </div>
       <c:if test="${login != null}">
          <div id="logininfo">
-         	<a href="myPage">${login}</a>님 환영합니다!
+         	<a href="myPage?id=${login}">${login}</a>님 환영합니다!
             <c:if test="${login != null}">
                <a href="logout">[로그아웃]</a>
             </c:if>
