@@ -15,12 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.billy.Service.IF_billyMemberService;
 import com.billy.VO.BillyMemberVO;
+import com.billy.util.FileDataUtil3;
 
 @Controller
 public class billyMemberController {
 
 	@Inject // 나 서비스 주입
 	private IF_billyMemberService bmsv;
+	
+	@Inject
+	private FileDataUtil3 fileDataUtil3;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) throws Exception {
@@ -40,6 +44,17 @@ public class billyMemberController {
 		System.out.println(bmvo.getName() + "---디버깅용도");
 
 		bmsv.insertMember(bmvo);
+		return "redirect:/home";
+	}
+	
+	
+	@RequestMapping(value = "/billyMemberModAction", method = RequestMethod.POST)
+	public String billyMemberModAction(Locale locale, Model model, BillyMemberVO bmvo, MultipartFile file) throws Exception {
+		// 객체로 받을 때는 파라미터 이름과 객체의 변수의 이름이 일치하고 getter,setter가 있어야한다.>>자동매핑
+		System.out.println(bmvo.getName() + "---내 정보 수정 컨트롤러단 디버깅용도");
+		String photoName = fileDataUtil3.fileUpload(file);
+		bmvo.setPhotoName(photoName);
+		bmsv.memberInfoUpdate(bmvo);
 		return "redirect:/home";
 	}
 
@@ -105,10 +120,17 @@ public class billyMemberController {
 	}
 	
 	@RequestMapping(value="/myPage", method=RequestMethod.GET)
-	public String myPage(HttpSession session) {
-
+	public String myPage(HttpSession session,Model model,@RequestParam("id") String id) throws Exception {
+		System.out.println(id + "--컨트롤러단 마이페이지 id받아오는지");
+		BillyMemberVO bmvo = bmsv.myPageInfo(id);
+		model.addAttribute("myInfo",bmvo);
+	
 		return "billyMember/myPage_Member_Info";
 	}
+	
+	
+	
+
 	
 	
 }

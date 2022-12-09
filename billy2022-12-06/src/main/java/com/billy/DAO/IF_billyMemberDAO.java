@@ -11,4 +11,8 @@ public interface IF_billyMemberDAO {
    public int chkName(String name) throws Exception;
    
    public int memberLoginChk(BillyMemberVO bmvo) throws Exception;
+   
+   public BillyMemberVO myPageInfo(String id) throws Exception;
+   
+   public void memberInfoUpdate(BillyMemberVO bmvo) throws Exception;
 }

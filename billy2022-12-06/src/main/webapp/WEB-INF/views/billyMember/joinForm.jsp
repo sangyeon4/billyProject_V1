@@ -59,7 +59,7 @@
             <tr>
                <td align=center>아이디</td>
                <td><input type="text" name="id" id="id" class="form-control"
-                  aria-describedby="idHelpInline"> <span id="idHelpInline"
+                  aria-describedby="idHelpInline" maxlength="20"> <span id="idHelpInline"
                   class="form-text"> ID는 8-20자, 문자와 숫자를 포함하여야 합니다. </span></td>
                   <td>
                   <input type="button" class="btn btn-primary" id="idChk"value="아이디 중복확인">
@@ -69,29 +69,30 @@
             <tr>
                <td align=center>비밀번호</td>
                <td><input type="password" name="pwd" id="pwd"
-                  class="form-control" aria-describedby="pwdHelpInline"> <span
+                  class="form-control" aria-describedby="pwdHelpInline" maxlength="20"> <span
                   id="pwdHelpInline" class="form-text"> 비밀번호는 8-20자
                      영문,숫자,특수문자를 포함하여야 합니다. </span></td>
             </tr>
+            
             <tr>
                <td align=center>비밀번호확인</td>
                <td><input type="password" name="pwdChk" id="pwdChk"
-                  class="form-control" aria-describedby="pwdChkHelpInline">
+                  class="form-control" aria-describedby="pwdChkHelpInline" maxlength="20">
                   <span id="pwdChkHelpInline" class="form-text"> </span></td>
 
             </tr>
             <tr>
                <td align=center>전화번호</td>
                <td><input type="text" name="tel" id="tel"
-                  class="form-control" aria-describedby="telHelpInline" placeholder="Ex) 01011112222"> <span
+                  class="form-control" aria-describedby="telHelpInline" placeholder="Ex) 01011112222" maxlength="11"> <span
                   id="telHelpInline" class="form-text"> 전화번호는 -를 제외하고 숫자만 입력합니다. </span></td>
             </tr>
             <tr>
                <td align=center>별명</td>
                <td><input type="text" name="name" id="name"
                   class="form-control" aria-describedby="nameHelpInline"> <span
-                  id="nameHelpInline" class="form-text"></span></td>
-                  <td><input type="button" class="btn btn-primary" id="nameChk" value="닉네임 중복확인">
+                  id="nameHelpInline" class="form-text" maxlength="20"></span></td>
+                  <td><input type="button" class="btn btn-primary" id="nameChk" value="닉네임 중복확인" >
             	  </td>
             </tr>
             <tr>

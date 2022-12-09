@@ -40,4 +40,17 @@ public class BillyMemberDAOImpl implements IF_billyMemberDAO {
 		return sqlSession.selectOne(mapperQuery+".memberLoginChk",bmvo);
 	}
 
+	@Override
+	public BillyMemberVO myPageInfo(String id) throws Exception {
+		System.out.println(id+"--dao단 내정보보기 디버깅");
+		return sqlSession.selectOne(mapperQuery+".myPageInfo",id);
+	}
+
+	@Override
+	public void memberInfoUpdate(BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getId()+"--dao단 내정보수정 디버깅");
+		sqlSession.insert(mapperQuery+".memberInfoUpdate",bmvo);
+		
+	}
+
 }
