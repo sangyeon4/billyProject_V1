@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.billy.DAO.IF_villageDAO;
+import com.billy.VO.VillagePageVO;
+import com.billy.VO.VillageReplyVO;
 import com.billy.VO.VillageVO;
 
 @Service
@@ -39,9 +41,9 @@ public class VillageServiceImpl implements IF_villageService{
 	}
 	
 	@Override
-	public List<VillageVO> selectAllVillage() {
+	public List<VillageVO> selectAllVillage(VillagePageVO vpvo) {
 		System.out.println("서비스단 빌리지 리스트 디버깅");
-		return villageDao.selectAllVillage();
+		return villageDao.selectAllVillage(vpvo);
 	}
 
 	@Override
@@ -62,6 +64,39 @@ public class VillageServiceImpl implements IF_villageService{
 		return villageDao.selectAttach_v(vNum);
 	}
 
-	
+	@Override
+	public void insertVillageReply_1(VillageReplyVO vrvo) {
+		villageDao.insertVillageReply_1(vrvo);
+		System.out.println("서비스단 빌리지 댓글 1 인서트 디버깅");
+	}
 
+	@Override
+	public List<VillageReplyVO> selectVillageReply_1(int vNum) {
+		System.out.println("서비스단 빌리지 댓글 1 셀렉트 디버깅");
+		return villageDao.selectVillageReply_1(vNum);
+	}
+
+	@Override
+	public int selectReplyNum(int vNum) {
+		System.out.println("서비스단 빌리지 댓글 1 넘버 셀렉트 디버깅");
+		return villageDao.selectReplyNum(vNum);
+	}
+
+	@Override
+	public void updateVillageCnt(int vNum) {
+		villageDao.updateVillageCnt(vNum);
+		System.out.println("서비스단 빌리지 조회수 업데이트 디버깅");
+	}
+
+	@Override
+	public int selectVillgeBoardCnt() {
+		System.out.println("서비스단 빌리지 개수 셀렉트 디버깅");
+		return villageDao.selectVillgeBoardCnt();
+	}
+
+	@Override
+	public void deleteVillageBoard(int vNum) {
+		villageDao.deleteVillageBoard(vNum);
+		System.out.println("서비스단 빌리지 삭제 디버깅");
+	}
 }

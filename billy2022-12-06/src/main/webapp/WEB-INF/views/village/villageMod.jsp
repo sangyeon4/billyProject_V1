@@ -33,11 +33,11 @@
 	<%@ include file="../bbs/nav.jsp"%>
 	<div id="joinTop">
 			<img src="resources/img/logo.png" alt="Logo" width="100" height="50">
-			<span id="join">빌리지 등록</span>
+			<span id="join">빌리지 수정</span>
 	</div>
 	
    <div id="wrap" align="center">								
-      <form  method="post" action="villageAction" encType="multipart/form-data" id="send_form">
+      <form  method="post" action="updateVillageBoardAction" encType="multipart/form-data" id="send_form">
          <table>
          	<tr>
          		<th>글번호</th>
@@ -66,9 +66,9 @@
          </table>
          <br>
          <br>
-         <input type="submit" class="btn btn-primary"  value="등록">
+         <input type="submit" class="btn btn-primary"  value="수정">
          <input type="reset" class="btn btn-primary" value="다시 작성">
-         <input type="button" class="btn btn-primary" value="취소" onclick="location.href='villageBoard'">
+         <input type="button" class="btn btn-primary" value="취소" onclick="history.go(-1)">
       </form>
    </div>
    <%@ include file="../bbs/footer.jsp"%>
