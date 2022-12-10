@@ -40,7 +40,7 @@
 			<exclude-mapping path="/billyViewAll**"/>	
 			<exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/billyMemberModAction/**"/>
-			<exclude-mapping path="/myPage/**"/>
+
 			<beans:ref bean="authenInterceptor"/>
 			</interceptor>
 	</interceptors>

@@ -31,4 +31,12 @@ public interface IF_villageDAO {
 	public int selectVillgeBoardCnt();
 	
 	public void deleteVillageBoard(int vNum);
+	
+	public void updateVillageBoardMemberId(String id);
+	
+	public void updateVillageReply_1MemberId(String id);
+	
+	public void updateVillageBoard(VillageVO vvo);
+	
+	public void updateAttach_v(VillageVO vvo);
 }

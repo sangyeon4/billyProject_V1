@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into villageAttach values ((select max(vNum) from villageBoard), #{fName},default)
 	</insert>
 	
+	<insert id="updateAttach_v">
+		insert into villageAttach values (#{vNum}, #{fName}, default)
+	</insert>
+	
 	<insert id="insertVillageReply_1" parameterType="com.billy.VO.VillageReplyVO">
 		insert into villageReply_1 values (#{vNum},#{r1Num},#{r1Id},#{r1Text},default)
 	</insert>
@@ -53,4 +57,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteVillageBoard">
 		delete from villageBoard where vNum = #{vNum}
 	</delete>
+	
+	<update id="updateVillageBoardMemeberId">
+		update villageBoard set vId = 'admin1' where vId = #{id}
+	</update>
+	
+	<update id="updateVillageReply_1MemeberId">
+		update villageReply_1 set r1Id = 'admin1' where r1Id = #{id}
+	</update>
+	
+	<update id="updateVillageBoard">
+		update villageBoard set vTitle = #{vTitle}, vText = #{vText}, vIndate = default where vNum = #{vNum}
+	</update>
 </mapper>

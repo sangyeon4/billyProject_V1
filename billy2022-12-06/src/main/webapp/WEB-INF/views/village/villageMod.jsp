@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,9 @@
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>Bootstrap Example</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+   crossorigin="anonymous"></script>
 </head>
 <style>
 	#header{
@@ -26,6 +30,9 @@
 	#join {
 		font-size: 30px;
 	}
+	#modBtn{
+		
+	}
 </style>
   	
 <body>
@@ -37,11 +44,11 @@
 	</div>
 	
    <div id="wrap" align="center">								
-      <form  method="post" action="updateVillageBoardAction" encType="multipart/form-data" id="send_form">
+      <form  method="get" action="updateVillageBoardAction" encType="multipart/form-data" id="send_form">
          <table>
          	<tr>
          		<th>글번호</th>
-         		<td><input type="text" class="form-control" name="vNum" value="${vNum}" readonly></td>
+         		<td><input type="text" class="form-control" name="vNum" value="${vvo.vNum}" readonly></td>
          	</tr>
          	<tr>
          		<th>아이디</th>
@@ -49,22 +56,40 @@
          	</tr>
             <tr>
                <th>제목</th>
-               <td><input type="text" size="70" name="vTitle" class="form-control" placeholder="제목을 입력하세요"></td>
+               <td><input type="text" size="70" name="vTitle" value="${vvo.vTitle}" class="form-control" placeholder="제목을 입력하세요"></td>
             </tr>
             <tr>
                <th>내용</th>
-               <td><textarea cols="71" rows="10" name="vText" class="form-control" placeholder="내용을 입력하세요"></textarea></td>
+               <td class="form-control">
+               		<input type="text" size="70" name="vText" value="${vvo.vText}" class="form-control" placeholder="내용을 입력하세요">
+               		<br>
+               		<input type='hidden' name='modFile'>
+               		<%
+               			ArrayList list = (ArrayList)request.getAttribute("file");
+               			for(int i = 0; i<list.size(); i++){
+               				out.print("<button id='imgBtn"+i+"' type='button'>");
+               				out.print("<img src='download2?filename="+list.get(i)+"' style='width:150px; height:100px;' onclick='delImg"+i+"()'>");
+               				out.print("<input type='hidden' name='modFile' value='"+list.get(i)+"'");
+               				out.print("</button>");
+               				out.print("<br>");
+               			}
+               		%>
+         		</td>
             </tr>
             <tr>
             	<td colspan="2">
             		<div class="mb-3">
-						<input type="file" class="form-control" name="file" accept="image/gif, image/jpeg, image/png"> 
-						<input type="file"  class="form-control" name="file" accept="image/gif, image/jpeg, image/png">
+            		<% 
+         				for(int i = 0; i + list.size() < 2; i++){
+         					out.print("<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>");
+         				}
+         			%>
 					</div>
+					<span id="img0"></span>
+					<span id="img1"></span>
 				</td>
             </tr>
          </table>
-         <br>
          <br>
          <input type="submit" class="btn btn-primary"  value="수정">
          <input type="reset" class="btn btn-primary" value="다시 작성">
@@ -73,5 +98,15 @@
    </div>
    <%@ include file="../bbs/footer.jsp"%>
 </body>
+<script>
+	function delImg0(){
+		$('#imgBtn0').remove();
+		document.getElementById('img0').innerHTML="<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>";
+	}
+	function delImg1(){
+		$('#imgBtn1').remove();
+		document.getElementById('img1').innerHTML="<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>";
+	}
+</script>
 
 </html>

@@ -53,7 +53,7 @@
                 ${vvo.vText}
                 <br>
                 <c:forEach items="${attach}" var="fname">
-               		<img src="download2?filename=${fname}">
+               		<img src="download2?filename=${fname}" style="width:600px; height:350px;">
                		<br>
                	</c:forEach>
                </td>
@@ -68,6 +68,8 @@
 						</form>
 						<form action="villageBoardModBtn" method="get" style="float: right">
 							<input type="hidden" name="vNum" value="${vvo.vNum}">
+							<input type="hidden" name="vTitle" value="${vvo.vTitle}">
+							<input type="hidden" name="vText" value="${vvo.vText}">
 							<input type="submit" class="btn btn-primary" value="수정">
 						</form>
 					</td>

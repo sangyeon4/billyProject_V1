@@ -84,8 +84,20 @@ public class villageController {
 	}
 	
 	@RequestMapping(value = "/villageBoardModBtn", method = RequestMethod.GET)
-	public String villageBoardModAction(Locale locale, Model model, int vNum) {
-		model.addAttribute("vNum", vNum);
+	public String villageBoardModAction(Locale locale, Model model, VillageVO vvo) throws Exception {
+		List<String> attach = ivs.selectAttach_v(vvo.getvNum());
+		model.addAttribute("vvo", vvo);
+		model.addAttribute("file", attach);
 		return "village/villageMod";
+	}
+	
+	@RequestMapping(value = "/updateVillageBoardAction", method = RequestMethod.GET)
+	public String updateVillageBoardAction(Locale locale, Model model, String[] modFile, MultipartFile[] file, VillageVO vvo) throws Exception {
+		System.out.println("11");
+		String[] fileNames = fileDataUtil2.fileUpload(file);
+	    vvo.setFiles(fileNames);
+	    System.out.println("11");
+		ivs.updateVillageBoardAction(modFile, vvo);
+		return "redirect:/villageBoard";
 	}
 }

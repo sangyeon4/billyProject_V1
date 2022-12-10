@@ -99,4 +99,43 @@ public class VillageServiceImpl implements IF_villageService{
 		villageDao.deleteVillageBoard(vNum);
 		System.out.println("서비스단 빌리지 삭제 디버깅");
 	}
+
+	@Override
+	public void updateVillageBoardMemberId(String id) {
+		villageDao.updateVillageBoardMemberId(id);
+		System.out.println("서비스단 회원탈퇴 빌리지 업데이트 디버깅");
+	}
+
+	@Override
+	public void updateVillageReply_1MemberId(String id) {
+		villageDao.updateVillageReply_1MemberId(id);
+		System.out.println("서비스단 회원탈퇴 빌리지 댓글 업데이트 디버깅");
+	}
+
+	@Override
+	public void updateVillageBoardAction(String[] modFile, VillageVO vvo) {
+		if(vvo.getFiles()[0] != "") {
+			if(modFile.length > 0) {
+				//무조건 파일은 1개 , 그파일의 밸류를 받아서 디비와 비교하고 그데이터는 삭제하지 않는다.
+			}else {
+				//원래글에 파일이 없고 파일을 인서트 하는경우
+				//그냥 평소대로 인서트
+				villageDao.updateVillageBoard(vvo);
+				for (int i = 0; i < vvo.getFiles().length; i++) {
+					if (vvo.getFiles()[i] != null) {
+						villageDao.updateAttach_v(vvo);
+						System.out.println(vvo.getFiles()[i] + "서비스단 빌리지 첨부파일 인서트 디버깅");
+					}
+				}
+			}
+		}else {
+			if(modFile.length > 0) {
+				//전부 삭제후 넘겨받은거 다시 인서트
+			}else {
+				//파일 업로드도 안하고 원래글에도 파일이 없는경우
+				System.out.println("서비스단 빌리지보드 내용만 업데이트 디버깅");
+				villageDao.updateVillageBoard(vvo);
+			}
+		}
+	}
 }

@@ -31,4 +31,10 @@ public interface IF_villageService {
 	public int selectVillgeBoardCnt();
 	
 	public void deleteVillageBoard(int vNum);
+	
+	public void updateVillageBoardMemberId(String id);
+	
+	public void updateVillageReply_1MemberId(String id);
+	
+	public void updateVillageBoardAction(String[] modFile, VillageVO vvo);
 }
