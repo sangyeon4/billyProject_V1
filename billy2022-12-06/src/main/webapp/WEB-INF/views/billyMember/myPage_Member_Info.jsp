@@ -28,7 +28,7 @@
 		height : 800px;
 	}
 	#profile{
-      	width : 200px;
+      	width : 250px;
       	float:left;
 	}
 	#myInfo h2{
@@ -36,13 +36,14 @@
 	}
 	#myInfo img{
 		width : 200px;
-		float : left;
+		float : center;
 		padding-left:30px;	
 	}
-	 #uploadButton{
+	#uploadButton{
       width: 200px;
-      display : inline;
+      float:left;
     }
+   
 	#joinTable {
    		width : 750px;
    		float:right;
@@ -67,20 +68,21 @@
 	<%@ include file="../bbs/nav.jsp"%>
 	<%@ page import="com.billy.VO.*" %>
 	<% BillyMemberVO myInfo = (BillyMemberVO)request.getAttribute("myInfo"); %>
+	<form name="frm" action="billyMemberModAction" method="POST" encType="multipart/form-data">
 	<section id="myInfo">
 	<div class="list-group">
-	<a href="#" class="list-group-item list-group-item-action active" aria-current="true">내 정보</a>
+	<a href="myPage?id=${login}" class="list-group-item list-group-item-action active" aria-current="true">내 정보</a>
   	<a href="#" class="list-group-item list-group-item-action">찜 목록</a>
   	<a href="#" class="list-group-item list-group-item-action">등록한 물품</a>
   	<a href="#" class="list-group-item list-group-item-action">대여한 물품</a>
   	<a href="#" class="list-group-item list-group-item-action">빌리 내역</a>
-  	<a href="#" class="list-group-item list-group-item-action">회원탈퇴</a>
+  	<a href="deleteMemberPage?id=${myInfo.getId()}" class="list-group-item list-group-item-action">회원탈퇴</a>
 	</div>
 	
 	
 	<h2>내 정보</h2>
 	<div id="profile">
-	<form name="frm" action="billyMemberModAction" method="POST" encType="multipart/form-data">
+	
 
 	<c:choose>
 		<c:when test="${myInfo.getPhotoName().equals('N')}">
@@ -181,7 +183,7 @@
                   id="answerHelpInline" class="form-text"></span></td>
             </tr>
             <tr>
-               <td align=center>지역설정</td>
+               <td align=center>주소</td>
                <td><input type="text" class="form-control"
                   id="sample5_address" placeholder="주소" onclick="sample5_execDaumPostcode()" name="loc" aria-describedby="locHelpInline" value="${myInfo.getLoc()}"><span
                   id="locHelpInline" class="form-text"></span></td>

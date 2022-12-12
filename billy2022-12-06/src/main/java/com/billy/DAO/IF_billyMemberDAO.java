@@ -15,4 +15,6 @@ public interface IF_billyMemberDAO {
    public BillyMemberVO myPageInfo(String id) throws Exception;
    
    public void memberInfoUpdate(BillyMemberVO bmvo) throws Exception;
+   
+   public void deleteMember(String id) throws Exception;
 }

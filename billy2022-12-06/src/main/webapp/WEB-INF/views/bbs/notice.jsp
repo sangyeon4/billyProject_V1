@@ -6,144 +6,123 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style>
-   .rolling_box{
-            width: 800px;
-            height: 30px;
-            text-align: center;
-            border: 1px solid #848484;
-            margin-left : 200px;
-            border-radius : 9px;
+ <style>
+        html, body{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
         }
 
-        .rolling_box ul {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+        /* 배너 컨테이너 */
+        .rollingbanner{
             position: relative;
-            list-style : none;
-            
-        }
-
-        .rolling_box ul li {
-            width: 100%;
-            height: 100%;
-            transition: .5s;
-            position:absolute;
-            transition: top .75s;
-            top: 100%;
-            z-index: 1;
-            background-color: #ffffff;
-            
-        }
-
-        .card_sliding{
-            top: 0 !important;
-            z-index: 100 !important;
-        } 
-
-        .card_sliding_after{
-            top: -100% !important;
-            z-index: 10 !important;
-        }
-
-        .rolling_box ul li p {
+            width: 500px;
+            height: 30px;
             font-size: 15px;
-            line-height: 40px;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+            border-radius: 16px;
+        }
+        /* 타이틀 */
+        .rollingbanner > .title{
             font-weight: bold;
-            
+            float: left;
+            padding-right: 10px;
         }
+        /* 롤링 배너 */
+        .rollingbanner > .wrap{
+            position: relative;
+            width: auto;
+            height: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }        
+        .rollingbanner ul{
+            list-style: none;
+        }
+        .rollingbanner li{
+            position: absolute;
+            top: -36px;
+            left: 0;
+        }
+        /* 이전, 현재, 다음 롤링 배너 표시 */
+        .rollingbanner li.prev{
+            top: 36px;
+            transition: top 0.5s ease;
+        }
+        .rollingbanner li.current{
+            top: 0;
+            transition: top 0.5s ease;
+        }
+        .rollingbanner li.next{
+            top: -36px;
+        }
+        .rollingbanner a{
+            display: block;
+            display: -webkit-box;
+            text-decoration: none;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient:vertical;
+            overflow: hidden;
+            color: #000;
+        }
+        /* 반대 방향으로 진행 */
+        .rollingbanner.reverse li.prev{
+            top: -36px;
+            transition: top 0.5s ease;
+        }
+        .rollingbanner.reverse li.next{
+            top: 36px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            var interval = window.setInterval(rollingCallback, 3000);
+        })
+        function rollingCallback(){
+            //.prev 클래스 삭제
+            document.querySelector('.rollingbanner .prev').classList.remove('prev');
 
-        .before_slide {
-            transform: translateY(100%);
-        }
+            //.current -> .prev
+            let current = document.querySelector('.rollingbanner .current');
+            current.classList.remove('current');
+            current.classList.add('prev');
 
-        .after_slide {
-            transform: translateY(0);
+            //.next -> .current
+            let next = document.querySelector('.rollingbanner .next');
+            //다음 목록 요소가 널인지 체크
+            if(next.nextElementSibling == null){
+                document.querySelector('.rollingbanner ul li:first-child').classList.add('next');
+            }else{
+                //목록 처음 요소를 다음 요소로 선택
+                next.nextElementSibling.classList.add('next');
+            }
+            next.classList.remove('next');
+            next.classList.add('current');
         }
-</style>
+    </script>
+</head>
 <body>
-   <div class="rolling_box">
-      <ul id="rolling_box">
-         <li class="card_sliding" id="first"><p></p></li>
-         <li class="" id="second"><p></p></li>
-         <li class="" id="third"><p></p></li>
-      </ul>
-   </div>
-   <br>
+    <div class="container">
+        <div class="rollingbanner">
+            <div class="title">공지사항 > </div>
+            <div class="wrap">
+                <ul>		              
+                    <li><a href="http://www.naver.com"></a></li>
+                    <li class="next"><a href="http://www.google.com">공사중~ 구글</a></li>
+                    <li class="current"><a href="https://www.google.com/search?q=휴먼교육센터">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
+                    <li><a href="#">"공법변경 구조검토 요구, 현산 측이 묵살했다"</a></li>
+                    <li class="prev"><a href="#">12월 주담대 금리 연 3.63%…7년7개월 만에 최고</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
-
-<script>
-let rollingData = [
-    '공사중',
-    '공사중입니다.'
-  ]    // 롤링할 데이터를 넣으면 됩니다 갯수 제한 없어요
-
-let timer = 2000 // 롤링되는 주기 입니다 (1000 => 1초)
-
-let first = document.getElementById('first'),
-second = document.getElementById('second'),
-third = document.getElementById('third')
-let move = 2
-let dataCnt = 1
-let listCnt = 1
-
-//위 선언은 따로 완전히 수정하지 않는 한 조정할 필요는 없습니다.
-
-first.children[0].innerHTML = rollingData[0]
-
-setInterval(() => {
-if(move == 2){
-first.classList.remove('card_sliding')
-first.classList.add('card_sliding_after')
-
-second.classList.remove('card_sliding_after')
-second.classList.add('card_sliding')
-
-third.classList.remove('card_sliding_after')
-third.classList.remove('card_sliding')
-
-move = 0
-} else if (move == 1){
-first.classList.remove('card_sliding_after')
-first.classList.add('card_sliding')
-
-second.classList.remove('card_sliding_after')
-second.classList.remove('card_sliding')
-
-third.classList.remove('card_sliding')
-third.classList.add('card_sliding_after')
-
-move = 2
-} else if (move == 0) {
-first.classList.remove('card_sliding_after')
-first.classList.remove('card_sliding')
-
-second.classList.remove('card_sliding')
-second.classList.add('card_sliding_after')
-
-third.classList.remove('card_sliding_after')
-third.classList.add('card_sliding')
-
-move = 1
-}
-
-if(dataCnt < (rollingData.length - 1)) {
-document.getElementById('rolling_box').children[listCnt].children[0].innerHTML = rollingData[dataCnt]
-dataCnt++
-} else if(dataCnt == rollingData.length - 1) {
-document.getElementById('rolling_box').children[listCnt].children[0].innerHTML = rollingData[dataCnt]
-dataCnt = 0
-}
-
-if(listCnt < 2) {
-listCnt++
-} else if (listCnt == 2) {
-listCnt = 0
-}
-
-console.log(listCnt)
-}, timer);
-
-</script>
 </html>
