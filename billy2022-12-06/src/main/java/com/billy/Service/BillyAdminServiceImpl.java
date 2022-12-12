@@ -47,4 +47,12 @@ public class BillyAdminServiceImpl implements IF_billyAdminService{
 		System.out.println("--서비스단 공지사항 5개 가져오기");
 		return badao.rollingBillyNotice();
 	}
+
+	@Override
+	public BillyNoticeVO selectOneBillyNotice(int bnNum) throws Exception {
+		System.out.println("--서비스단 공지사항 자세히보기");
+		return badao.selectOneBillyNotice(bnNum);
+	}
+	
+	
 }

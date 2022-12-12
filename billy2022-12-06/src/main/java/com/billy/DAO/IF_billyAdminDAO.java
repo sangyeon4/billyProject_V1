@@ -17,6 +17,6 @@ public interface IF_billyAdminDAO {
 	
 	public List<BillyNoticeVO> rollingBillyNotice() throws Exception;
 
-	
+	public BillyNoticeVO selectOneBillyNotice(int bnNum)throws Exception;
 	
 }

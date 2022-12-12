@@ -26,4 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select bnTitle from (select bnTitle from billyNotice order by bnNum DESC) <![CDATA[ where rownum <=5]]>
 	</select>
 	
+	<select id="rollingBillyNotice" resultType="com.billy.VO.BillyNoticeVO">
+		select * from billyNotice where bnNum = #{bnNum}
+	</select>
 </mapper>
+

@@ -47,5 +47,11 @@ public class BillyAdminDAOImpl implements IF_billyAdminDAO{
 		System.out.println("--dao단 공지사항 5개만 가져오기 디버깅");
 		return sqlSession.selectList(mapperQuery + ".rollingBillyNotice");
 	}
+
+	@Override
+	public BillyNoticeVO selectOneBillyNotice(int bnNum) throws Exception {
+		System.out.println(bnNum+"--dao단 공지사항 자세히보기 디버깅");
+		return sqlSession.selectOne(mapperQuery + ".selectOneBillyNotice",bnNum);
+	}
 	
 }

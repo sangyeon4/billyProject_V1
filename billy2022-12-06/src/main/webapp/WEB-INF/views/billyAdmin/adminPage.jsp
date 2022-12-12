@@ -61,7 +61,7 @@
 		<c:forEach items="${bnList}" var="bnvo">         
                <tr class='record'>
 	               <td>${bnvo.bnNum}</td>   
-	               <td><a href="#">${bnvo.bnTitle}</a></td>
+	               <td><a href="billyNoticeView?bnNum?=${bnvo.bnNum}">${bnvo.bnTitle}</a></td>
 	               <td>${bnvo.bnIndate.substring(0,10)}</td>
 	               <td>${bnvo.bnCnt}</td>
                </tr>      

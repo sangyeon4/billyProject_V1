@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.billy.Service.IF_billyAdminService;
 import com.billy.VO.BillyNoticeVO;
 import com.billy.VO.VillagePageVO;
+import com.billy.VO.VillageReplyVO;
+import com.billy.VO.VillageVO;
 
 @Controller
 public class billyAdminController {
@@ -55,6 +57,14 @@ public class billyAdminController {
 		model.addAttribute("bnList",bnList);
 		
 		return "redirect:/adminPage";
+	}
+	
+	@RequestMapping(value = "/billyNoticeView", method = RequestMethod.GET)
+	public String villageView(Locale locale, Model model, int bnNum) throws Exception {
+		//basv.updateVillageCnt(bnNum);	조회수
+		BillyNoticeVO bnvo = basv.selectOneBillyNotice(bnNum);
+		model.addAttribute("bnvo",bnvo);
+		return "village/villageView";
 	}
 	
 	

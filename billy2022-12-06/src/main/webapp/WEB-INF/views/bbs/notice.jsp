@@ -113,7 +113,7 @@
     <div class="container">
         <div class="rollingbanner">
             <div class="title">공지사항 > </div>
-            <div class="wrap">
+            <div class="wrap">            
                 <ul>		              
                     <li><a href="http://www.naver.com"></a></li>
                     <li class="next"><a href="http://www.google.com">공사중~ 구글</a></li>
