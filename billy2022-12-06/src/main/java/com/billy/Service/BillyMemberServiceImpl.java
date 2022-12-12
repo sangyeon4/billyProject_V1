@@ -51,4 +51,11 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 		
 	}
 
+	@Override
+	public void deleteMember(String id) throws Exception {
+		System.out.println(id+"--서비스단 탈퇴 디버깅");
+		bmdao.deleteMember(id);
+		
+	}
+
 }

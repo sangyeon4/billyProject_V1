@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <update id="memberInfoUpdate">
 		update billyMember set name = #{name},pwd = #{pwd},tel = #{tel},loc = #{loc},email = #{email},photoName = #{photoName},pwdQuiz = #{pwdQuiz},pwdAnswer = #{pwdAnswer}  where id =#{id}
-	</update>   
+	</update>
+	
+	<delete id="deleteMember">
+		delete from billyMember where id = #{id}
+	</delete>   
+	
+	
    
 </mapper>
