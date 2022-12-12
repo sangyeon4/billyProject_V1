@@ -29,7 +29,14 @@
       </div>
       <c:if test="${login != null}">
          <div id="logininfo">
-         	<a href="myPage?id=${login}">${login}</a>님 환영합니다!
+         <c:choose>
+         	<c:when test = "${login eq 'admin'}">
+         		<a href="adminPage">관리자페이지</a>
+         	</c:when>
+         	<c:otherwise>
+         		<a href="myPage?id=${login}">${login}</a>님 환영합니다!
+         	</c:otherwise>
+         </c:choose>        	
             <c:if test="${login != null}">
                <a href="logout">[로그아웃]</a>
             </c:if>

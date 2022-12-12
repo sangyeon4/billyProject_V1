@@ -39,8 +39,7 @@
 			<exclude-mapping path="/chkName**"/>
 			<exclude-mapping path="/billyViewAll**"/>	
 			<exclude-mapping path="/resources/**" />
-			<exclude-mapping path="/billyMemberModAction/**"/>
-
+			<exclude-mapping path="/member/**"/>
 			<beans:ref bean="authenInterceptor"/>
 			</interceptor>
 	</interceptors>

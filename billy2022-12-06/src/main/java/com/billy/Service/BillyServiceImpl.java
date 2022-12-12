@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.billy.DAO.IF_billyDAO;
 import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyGoods_attachVO;
+import com.billy.VO.BillyGoods_likeVO;
 
 @Service
 public class BillyServiceImpl implements IF_billyService {
@@ -38,7 +39,7 @@ public class BillyServiceImpl implements IF_billyService {
 	}
 
 	@Override
-	public List<BillyGoodsVO> selectBillyAll() {  //모든 빌리+사진하나
+	public List<BillyGoodsVO> selectBillyAll() throws Exception{  //모든 빌리+사진하나
 		List<BillyGoodsVO>bList=billyDao.selectBillyAll();
 		System.out.println(bList.get(0).getgNum()+"-----service단 전체보기시 번호 디버깅");
 		List<BillyGoods_attachVO>baList=billyDao.selectBilly_attach();
@@ -59,9 +60,10 @@ public class BillyServiceImpl implements IF_billyService {
 		return null;
 	}
 	@Override
-	public BillyGoodsVO selectBillyOne(String vno) {
+	public BillyGoodsVO selectBillyOne(String vno) throws Exception {
 		System.out.println(billyDao.selectBillyOne(vno).getgNum()+"service단 빌리자세히보기 디버깅");		
 		BillyGoodsVO bvo=billyDao.selectBillyOne(vno);
+		bvo.setName(billyDao.selectOnebilly_name(vno));
 		List<BillyGoods_attachVO>baList=billyDao.selectOneBilly_attach(vno);
 		System.out.println(baList.size()+"----service단 빌리 자세히보기(파일)사이즈 디버깅");
 		if(baList.size()!=0) {
@@ -75,8 +77,33 @@ public class BillyServiceImpl implements IF_billyService {
 	}
 	@Override
 	public void updateBilly(BillyGoodsVO bvo) throws Exception {
+		System.out.println(bvo.getgNum()+"---service단 빌리 수정하기 디버깅");		
 		billyDao.updateBilly(bvo);
-		System.out.println(bvo.getgNum()+"---servicc단 빌리 수정하기 디버깅");		
+		
 	}
+	@Override
+	public void updateBillyMemberId(String id) throws Exception {
+		System.out.println(id+"---service단 회원탈퇴시 빌리처리 id 디버깅 ");
+		billyDao.updateBillyMemberId(id);
+		
+		
+	}
+	@Override
+	public int selectCntBilly_like(BillyGoods_likeVO blvo) throws Exception {
+		System.out.println(blvo.getgNum()+"----service단 빌리자세히보기(좋아요클릭유무) gNum디버깅");
+		return billyDao.selectCntBilly_like(blvo);
+	}
+	@Override
+	public void billyLikeUp(BillyGoods_likeVO blvo) throws Exception {
+		billyDao.billyLikeUp(blvo);
+		System.out.println(blvo.getgNum()+"---service단 likeUp디버깅");		
+	}
+	@Override
+	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception {
+		billyDao.billyLikeDown(blvo);
+		System.out.println(blvo.getgNum()+"---service단 likeDown디버깅");
+	}
+
+	
 
 }

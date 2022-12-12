@@ -11,7 +11,7 @@
 		height : 800px;
 	}
 	
-	section #developer{
+	section .developer{
 		margin-left : 200px;
 		padding-top : 100px;
 		width:800px;
@@ -23,7 +23,8 @@
    <%@ include file="../bbs/nav.jsp"%>
    <%@ include file="../bbs/notice.jsp"%>
    <section>
-   		<img src=resources/img/개발자.jpg id="developer">
+   		<img src=resources/img/개발자.jpg class="developer">
+   		<img src=resources/img/developer.png class="developer">
    </section>
    
    <%@ include file="../bbs/footer.jsp"%>

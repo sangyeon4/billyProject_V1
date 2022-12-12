@@ -100,7 +100,7 @@ h4 {
 						url : "loginChk",
 						data : data2,
 						success : function(result) {
-							if (result != 'fail') { //아이디가 없다면            	
+							if (result != 'fail') { //회원정보가 없다면 없다면            	
 								alert('비밀번호가 틀렸습니다');
 							}else{
 								document.loginForm.submit();

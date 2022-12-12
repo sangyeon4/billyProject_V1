@@ -53,4 +53,11 @@ public class BillyMemberDAOImpl implements IF_billyMemberDAO {
 		
 	}
 
+	@Override
+	public void deleteMember(String id) throws Exception {
+		System.out.println(id+"--dao단 탈퇴 디버깅");
+		sqlSession.insert(mapperQuery+".deleteMember",id);
+		
+	}
+
 }

@@ -119,6 +119,26 @@ public class billyMemberController {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(value = "/deleteMemberPage", method = RequestMethod.GET)
+	public String deleteMember(Locale locale, Model model,@RequestParam("id") String id) throws Exception {
+		System.out.println(id + "--컨트롤러단 회원탈퇴페이지 id디버깅");
+		model.addAttribute("id",id);
+		return "billyMember/myPage_deleteMember";
+	}
+	
+	@RequestMapping(value = "/deleteMemberAction", method = RequestMethod.POST)
+	public String deleteMemberAction(HttpSession session,Locale locale, Model model,BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getId() + "--컨트롤러단 회원탈퇴 id디버깅");
+		int result = bmsv.memberLoginChk(bmvo);
+		if(result==1) {
+			//진호오빠,상연 테이블 업데이트 쿼리문 써야됨~ 
+			bmsv.deleteMember(bmvo.getId());
+			session.removeAttribute("login");
+		}	
+		
+		return "home";
+	}
+	
 	@RequestMapping(value="/myPage", method=RequestMethod.GET)
 	public String myPage(HttpSession session,Model model,@RequestParam("id") String id) throws Exception {
 		System.out.println(id + "--컨트롤러단 마이페이지 id받아오는지");
@@ -127,6 +147,7 @@ public class billyMemberController {
 	
 		return "billyMember/myPage_Member_Info";
 	}
+	
 	
 	
 	

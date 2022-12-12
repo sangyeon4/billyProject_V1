@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.billy.DAO.IF_billyAdminDAO">
+
+	<select id="selectBillyNotice" resultType="int">
+		select count(*) from billyNotice
+	</select>
+	
+	<insert id="insertBillyNotice">
+		insert into billyNotice values (#{bnNum},#{bnTitle},#{bnText},default,default)
+	</insert>
+	
+	<select id="selectAllBillyNotice" resultType="com.billy.VO.BillyNoticeVO">
+		select no2.* from (select no1.*, rownum as rnum from (select * from billyNotice order by bnNum desc) no1) no2 
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectBillyNoticeCnt" resultType="int">
+		select count(*) from billyNotice
+	</select>
+	
+	<select id="rollingBillyNotice" resultType="com.billy.VO.BillyNoticeVO">
+		select bnTitle from (select bnTitle from billyNotice order by bnNum DESC) <![CDATA[ where rownum <=5]]>
+	</select>
+	
+</mapper>

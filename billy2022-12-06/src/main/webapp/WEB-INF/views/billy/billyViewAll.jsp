@@ -22,7 +22,7 @@
 
 	<c:forEach items="${bList}" var="bvo">
 
-		<a href='billyViewOne?vno=${bvo.getgNum()}' style="float: left; margin: 50px;  ">
+		<a href='billyViewOne?vno=${bvo.getgNum()}&vid=${login}' style="float: left; margin: 50px;  ">
 			<div class="card" style="width: 18rem; height: 18rem;">
 		
 			<!-- 사진 파일유무 파악 -->			
