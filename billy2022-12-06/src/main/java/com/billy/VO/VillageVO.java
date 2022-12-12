@@ -7,8 +7,15 @@ public class VillageVO {
 	private String vId;
 	private String vIndate;
 	private int vCnt;
-	private String[] files;
+	private String[] files = null;
+	private String[] delFiles = null;
 	
+	public String[] getDelFiles() {
+		return delFiles;
+	}
+	public void setDelFiles(String[] delFiles) {
+		this.delFiles = delFiles;
+	}
 	public String[] getFiles() {
 		return files;
 	}

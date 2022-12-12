@@ -1,6 +1,8 @@
 package com.billy.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -99,4 +101,41 @@ public class VillageServiceImpl implements IF_villageService{
 		villageDao.deleteVillageBoard(vNum);
 		System.out.println("서비스단 빌리지 삭제 디버깅");
 	}
+
+	@Override
+	public void updateVillageBoardMemberId(String id) {
+		villageDao.updateVillageBoardMemberId(id);
+		System.out.println("서비스단 회원탈퇴 빌리지 업데이트 디버깅");
+	}
+
+	@Override
+	public void updateVillageReply_1MemberId(String id) {
+		villageDao.updateVillageReply_1MemberId(id);
+		System.out.println("서비스단 회원탈퇴 빌리지 댓글 업데이트 디버깅");
+	}
+
+	@Override
+	public void deleteVillageAttach(VillageVO vvo) {
+		if(vvo.getDelFiles() != null) {
+			villageDao.deleteVillageAttach(vvo);
+			System.out.println("서비스단 빌리지 첨부파일 삭제 디버깅");
+		}
+		System.out.println("삭제 실행안함");
+	}
+
+	@Override
+	public void updateVillageAttach(VillageVO vvo) {
+		Map<String, String> map = new HashMap<>();
+		for (int i = 0; i < 2; i++) {
+			String file = vvo.getFiles()[i];
+			System.out.println(file);
+			String num = Integer.toString(vvo.getvNum());
+			System.out.println(num);
+			map.put("vNum" + i, num);
+			map.put("file" + i, file);
+		}
+		villageDao.updateVillageAttach(map);
+	}
+
 }
+
