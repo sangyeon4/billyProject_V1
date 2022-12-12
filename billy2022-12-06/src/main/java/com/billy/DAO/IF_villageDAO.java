@@ -1,6 +1,7 @@
 package com.billy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import com.billy.VO.VillagePageVO;
 import com.billy.VO.VillageReplyVO;
@@ -36,7 +37,8 @@ public interface IF_villageDAO {
 	
 	public void updateVillageReply_1MemberId(String id);
 	
-	public void updateVillageBoard(VillageVO vvo);
+	public void deleteVillageAttach(VillageVO vvo);
 	
-	public void updateAttach_v(VillageVO vvo);
+	public void updateVillageAttach(Map<String,String> map);
+	
 }

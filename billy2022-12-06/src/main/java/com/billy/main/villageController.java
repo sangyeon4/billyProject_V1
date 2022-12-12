@@ -49,6 +49,7 @@ public class villageController {
 	
 	@RequestMapping(value = "/villageAction", method = RequestMethod.POST)
 	public String villageAction(Locale locale, Model model, VillageVO vvo, MultipartFile[] file) throws Exception {
+		System.out.println(file.length);
 		String[] fileNames = fileDataUtil2.fileUpload(file);
 	    vvo.setFiles(fileNames);
 		ivs.insertVillage(vvo);
@@ -91,13 +92,15 @@ public class villageController {
 		return "village/villageMod";
 	}
 	
-	@RequestMapping(value = "/updateVillageBoardAction", method = RequestMethod.GET)
-	public String updateVillageBoardAction(Locale locale, Model model, String[] modFile, MultipartFile[] file, VillageVO vvo) throws Exception {
-		System.out.println("11");
+	@RequestMapping(value = "/updateVillageBoardAction", method = RequestMethod.POST)
+	public String updateVillageBoardAction(Locale locale, Model model, MultipartFile[] file, String[] delFiles, VillageVO vvo) throws Exception {
+		System.out.println("업데이트 서블릿 시작");
 		String[] fileNames = fileDataUtil2.fileUpload(file);
-	    vvo.setFiles(fileNames);
-	    System.out.println("11");
-		ivs.updateVillageBoardAction(modFile, vvo);
+		vvo.setFiles(fileNames);
+		vvo.setDelFiles(delFiles);
+		ivs.deleteVillageAttach(vvo);
+		ivs.updateVillageAttach(vvo);
+		System.out.println("업데이트 서블릿 종료");
 		return "redirect:/villageBoard";
 	}
 }

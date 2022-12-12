@@ -44,7 +44,7 @@
 	</div>
 	
    <div id="wrap" align="center">								
-      <form  method="get" action="updateVillageBoardAction" encType="multipart/form-data" id="send_form">
+      <form  method="post" action="updateVillageBoardAction" encType="multipart/form-data" id="send_form">
          <table>
          	<tr>
          		<th>글번호</th>
@@ -63,13 +63,11 @@
                <td class="form-control">
                		<input type="text" size="70" name="vText" value="${vvo.vText}" class="form-control" placeholder="내용을 입력하세요">
                		<br>
-               		<input type='hidden' name='modFile'>
                		<%
                			ArrayList list = (ArrayList)request.getAttribute("file");
                			for(int i = 0; i<list.size(); i++){
                				out.print("<button id='imgBtn"+i+"' type='button'>");
-               				out.print("<img src='download2?filename="+list.get(i)+"' style='width:150px; height:100px;' onclick='delImg"+i+"()'>");
-               				out.print("<input type='hidden' name='modFile' value='"+list.get(i)+"'");
+               				out.print("<img src='download2?filename="+list.get(i)+"' style='width:150px; height:100px;' onclick=delImg"+i+"('"+list.get(i)+"')>");
                				out.print("</button>");
                				out.print("<br>");
                			}
@@ -87,6 +85,9 @@
 					</div>
 					<span id="img0"></span>
 					<span id="img1"></span>
+					<span id="delImg0"></span>
+					<span id="delImg1"></span>
+					<input type='hidden' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>
 				</td>
             </tr>
          </table>
@@ -99,13 +100,15 @@
    <%@ include file="../bbs/footer.jsp"%>
 </body>
 <script>
-	function delImg0(){
+	function delImg0(a){
 		$('#imgBtn0').remove();
 		document.getElementById('img0').innerHTML="<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>";
+		document.getElementById('delImg0').innerHTML="<input type='hidden' name='delFiles' value='"+a+"'>";
 	}
-	function delImg1(){
+	function delImg1(a){
 		$('#imgBtn1').remove();
 		document.getElementById('img1').innerHTML="<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>";
+		document.getElementById('delImg1').innerHTML="<input type='hidden' name='delFiles' value='"+a+"'>";
 	}
 </script>
 

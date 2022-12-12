@@ -36,5 +36,8 @@ public interface IF_villageService {
 	
 	public void updateVillageReply_1MemberId(String id);
 	
-	public void updateVillageBoardAction(String[] modFile, VillageVO vvo);
+	public void deleteVillageAttach(VillageVO vvo);
+	
+	public void updateVillageAttach(VillageVO vvo);
+	
 }

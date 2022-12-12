@@ -1,6 +1,7 @@
 package com.billy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -104,15 +105,15 @@ public class VillageDAOImpl implements IF_villageDAO {
 	}
 
 	@Override
-	public void updateVillageBoard(VillageVO vvo) {
-		//빌리지 보드에 제목과 내용만 바꾸는 메서드
-		System.out.println("--DAO단 빌리지보드 내용만 업데이트 디버깅");
-		sqlSession.update(mapperQuery + ".updateVillageBoard", vvo);
+	public void deleteVillageAttach(VillageVO vvo) {
+		System.out.println("--DAO단 빌리지첨부파일 삭제 디버깅");
+		sqlSession.delete(mapperQuery + ".deleteVillageAttach", vvo);
 	}
 
 	@Override
-	public void updateAttach_v(VillageVO vvo) {
-		System.out.println("--DAO단 첨부파일  업데이트 디버깅");
-		sqlSession.update(mapperQuery + ".updateAttach_v", vvo);
+	public void updateVillageAttach(Map<String,String> map) {
+		System.out.println("--DAO단 빌리지첨부파일 업데이트 디버깅");
+		System.out.println(map);
+		sqlSession.update(mapperQuery + ".updateVillageAttach", map);
 	}
 }

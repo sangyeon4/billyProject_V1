@@ -41,13 +41,13 @@
          </div>
       </c:if>
     </header>
-    <c:if test="${login != null}">
+    <%-- <c:if test="${login != null}">
     	<div id="ViewTimer"></div>
-    </c:if>
+    </c:if> --%>
     
     <!-- End Example Code -->
   </body>
-  <script language="JavaScript">
+  <!-- <script language="JavaScript">
 		var SetTime = 1800;		// 최초 설정 시간(기본 : 초)
 		function msg_time() {	// 1초씩 카운트
 			m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";	// 남은 시간 계산
@@ -59,5 +59,5 @@
 			}
 		}
 		window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
-	</script>
+	</script> -->
 </html>
