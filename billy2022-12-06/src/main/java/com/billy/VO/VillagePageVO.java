@@ -121,4 +121,21 @@ public class VillagePageVO {
 	   public void setPerPageNum(int perPageNum) {
 	      this.perPageNum = perPageNum;
 	   }
+	   
+	   
+		private String searchOption;
+		private String searchWord;
+		
+		public String getSearchWord() {
+			return searchWord;
+		}
+		public void setSearchWord(String searchWord) {
+			this.searchWord = searchWord;
+		}
+		public String getSearchOption() {
+			return searchOption;
+		}
+		public void setSearchOption(String searchOption) {
+			this.searchOption = searchOption;
+		}
 }

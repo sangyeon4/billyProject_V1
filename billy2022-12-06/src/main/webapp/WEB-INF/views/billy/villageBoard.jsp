@@ -29,28 +29,40 @@
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<%@ include file="../bbs/notice.jsp"%>
+	<br>
 	<h3>빌리지 게시판</h3>
-	<table class="table table-sm" style="width:900px">
+	<table class="table table-sm" style="width: 900px">
 		<tr>
 			<th>글번호</th>
 			<th>제목</th>
-			<th>아이디</th>
+			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
 			<th><a href="villageForm">글작성</a></th>
 		</tr>
-		<c:forEach items="${vList}" var="vvo">         
-               <tr class='record'>
-	               <td>${vvo.vNum}</td>   
-	               <td><a href="villageView?vNum=${vvo.vNum}">${vvo.vTitle}</a></td>
-	               <td>${vvo.vId}</td>
-	               <td>${vvo.vIndate.substring(0,10)}</td>
-	               <td>${vvo.vCnt}</td>
-               </tr>      
-         </c:forEach>
-		
-			
+		<c:forEach items="${vList}" var="vvo">
+			<tr class='record'>
+				<td>${vvo.vNum}</td>
+				<td><a href="villageView?vNum=${vvo.vNum}">${vvo.vTitle}</a> (${vvo.reply})</td>
+				<td>${vvo.name}</td>
+				<td>${vvo.vIndate.substring(0,10)}</td>
+				<td>${vvo.vCnt}</td>
+			</tr>
+		</c:forEach>
 	</table>
+
+	<form action="selectVillageSearch" method="get">
+		<div class="mainSelect" style="margin-left: 450px">
+			<select id="mainS" name="searchOption">
+				<option value="title">제목</option>
+				<option value="titleText">제목+내용</option>
+				<option value="writer">작성자</option>
+			</select> 
+			<input type="text" name="searchWord"> 
+			<input class="btn btn-primary" type="submit" value="검색">
+		</div>
+	</form>
+	<br>
 	<div id="page">
 		<nav aria-label="...">
 			<ul class="pagination">

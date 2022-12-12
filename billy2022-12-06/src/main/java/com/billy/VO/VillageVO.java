@@ -7,9 +7,24 @@ public class VillageVO {
 	private String vId;
 	private String vIndate;
 	private int vCnt;
+	private String name;
 	private String[] files = null;
 	private String[] delFiles = null;
+	private int reply = 0;
 	
+	
+	public int getReply() {
+		return reply;
+	}
+	public void setReplyCnt(int reply) {
+		this.reply = reply;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String[] getDelFiles() {
 		return delFiles;
 	}
