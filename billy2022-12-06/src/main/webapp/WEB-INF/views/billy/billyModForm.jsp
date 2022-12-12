@@ -85,18 +85,18 @@
 				placeholder="${bvo.getgEndDate()}">
 		</div>
 		<div class="mb-3">
-         <label for="gPriceLB" class="form-label">가격</label> <input
+        	 <label for="gPriceLB" class="form-label">가격</label> <input
             type="number" class="form-control" name="gPrice" value="${bvo.getgPrice()}">
-      </div>
-      <div class="mb-3">
-         <label for="gTextLB" class="form-label">내용</label>
-         <textarea class="form-control" name="gText" >${bvo.getgText()}</textarea>
-      </div>
-      <div class="mb-3">
-         <label for="goodsFile" class="form-label">사진올리기</label> <input
-            type="file" class="form-control" name="file"> <input
-            type="file" class="form-control" name="file">
-      </div>
+      	</div>
+      	<div class="mb-3">
+         	<label for="gTextLB" class="form-label">내용</label>
+         	<textarea class="form-control" name="gText" >${bvo.getgText()}</textarea>
+      	</div>
+      	<div class="mb-3">
+         	<label for="goodsFile" class="form-label">사진올리기</label> 
+         	<input type="file" class="form-control" name="file"> 
+         	<input type="file" class="form-control" name="file">
+      	</div>
 
 
       <input type="submit" class="btn btn-primary">
