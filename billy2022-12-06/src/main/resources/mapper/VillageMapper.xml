@@ -10,8 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertAttach_v" parameterType="String">
-		insert into villageAttach values ((select max(vNum) from villageBoard), #{fName},default)
+		insert into villageAttach values ((select max(vNum) from villageBoard), #{fname},default)
 	</insert>
+	
+	<!-- <insert id="updateAttach_v">
+		insert into villageAttach values (#{vNum}, #{fName}, default)
+	</insert> -->
 	
 	<insert id="insertVillageReply_1" parameterType="com.billy.VO.VillageReplyVO">
 		insert into villageReply_1 values (#{vNum},#{r1Num},#{r1Id},#{r1Text},default)
@@ -53,4 +57,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteVillageBoard">
 		delete from villageBoard where vNum = #{vNum}
 	</delete>
+	
+	<update id="updateVillageBoardMemeberId">
+		update villageBoard set vId = 'admin1' where vId = #{id}
+	</update>
+	
+	<update id="updateVillageReply_1MemeberId">
+		update villageReply_1 set r1Id = 'admin1' where r1Id = #{id}
+	</update>
+	
+	<delete id="deleteVillageAttach">
+		delete from villageAttach where vNum = #{vNum} and
+		<foreach collection="delFiles" item="delFile" open="(" close=")" separator="OR"> 
+			fName = #{delFile}
+		</foreach>
+	</delete>
+	
+	<insert id="updateVillageAttach">
+		<choose>
+			<when test='vNum1 != null'>
+			insert all
+				into villageAttach values (#{vNum0},#{file0},default)
+				into villageAttach values (#{vNum0},#{file1},default)
+			select * from villageAttach
+			</when>
+			<otherwise>
+				insert into villageAttach values (#{vNum0},#{file0},default)
+			</otherwise>
+		</choose>
+	</insert>
 </mapper>
