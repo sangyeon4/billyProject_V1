@@ -21,12 +21,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectOneBilly" parameterType="String" resultType="com.billy.VO.BillyGoodsVO">
    		select * from billygoods where gNum= #{vno}
    </select>
+   <select id="selectOnebilly_name" parameterType="String" resultType="String">
+  		 select m.name from billyMember m inner Join billyGoods g on(m.id=g.id) where g.gNum=#{vno}
+   </select>
      <select id="selectAllBilly_attach" resultType="com.billy.VO.BillyGoods_attachVO">
    		select * from billyAttach
    </select>
    <select id="selectOneBilly_attach" parameterType="String" resultType="com.billy.VO.BillyGoods_attachVO">
    		select fName from billyAttach where gNum=#{vno}
    </select>
+
    
    <update id="updateBilly" parameterType="com.billy.VO.BillyGoodsVO">
 		update billyGoods set 
@@ -34,6 +38,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gPrice=#{gPrice}, gText=#{gText} where gNum=#{gNum}
    </update>
    
+   <update id="updateBillyMemberId" parameterType="String">
+   		update billyGoods set id='admin1' where id=#{id}
+   </update>
+   
+   	<!-- 좋아요 클릭유무 -->
+	<select id="selectCntBilly_like" resultType="int" parameterType="com.billy.VO.BillyGoods_likeVO">
+		select count(*) from billyBookmark where id = #{id} and gNum = #{gNum}
+	</select>
+   <insert id="billyLikeUp" parameterType="com.billy.VO.BillyGoods_likeVO" >
+		insert into billyBookmark values(#{id}, #{gNum})
+	</insert>
+	<delete id="billyLikeDown" parameterType="com.billy.VO.BillyGoods_likeVO">
+		delete from billyBookmark where id = #{id} and gNum =#{gNum}
+	</delete>
   
 
 </mapper>

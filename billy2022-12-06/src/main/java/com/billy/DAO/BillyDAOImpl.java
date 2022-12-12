@@ -5,10 +5,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyGoods_attachVO;
+import com.billy.VO.BillyGoods_likeVO;
 
 @Repository
 public class BillyDAOImpl implements IF_billyDAO {
@@ -64,8 +67,39 @@ public class BillyDAOImpl implements IF_billyDAO {
 
 	@Override
 	public void updateBilly(BillyGoodsVO bvo) throws Exception {
+		System.out.println(bvo.getgNum()+"----DAO단 빌리수정 글번호 디버깅");		
 		sqlSession.update(mapperQuery+".updateBilly", bvo);
-		System.out.println(bvo.getgNum()+"----DAO단 빌리수정 글번호 디버깅");
+	
+	}
+
+	@Override
+	public void updateBillyMemberId(String id) throws Exception {
+		System.out.println(id+"----DAO단 탈퇴시 빌리처리 id 디버깅");	
+		sqlSession.update(mapperQuery+".updateBillyMemberId", id);
 		
+	}
+
+	@Override
+	public int selectCntBilly_like(BillyGoods_likeVO blvo) throws Exception {
+		System.out.println(blvo.getgNum()+"----DAO단 빌리자세히보기(좋아요클릭유무) gNum디버깅");
+		return sqlSession.selectOne(mapperQuery+".selectCntBilly_like", blvo);
+	}
+
+	@Override
+	public void billyLikeUp(BillyGoods_likeVO blvo) throws Exception {
+		sqlSession.insert(mapperQuery+".billyLikeUp", blvo);
+		System.out.println(blvo.getgNum()+"---DAO단 likeUp디버깅");		
+	}
+
+	@Override
+	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception {
+		sqlSession.delete(mapperQuery+".billyLikeDown", blvo);
+		System.out.println(blvo.getgNum()+"---DAO단 likeDown디버깅");				
+	}
+
+	@Override
+	public String selectOnebilly_name(String vno) throws Exception {
+		System.out.println(vno+"----DAO단 selectOne name디버깅");
+		return sqlSession.selectOne(mapperQuery+".selectOnebilly_name", vno);
 	}
 }

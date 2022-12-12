@@ -96,6 +96,7 @@ $(function() {
           dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],//요일 이름 지정
           monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],//월 이름 지정
           minDate:0 //오늘 이전 날짜를 선택할 수 없음
+        
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate(this) );//종료일의 minDate 지정
@@ -107,11 +108,12 @@ $(function() {
         dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],
         monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
         minDate:'+1D' //내일부터 선택가능, 지정형식 예(+1D +1M +1Y)
+        
       })
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate(this) );//시작일의 maxDate 지정
       });
- 
+   
     function getDate(element) {
       var date;
       try {
