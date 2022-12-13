@@ -17,7 +17,7 @@ public interface IF_billyAdminService {
 	
 	public List<BillyNoticeVO> rollingBillyNotice()throws Exception;
 	
-	public BillyNoticeVO selectOneBillyNotice(int bnNum)throws Exception;
+	public BillyNoticeVO selectOneBillyNotice(String bnNum)throws Exception;
 
 	
 }

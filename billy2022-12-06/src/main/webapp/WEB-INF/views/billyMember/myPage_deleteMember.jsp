@@ -130,8 +130,6 @@
 				if(result != 'fail'){
 					alert('비밀번호가 틀렸습니다');
 				}else{
-					window.open("member","width=800, height=700");
-					window.onload = closeWindow();  
 					document.deleteForm.submit();					
 				}
 				

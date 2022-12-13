@@ -6,7 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.billy.DAO.IF_billyMemberDAO">
 
    <insert id="insertMember" parameterType="com.billy.VO.BillyMemberVO">
-      insert into billyMember values (#{id},#{name},#{pwd},#{tel},#{loc},#{email},default,#{pwdQuiz},#{pwdAnswer})
+      insert into billyMember (id,name,pwd,tel,loc,email,photoName,pwdQuiz,pwdAnswer)
+      values (#{id},#{name},#{pwd},#{tel},#{loc},#{email},default,#{pwdQuiz},#{pwdAnswer})
    </insert>
    
    <select id="chkId" resultType="int">
@@ -31,8 +32,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deleteMember">
 		delete from billyMember where id = #{id}
-	</delete>   
+	</delete> 
 	
+	<!--회원가입 시 이메일 인증을 위한 랜덤번호 저장  -->
+	<update id="updateMailKey" parameterType="com.billy.VO.BillyMemberVO">
+    update billyMember set mailKey=#{mailKey} where email=#{email} and id=#{id}
+	</update>  
 	
+	<!--메일 인증을 하면 mail_auth 컬럼을 기본값 0에서 1로 바꿔 로그인을 허용  -->
+	<update id="updateMailAuth" parameterType="com.billy.VO.BillyMemberVO">
+    update billyMember set mailAuth=1 where email=#{email} and mailKey=#{mailKey}
+	</update>
+	
+	<!-- 이메일 인증을 안 했으면 0을 반환, 로그인 시 인증했나 안 했나 체크하기 위함 -->
+	<select id="emailAuthFail" parameterType="String" resultType="int">
+    	select count(*) from billyMember where id=#{id} and mailAuth=1
+	</select>
    
 </mapper>

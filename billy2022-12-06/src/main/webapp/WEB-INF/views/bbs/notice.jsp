@@ -110,17 +110,20 @@
     </script>
 </head>
 <body>
+	<%@ page import="com.billy.VO.*"%>
     <div class="container">
         <div class="rollingbanner">
             <div class="title">공지사항 > </div>
             <div class="wrap">            
-                <ul>		              
-                    <li><a href="http://www.naver.com"></a></li>
-                    <li class="next"><a href="http://www.google.com">공사중~ 구글</a></li>
-                    <li class="current"><a href="https://www.google.com/search?q=휴먼교육센터">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
-                    <li><a href="#">"공법변경 구조검토 요구, 현산 측이 묵살했다"</a></li>
-                    <li class="prev"><a href="#">12월 주담대 금리 연 3.63%…7년7개월 만에 최고</a></li>
-                </ul>
+                <ul>
+                <%
+                	out.print("<li><a href='billyNoticeView?bnNum="+5+"'>billy 가족이 되신 것을 환영합니다!</a></li>");
+                	out.print("<li class='next'><a href='billyNoticeView?bnNum="+4+"'>들린다 들려 합격의 소리</a></li>");
+                	out.print("<li class='current'><a href='billyNoticeView?bnNum="+3+"'>billy 가족에게 폭언을 하지마세요</a></li>");
+                	out.print("<li><a href='billyNoticeView?bnNum="+2+"'>대여기간을 준수합니다</a></li>");
+                	out.print("<li class='prev'><a href='billyNoticeView?bnNum="+1+"'>공사중~</a></li>");
+                 %>
+             	</ul>
             </div>
         </div>
     </div>

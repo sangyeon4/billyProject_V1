@@ -49,7 +49,7 @@ public class BillyAdminDAOImpl implements IF_billyAdminDAO{
 	}
 
 	@Override
-	public BillyNoticeVO selectOneBillyNotice(int bnNum) throws Exception {
+	public BillyNoticeVO selectOneBillyNotice(String bnNum) throws Exception {
 		System.out.println(bnNum+"--dao단 공지사항 자세히보기 디버깅");
 		return sqlSession.selectOne(mapperQuery + ".selectOneBillyNotice",bnNum);
 	}

@@ -58,11 +58,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from villageBoard where vNum = #{vNum}
 	</delete>
 	
-	<update id="updateVillageBoardMemeberId">
+	<update id="updateVillageBoardMemberId">
 		update villageBoard set vId = 'admin1' where vId = #{id}
 	</update>
 	
-	<update id="updateVillageReply_1MemeberId">
+	<update id="updateVillageReply_1MemberId">
 		update villageReply_1 set r1Id = 'admin1' where r1Id = #{id}
 	</update>
 	

@@ -12,6 +12,24 @@ public class BillyMemberVO {
 	private String photoName;
 	private String pwdQuiz;
 	private String pwdAnswer;
+	private String mailAuth;
+	private String mailKey;
+
+	public String getMailAuth() {
+		return mailAuth;
+	}
+
+	public void setMailAuth(String mailAuth) {
+		this.mailAuth = mailAuth;
+	}
+
+	public String getMailKey() {
+		return mailKey;
+	}
+
+	public void setMailKey(String mailKey) {
+		this.mailKey = mailKey;
+	}
 
 	public String getPwdChk() {
 		return pwdChk;
