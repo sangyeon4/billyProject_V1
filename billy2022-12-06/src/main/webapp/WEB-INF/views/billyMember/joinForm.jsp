@@ -101,6 +101,9 @@
                <td><input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelpInline"
                   placeholder="Ex) name@example.com"> <span
                   id="emailHelpInline" class="form-text"></span></td>
+<!--                <td>
+                   		<input type="button" class="btn btn-primary" id="emailAuthBtn" value="이메일 인증">
+            	  </td> -->
             </tr>
             <tr>
                <td align=center>비밀번호 찾기용 질문</td>

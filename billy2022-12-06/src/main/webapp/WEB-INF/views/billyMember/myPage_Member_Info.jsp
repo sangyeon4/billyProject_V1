@@ -87,14 +87,19 @@
 
 	<c:choose>
 		<c:when test="${myInfo.getPhotoName().equals('N')}">
-		<img src='resources/img/basic.png' class='rounded mx-auto d-block' alt='...'>
+			<button id='imgBtn1' type='button'>
+			<img src='resources/img/basic.png' class='rounded mx-auto d-block' onclick="delImg1()">
+			</button>
 		</c:when>
 		<c:otherwise>
+		<button id='imgBtn2' type='button'>
 		<img src="download3?filename=${myInfo.getPhotoName()}">
+		</button>
 		</c:otherwise>
 	</c:choose>
 	<!-- <img src="resources/img/basic.png" class="rounded mx-auto d-block" alt="..."> -->
-	<input type="file" name="file" id ="uploadButton" class="form-control" value="${myInfo.getPhotoName()}" accept="image/gif, image/jpeg, image/png">
+	<!-- <input type="file" name="file" id ="uploadButton" class="form-control" accept="image/gif, image/jpeg, image/png"> -->
+	<span id="fileAttach"></span>
 	</div>
 	
          <table id="joinTable">
@@ -210,6 +215,20 @@
 	<%@ include file="../bbs/footer.jsp"%>
 </body>
 <script type="text/javascript">
+//------------------첨부파일수정-------------------
+function delImg1(){	
+		$('#imgBtn1').remove();
+		document.getElementById('fileAttach').innerHTML="<input type='file' name='file' id ='uploadButton' class='form-control' accept='image/gif, image/jpeg, image/png'>";
+		//document.getElementById('delImg0').innerHTML="<input type='hidden' name='delFiles' value='"+a+"'>";
+	}
+
+
+
+
+
+
+
+
 function sample5_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
