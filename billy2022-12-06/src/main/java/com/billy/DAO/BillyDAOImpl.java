@@ -75,8 +75,7 @@ public class BillyDAOImpl implements IF_billyDAO {
 	@Override
 	public void updateBillyMemberId(String id) throws Exception {
 		System.out.println(id+"----DAO단 탈퇴시 빌리처리 id 디버깅");	
-		sqlSession.update(mapperQuery+".updateBillyMemberId", id);
-		
+		sqlSession.update(mapperQuery+".updateBillyMemberId", id);		
 	}
 
 	@Override

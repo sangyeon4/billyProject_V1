@@ -5,10 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 <body>
    <%@ include file="../bbs/header.jsp"%>
@@ -18,6 +15,7 @@
 	<h1>글번호:${bvo.getgNum()} 수정하기</h1>
    <form name="frm" method="POST" action="billeyModAction"
       encType="multipart/form-data">
+
       <div class="mb-3">
          <label for="cateNumLB" class="form-label">카테고리</label> <select
 				name="cateNum" class="form-control">
@@ -79,10 +77,10 @@
 		</div>
 		<div class="mb-3">
 			<label for="dateSelect" class="form-label">날짜 선택 </label><br> <input
-				type="text" name="gStrDate" id="from" autocomplete="off"
-				placeholder="${bvo.getgStrDate()}"> <input type="text"
+				type="text" name="gStrDate" id="from" autocomplete="off" 
+				placeholder="${bvo.getgStrDate()}" value="${bvo.getgStrDate()}"> <input type="text"
 				name="gEndDate" id="to" autocomplete="off"
-				placeholder="${bvo.getgEndDate()}">
+				placeholder="${bvo.getgEndDate()}" value="${bvo.getgEndDate()}">
 		</div>
 		<div class="mb-3">
         	 <label for="gPriceLB" class="form-label">가격</label> <input
@@ -122,7 +120,7 @@ $(function() {
         .datepicker({
           showMonthAfterYear: true, //연도,달 순서로 지정
           changeMonth: true,//달 변경 지정
-          dateFormat:"yy/mm/dd",//날짜 포맷
+          dateFormat: dateFormat,//날짜 포맷
           dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],//요일 이름 지정
           monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],//월 이름 지정
           minDate:0 //오늘 이전 날짜를 선택할 수 없음

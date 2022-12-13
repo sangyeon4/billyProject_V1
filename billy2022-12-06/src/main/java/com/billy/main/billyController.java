@@ -136,7 +136,7 @@ public class billyController {
 		bsrv.updateBilly(bvo);
 		System.out.println(bvo.getCateNum() + "---컨트롤러단 빌리수정하기(action) 디버깅");
 
-		return "redirect:/billyViewOne?vno=" + bvo.getgNum();
+		return "redirect:/billyViewOne?vno=" + bvo.getgNum()+"&vid="+bvo.getId();
 	}
 
 	@RequestMapping(value = "/member", method = RequestMethod.GET)
