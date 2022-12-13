@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.billy.Service.IF_billyMemberService;
+import com.billy.Service.IF_billyService;
+import com.billy.Service.IF_villageService;
 import com.billy.VO.BillyMemberVO;
 import com.billy.util.FileDataUtil3;
 
@@ -22,6 +25,12 @@ public class billyMemberController {
 
 	@Inject // 나 서비스 주입
 	private IF_billyMemberService bmsv;
+	
+	@Inject
+	private IF_villageService ivs;
+	
+	@Inject // 나 서비스 주입
+	private IF_billyService bsrv;
 	
 	@Inject
 	private FileDataUtil3 fileDataUtil3;
@@ -36,6 +45,14 @@ public class billyMemberController {
 	public String joinForm(Locale locale, Model model) {
 
 		return "billyMember/joinForm";
+	}
+	
+	@GetMapping("/registerEmail")
+	public String emailConfirm(BillyMemberVO bmvo)throws Exception{
+		System.out.println(bmvo.getEmail()+"이메일인증완료 컨트롤러단");
+	    bmsv.updateMailAuth(bmvo);
+
+	    return "billyMember/emailAuthSuccess";
 	}
 
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
@@ -82,17 +99,22 @@ public class billyMemberController {
 		}
 	}
 	
-	@RequestMapping(value="/loginAction", method=RequestMethod.POST)                                                                                                                                                                                                                                                                       
-	public String loginAction(HttpSession session,BillyMemberVO bmvo) throws Exception {
+	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
+	public String loginAction(HttpSession session, BillyMemberVO bmvo) throws Exception {
 		int result = bmsv.memberLoginChk(bmvo);
-		System.out.println(result);		
-		if(result==1) {	
-			if(session.getAttribute("login") != null) {
-				session.removeAttribute("login"); 	//이전 로그인 세션 정보 제거
-			}		
+		System.out.println(result);
+		if (result == 1) {
+			if (session.getAttribute("login") != null) {
+				session.removeAttribute("login"); // 이전 로그인 세션 정보 제거
+			}
+			if (bmsv.emailAuthFail(bmvo.getId()) != 1) {
+				System.out.println("누가 이메일인증안했냐?"+bmvo.getId()+"/"+bmvo.getMailAuth());
+				return "billyMember/emailAuthFail";
+			}
 			session.setAttribute("login", bmvo.getId());
 		}
-		return "home";		
+		
+		return "home";
 	}
 	
 	@RequestMapping(value="/loginChk", method=RequestMethod.POST)
@@ -131,12 +153,13 @@ public class billyMemberController {
 		System.out.println(bmvo.getId() + "--컨트롤러단 회원탈퇴 id디버깅");
 		int result = bmsv.memberLoginChk(bmvo);
 		if(result==1) {
-			//진호오빠,상연 테이블 업데이트 쿼리문 써야됨~ 
+			ivs.updateVillageReply_1MemberId(bmvo.getId());
+			ivs.updateVillageBoardMemberId(bmvo.getId());
+			bsrv.updateBillyMemberId(bmvo.getId());
 			bmsv.deleteMember(bmvo.getId());
 			session.removeAttribute("login");
-		}	
-		
-		return "home";
+		}			
+		return "billyMember/deleteSuccess";
 	}
 	
 	@RequestMapping(value="/myPage", method=RequestMethod.GET)
