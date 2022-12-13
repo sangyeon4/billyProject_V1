@@ -41,4 +41,12 @@ public interface IF_villageDAO {
 	
 	public void updateVillageAttach(Map<String,String> map);
 	
+	public void updateVillageBoard(VillageVO vvo);
+	
+	public List<VillageVO> selectVillageTitle(VillagePageVO vpvo);
+	
+	public List<VillageVO> selectVillageTitleText(VillagePageVO vpvo);
+	
+	public List<VillageVO> selectVillageWriter(VillagePageVO vpvo);
+	
 }

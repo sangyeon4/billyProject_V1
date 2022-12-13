@@ -76,6 +76,11 @@
             </tr>
             <tr>
             	<td colspan="2">
+           	 		*파일은 최대2개 등록 가능합니다
+           	 	</td>
+            </tr>
+            <tr>
+            	<td colspan="2">
             		<div class="mb-3">
             		<% 
          				for(int i = 0; i + list.size() < 2; i++){

@@ -30,7 +30,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="selectOneBilly_attach" parameterType="String" resultType="com.billy.VO.BillyGoods_attachVO">
    		select fName from billyAttach where gNum=#{vno}
    </select>
-
    
    <update id="updateBilly" parameterType="com.billy.VO.BillyGoodsVO">
 		update billyGoods set 
