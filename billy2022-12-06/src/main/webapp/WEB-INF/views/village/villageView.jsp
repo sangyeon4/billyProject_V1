@@ -5,11 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>Bootstrap Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
 #join {
@@ -25,8 +21,10 @@
 <body>
 <%@ page import="java.util.*"%>
 <%@ page import="com.billy.VO.*"%>
+<%@ include file="../bbs/bootstrap.jsp" %>
 <%@ include file="../bbs/header.jsp"%>
 <%@ include file="../bbs/nav.jsp"%>
+
 <br>
 	<div id="joinTop">
 			<img src="resources/img/logo.png" alt="Logo" width="100" height="50">
@@ -75,7 +73,7 @@
 					</td>
 				</tr>
 			</c:if>
-		</table>
+		 </table>
          <hr>
          ${replyNum-1}개의 댓글<br>
          <form action="villageReply_1Action" method="post">

@@ -29,6 +29,7 @@
 </style>
   	
 <body>
+	<%@ include file="../bbs/bootstrap.jsp" %>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<div id="joinTop">

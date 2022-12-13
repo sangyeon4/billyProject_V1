@@ -19,6 +19,7 @@
 </style>
 </head>
 <body>
+	<%@ include file="../bbs/bootstrap.jsp" %>
    <%@ include file="../bbs/header.jsp"%>
    <%@ include file="../bbs/nav.jsp"%>
    <%@ include file="../bbs/notice.jsp"%>
