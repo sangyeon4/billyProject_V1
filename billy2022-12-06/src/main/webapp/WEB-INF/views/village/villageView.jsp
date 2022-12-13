@@ -5,11 +5,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <!--   <meta name="viewport" content="width=device-width, initial-scale=1">--> 
+
     <title>Bootstrap Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
 </head>
 <style>
 #join {
@@ -22,7 +21,7 @@
 
 </style>
 
-<body>
+<body class="p-3 m-0 border-0 bd-example">
 <%@ page import="java.util.*"%>
 <%@ page import="com.billy.VO.*"%>
 <%@ include file="../bbs/header.jsp"%>
@@ -33,8 +32,9 @@
 			<span id="join">빌리지 내용</span>
 	</div>
 	<br>
-   <div align="center">								
-         <table>
+	
+   <div align="center" >								
+         <table class="mb-3">
          	<tr>
          		<th>글번호</th>
          		<td><input type="text" class="form-control" name="vNum" value="${vvo.vNum}" readonly></td>
