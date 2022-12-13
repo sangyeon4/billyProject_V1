@@ -98,9 +98,32 @@ public class villageController {
 		String[] fileNames = fileDataUtil2.fileUpload(file);
 		vvo.setFiles(fileNames);
 		vvo.setDelFiles(delFiles);
-		ivs.deleteVillageAttach(vvo);
-		ivs.updateVillageAttach(vvo);
+		ivs.updateVillageBoard(vvo);
+		if(vvo.getDelFiles() != null) {
+			ivs.deleteVillageAttach(vvo);
+		}
+		if(vvo.getFiles().length != 0) {
+			if(fileNames[0] != null) {
+				ivs.updateVillageAttach(vvo);
+			}
+		}
 		System.out.println("업데이트 서블릿 종료");
 		return "redirect:/villageBoard";
+	}
+	
+	@RequestMapping(value = "/selectVillageSearch", method = RequestMethod.GET)
+	public String selectVillageSearch(Locale locale, Model model, VillagePageVO vpvo) throws Exception {
+		if(vpvo.getSearchWord() != "") {
+			if(vpvo.getPage() == null) {
+				vpvo.setPage(1);
+			}
+			int totalpageCnt = ivs.selectVillgeBoardCnt();
+			vpvo.setTotalCount(totalpageCnt);
+			List<VillageVO> list = ivs.selectVillageSearch(vpvo);
+			System.out.println(list.size());
+			model.addAttribute("vList",list);
+			model.addAttribute("page",vpvo);
+		}
+		return "billy/villageBoard";
 	}
 }

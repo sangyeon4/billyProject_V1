@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectAllVillage" resultType="com.billy.VO.VillageVO">
-		select t.* from (select sub.*, rownum as rnum from (select * from villageBoard order by vNum DESC) sub) t 
+		select t.* from (select sub.*, rownum as rnum from (select * from villageBoard_View order by vNum desc) sub) t 
         where rnum between #{startNo} and #{endNo}
 	</select>
 	
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectOneVillage" resultType="com.billy.VO.VillageVO">
-		select * from villageBoard where vNum = #{vNum}
+		select * from allVillage_View where vNum = #{vNum}
 	</select>
 	
 	<select id="selectVillageReply_1" resultType="com.billy.VO.VillageReplyVO">
@@ -66,6 +66,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update villageReply_1 set r1Id = 'admin1' where r1Id = #{id}
 	</update>
 	
+	<!-- 게시판 글 수정 쿼리 -->
+	<update id="updateVillageBoard">
+		update villageBoard set vTitle = #{vTitle}, vText = #{vText}, vIndate = default where vNum = #{vNum}
+	</update>
+	
+	<!-- 게시판 첨부파일 삭제 쿼리 -->
 	<delete id="deleteVillageAttach">
 		delete from villageAttach where vNum = #{vNum} and
 		<foreach collection="delFiles" item="delFile" open="(" close=")" separator="OR"> 
@@ -73,17 +79,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</delete>
 	
+	<!-- 게시판 첨부파일  삽입 쿼리 -->
 	<insert id="updateVillageAttach">
 		<choose>
-			<when test='vNum1 != null'>
+			<when test='file1 != null'>
 			insert all
 				into villageAttach values (#{vNum0},#{file0},default)
 				into villageAttach values (#{vNum0},#{file1},default)
-			select * from villageAttach
+			select * from sys.dual
 			</when>
 			<otherwise>
 				insert into villageAttach values (#{vNum0},#{file0},default)
 			</otherwise>
 		</choose>
 	</insert>
+	
+	<select id="selectVillageTitle" resultType="com.billy.VO.VillageVO">
+		select t.* from (select sub.*, rownum as rnum from (select * from allVillage_View where vTitle like '%' ||  #{searchWord} || '%') sub) t 
+        where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectVillageTitleText" resultType="com.billy.VO.VillageVO">
+		select t.* from (select sub.*, rownum as rnum from (select * from allVillage_View where vTitle like '%' ||  #{searchWord} || '%' or vText like '%' ||  #{searchWord} || '%' ) sub) t 
+        where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectVillageWriter" resultType="com.billy.VO.VillageVO">
+		select t.* from (select sub.*, rownum as rnum from (select * from allVillage_View where name like '%' ||  #{searchWord} || '%') sub) t 
+        where rnum between #{startNo} and #{endNo}
+	</select>
+	<!-- create view allVillage_View as
+		select vNum, vTitle, vText, vId, vIndate, vCnt, name 
+		from villageBoard 
+		inner join billymember 
+		on vid = id
+		order by vNum desc; -->
+		
+	<!-- create view villageReplyCnt_View as
+		select b.vNum, nvl(r.reply,0)as reply
+		from villageBoard b
+		left outer join (select vNum, count(*)reply from villageReply_1 group by vNum) r
+		on b.vNum = r.vNum; -->	
+		
+	<!-- create view villageBoard_View as
+		select a.vNum, a.vTitle, a.vText, a.vId, a.vIndate, a.vCnt, a.name, b.reply 
+		from allVillage_View a 
+		inner join villageReplyCnt_View b 
+		on a.vNum = b.vNum; -->	
+		
+	
 </mapper>

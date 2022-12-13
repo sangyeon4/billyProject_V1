@@ -1,9 +1,6 @@
 package com.billy.main;
 
-import java.util.List;
 import java.util.Locale;
-
-import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -40,4 +40,8 @@ public interface IF_villageService {
 	
 	public void updateVillageAttach(VillageVO vvo);
 	
+	public void updateVillageBoard(VillageVO vvo);
+	
+	public List<VillageVO> selectVillageSearch(VillagePageVO vpvo);
+	
 }

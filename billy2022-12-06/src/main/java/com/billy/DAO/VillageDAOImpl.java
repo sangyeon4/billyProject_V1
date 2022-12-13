@@ -105,6 +105,12 @@ public class VillageDAOImpl implements IF_villageDAO {
 	}
 
 	@Override
+	public void updateVillageBoard(VillageVO vvo) {
+		System.out.println("--DAO단 빌리지 게시글 업데이트 디버깅");
+		sqlSession.update(mapperQuery + ".updateVillageBoard", vvo);
+	}
+	
+	@Override
 	public void deleteVillageAttach(VillageVO vvo) {
 		System.out.println("--DAO단 빌리지첨부파일 삭제 디버깅");
 		sqlSession.delete(mapperQuery + ".deleteVillageAttach", vvo);
@@ -113,7 +119,25 @@ public class VillageDAOImpl implements IF_villageDAO {
 	@Override
 	public void updateVillageAttach(Map<String,String> map) {
 		System.out.println("--DAO단 빌리지첨부파일 업데이트 디버깅");
-		System.out.println(map);
 		sqlSession.update(mapperQuery + ".updateVillageAttach", map);
+	}
+
+	@Override
+	public List<VillageVO> selectVillageTitle(VillagePageVO vpvo) {
+		System.out.println("--DAO단 빌리지 제목 검색  디버깅");
+		System.out.println(vpvo.getSearchWord());
+		return sqlSession.selectList(mapperQuery + ".selectVillageTitle", vpvo);
+	}
+
+	@Override
+	public List<VillageVO> selectVillageTitleText(VillagePageVO vpvo) {
+		System.out.println("--DAO단 빌리지 제목+내용 검색  디버깅");
+		return sqlSession.selectList(mapperQuery + ".selectVillageTitleText", vpvo);
+	}
+
+	@Override
+	public List<VillageVO> selectVillageWriter(VillagePageVO vpvo) {
+		System.out.println("--DAO단 빌리지 작성자 검색  디버깅");
+		return sqlSession.selectList(mapperQuery + ".selectVillageWriter", vpvo);
 	}
 }

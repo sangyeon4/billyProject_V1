@@ -40,8 +40,8 @@
          		<td><input type="text" class="form-control" name="vNum" value="${vvo.vNum}" readonly></td>
          	</tr>
          	<tr>
-         		<th>아이디</th>
-         		<td><input type="text" class="form-control" name="vId" value="${vvo.vId}" readonly></td>
+         		<th>작성자</th>
+         		<td><input type="text" class="form-control" name="vId" value="${vvo.name}" readonly></td>
          	</tr>
             <tr>
                <th>제목</th>

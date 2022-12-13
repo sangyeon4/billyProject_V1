@@ -57,6 +57,11 @@
             </tr>
             <tr>
             	<td colspan="2">
+           	 		*파일은 최대2개 등록 가능합니다
+           	 	</td>
+            </tr>
+            <tr>
+            	<td colspan="2">
             		<div class="mb-3">
 						<input type="file" class="form-control" name="file" accept="image/gif, image/jpeg, image/png"> 
 						<input type="file"  class="form-control" name="file" accept="image/gif, image/jpeg, image/png">

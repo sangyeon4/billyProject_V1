@@ -113,20 +113,23 @@ public class VillageServiceImpl implements IF_villageService{
 		villageDao.updateVillageReply_1MemberId(id);
 		System.out.println("서비스단 회원탈퇴 빌리지 댓글 업데이트 디버깅");
 	}
+	
+	@Override
+	public void updateVillageBoard(VillageVO vvo) {
+		villageDao.updateVillageBoard(vvo);
+		System.out.println("서비스단  빌리지 게시글 업데이트 디버깅");
+	}
 
 	@Override
 	public void deleteVillageAttach(VillageVO vvo) {
-		if(vvo.getDelFiles() != null) {
-			villageDao.deleteVillageAttach(vvo);
-			System.out.println("서비스단 빌리지 첨부파일 삭제 디버깅");
-		}
-		System.out.println("삭제 실행안함");
+		villageDao.deleteVillageAttach(vvo);
+		System.out.println("서비스단 빌리지 첨부파일 삭제 디버깅");
 	}
 
 	@Override
 	public void updateVillageAttach(VillageVO vvo) {
 		Map<String, String> map = new HashMap<>();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < vvo.getFiles().length; i++) {
 			String file = vvo.getFiles()[i];
 			System.out.println(file);
 			String num = Integer.toString(vvo.getvNum());
@@ -137,5 +140,18 @@ public class VillageServiceImpl implements IF_villageService{
 		villageDao.updateVillageAttach(map);
 	}
 
+	@Override
+	public List<VillageVO> selectVillageSearch(VillagePageVO vpvo) {
+		System.out.println("서비스단 검색 디버깅");
+		String searchOption = vpvo.getSearchOption();
+		if(searchOption.equals("title")) {
+			return villageDao.selectVillageTitle(vpvo);
+		}else if(searchOption.equals("titleText")) {
+			return villageDao.selectVillageTitleText(vpvo);
+		}else if(searchOption.equals("writer")) {
+			return villageDao.selectVillageWriter(vpvo);
+		}
+		return null;
+	}
 }
 
