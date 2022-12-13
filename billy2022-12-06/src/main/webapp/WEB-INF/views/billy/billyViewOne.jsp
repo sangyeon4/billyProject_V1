@@ -4,10 +4,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 	
+    
+    	
 
 <title>Bootstrap Example</title>
 
@@ -16,6 +15,23 @@
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<%@ include file="../bbs/notice.jsp"%>
+	
+	<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+     
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Bootstrap 4 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
 		<div class="mb-3">
 			<label for="gNumLB" class="form-label">글번호</label> 
 			<input type="text" readonly class="form-control" name="gNum" value="${bvo.getgNum()}">
@@ -25,34 +41,31 @@
 		 <input type="hidden" value="${bvo.getCateNum()}">
 		<c:choose>
 			<c:when test="${bvo.getCateNum()==1}">
-				<input type="text" class="form-control" readonly value="디지털기기">			
+				<input type="text" class="form-control" readonly value="디지털기기">
 			</c:when>
 			<c:when test="${bvo.getCateNum()==2}">
-				<input type="text" class="form-control" readonly value="생활가전">					
-			</c:when>		
+				<input type="text" class="form-control" readonly value="생활가전">
+			</c:when>
 			<c:when test="${bvo.getCateNum()==3}">
 				<input type="text" class="form-control" readonly value="가구/인테리어">
 			</c:when>
 			<c:when test="${bvo.getCateNum()==4}">
-			<input type="text" class="form-control" readonly value="생활/주방">		
+				<input type="text" class="form-control" readonly value="생활/주방">
 			</c:when>
 			<c:when test="${bvo.getCateNum()==5}">
-			<input type="text" class="form-control" readonly value="유아동">	
+				<input type="text" class="form-control" readonly value="유아동">
 				<option value="5">유아동</option>
 			</c:when>
 			<c:when test="${bvo.getCateNum()==6}">
-			<input type="text" class="form-control" readonly value="스포츠/레저">	
-				<option value="6">스포츠/레저</option>
+				<input type="text" class="form-control" readonly value="스포츠/레저">
 			</c:when>
 			<c:when test="${bvo.getCateNum()==7}">
-			<input type="text" class="form-control" readonly value="취미/게임">	
-				<option value="7">취미/게임</option>
+				<input type="text" class="form-control" readonly value="취미/게임">
 			</c:when>
 			<c:when test="${bvo.getCateNum()==8}">
-			<input type="text" class="form-control" readonly value="기타">	
-				<option value="8">기타</option>
+				<input type="text" class="form-control" readonly value="기타">
 			</c:when>
-		</c:choose>		
+		</c:choose>
 		<div class="mb-3">
 			<label for="nameLB" class="form-label">빌리이름</label> 
 			<input type="text" readonly class="form-control" name="name" value="${bvo.getName()}">
@@ -66,11 +79,9 @@
 			<input type="text" readonly class="form-control" name="gLoca" value="${bvo.getgLoca()}">
 		</div>
 		<div class="mb-3">
-			<label for="dateSelect" class="form-label">날짜 선택 </label><br> <input
-				type="text" name="gStrDate" id="from" autocomplete="off"
-				placeholder="${bvo.getgStrDate()}"> <input type="text"
-				name="gEndDate" id="to" autocomplete="off"
-				placeholder="${bvo.getgEndDate()}">
+			<label for="dateSelect" class="form-label">날짜 선택 </label><br>
+			   <input type="text" class="datepicker"  placeholder="${bvo.getgStrDate()} ~ ${bvo.getgEndDate()}" name="date"
+			   style="width: 200;">			   
 		</div>
 		<div class="mb-3">
         	 <label for="gPriceLB" class="form-label" >하루당 가격</label> 
@@ -95,6 +106,7 @@
 			onclick="history.go(-1)">
 			<!-- 세션아이디체크 --><!-- 세션아이디가 해당글에 좋아요 클릭유무 -->
 		<c:if test="${bvo.getId()!=login}"> 
+			<input type="button" class="btn btn-primary" value="빌리기">
 			<c:choose> 
 				<c:when test="${like>0}">
 					<button type="button" class="LikeBtn">
@@ -116,12 +128,21 @@
 		</c:if>	  
 	</div>
 	<%@ include file="../bbs/footer.jsp"%>
+  
 </body>
 <script
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+var today=new Date();
 var strDate='${bvo.getgStrDate()}';
 var endDate='${bvo.getgEndDate()}';
+var tempDate=new Date(); //글에 올려진 날이 지났다면 최소 선택일을 오늘로 변경
+if(today<=tempDate){
+	strDate=today;
+}
+
+
+var datesForDisable = ["2023-01-10", "2022-12-20","2022-12-21","2023-01-03"];
 
 var likeval = ${like};
 var id='${login}';
@@ -157,51 +178,30 @@ $('.LikeBtn').click(function() {
 				}
 			})// 아작스 끝
 		}
-	})
-	
-	
-$(function() {     
-    var dateFormat = "yy/mm/dd",
-      from = $( "#from" )
-        .datepicker({
-          showMonthAfterYear: true, //연도,달 순서로 지정
-          changeMonth: true,//달 변경 지정
-          dateFormat:"yy/mm/dd",//날짜 포맷
-          dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],//요일 이름 지정
-          monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],//월 이름 지정
-          minDate:strDate, //오늘 이전 날짜를 선택할 수 없음
-          maxDate:endDate
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate(this) );//종료일의 minDate 지정
-        }),
-      to = $( "#to" ).datepicker({
-     showMonthAfterYear: true,  
-        changeMonth: true,
-        dateFormat:"yy/mm/dd",
-        dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],
-        monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-        minDate:'+1D', //내일부터 선택가능, 지정형식 예(+1D +1M +1Y)
-      	maxDate:endDate
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate(this) );//시작일의 maxDate 지정
-      });
+	});
+
+
+
+$('.datepicker').datepicker({
+    clearBtn: true,
+    format: 'yyyy-mm-dd',
+
+    startDate: strDate,
+    endDate: endDate,  
+
+    multidate: true,
+    multidateSeparator: ",",
+    todayHighlight: true,
+    templates: {
+        leftArrow: '&laquo;',
+        rightArrow: '&raquo;',
+     }, 
+    datesDisabled: datesForDisable, 
+    language : "ko"
+    
+});
+
+
  
-    function getDate(element) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-        if(element.id == 'from'){
-        date.setDate(date.getDate()+1);//종료일은 시작보다 하루 이후부터 지정할 수 있도록 설정
-        }else{
-         date.setDate(date.getDate()-1);//시작일은 종료일보다 하루 전부터 지정할 수 있도록 설정
-        }
-      } catch( error ) {
-        date = null;
-      }
-      return date;
-    }
-  } );	
-</script>
+    </script>
 </html>
