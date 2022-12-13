@@ -67,6 +67,7 @@
 }
 </style>
 <body>
+	<%@ include file="../bbs/bootstrap.jsp" %>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<form name="deleteForm" action="deleteMemberAction" method="POST" encType="multipart/form-data">

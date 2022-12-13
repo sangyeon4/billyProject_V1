@@ -39,6 +39,7 @@ h4 {
 }
 </style>
 <body class="p-3 m-0 border-0 bd-example">
+	<%@ include file="../bbs/bootstrap.jsp" %>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<div id="loginArea">
