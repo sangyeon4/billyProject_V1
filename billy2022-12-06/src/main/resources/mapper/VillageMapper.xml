@@ -108,5 +108,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select t.* from (select sub.*, rownum as rnum from (select * from allVillage_View where name like '%' ||  #{searchWord} || '%') sub) t 
         where rnum between #{startNo} and #{endNo}
 	</select>
+	<!-- create view allVillage_View as
+		select vNum, vTitle, vText, vId, vIndate, vCnt, name 
+		from villageBoard 
+		inner join billymember 
+		on vid = id
+		order by vNum desc; -->
+		
+	<!-- create view villageReplyCnt_View as
+		select b.vNum, nvl(r.reply,0)as reply
+		from villageBoard b
+		left outer join (select vNum, count(*)reply from villageReply_1 group by vNum) r
+		on b.vNum = r.vNum; -->	
+		
+	<!-- create view villageBoard_View as
+		select a.vNum, a.vTitle, a.vText, a.vId, a.vIndate, a.vCnt, a.name, b.reply 
+		from allVillage_View a 
+		inner join villageReplyCnt_View b 
+		on a.vNum = b.vNum; -->	
+		
 	
 </mapper>
