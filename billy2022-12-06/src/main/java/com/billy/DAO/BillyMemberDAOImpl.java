@@ -60,4 +60,22 @@ public class BillyMemberDAOImpl implements IF_billyMemberDAO {
 		
 	}
 
+	@Override
+	public int updateMailKey(BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getId()+"--dao단 이메일 인증키 디버깅");
+		return sqlSession.update(mapperQuery + ".updateMailKey", bmvo);
+	}
+
+	@Override
+	public int updateMailAuth(BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getMailKey()+"--dao단 이메일 인증받았으면 0>1로 바뀌는기능 디버깅");
+		return sqlSession.update(mapperQuery + ".updateMailAuth", bmvo);
+	}
+
+	@Override
+	public int emailAuthFail(String id) throws Exception {
+		System.out.println(id+"--dao단 회원가입시 이메일 인증여부 체크 디버깅");
+		return sqlSession.selectOne(mapperQuery + ".emailAuthFail", id);
+	}
+
 }

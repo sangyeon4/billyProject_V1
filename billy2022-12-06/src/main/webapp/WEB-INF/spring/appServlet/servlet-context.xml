@@ -32,6 +32,7 @@
 			<exclude-mapping path="/login**"/>
 			<exclude-mapping path="/logout**"/>
 			<exclude-mapping path="/loginAction**"/>
+			<exclude-mapping path="/registerEmail**"/>
 			<exclude-mapping path="/loginChk**"/>
 			<exclude-mapping path="/joinForm**"/>
 			<exclude-mapping path="/joinAction**"/>
@@ -66,4 +67,5 @@
    
    <context:component-scan base-package="com.billy.main" />  <!--지정된 패키지에 있는 모든 소스파일을 스캔해서 bean으로 만들어달라  -->
    <context:component-scan base-package="com.billy.util" />
+
 </beans:beans>

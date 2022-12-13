@@ -99,7 +99,7 @@ public class VillageDAOImpl implements IF_villageDAO {
 
 	@Override
 	public void updateVillageReply_1MemberId(String id) {
-		System.out.println("--DAO단 회원탈퇴시 빌리지 댓글 업데이트 디버깅");
+		System.out.println(id+"--DAO단 회원탈퇴시 빌리지 댓글 업데이트 디버깅");
 		sqlSession.update(mapperQuery + ".updateVillageReply_1MemberId", id);
 		
 	}

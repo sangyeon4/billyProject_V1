@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.billy.Service.IF_billyAdminService;
 import com.billy.VO.BillyNoticeVO;
@@ -55,6 +55,15 @@ public class billyAdminController {
 		model.addAttribute("bnList",bnList);
 		
 		return "redirect:/adminPage";
+	}
+	
+	@RequestMapping(value = "/billyNoticeView", method = RequestMethod.GET)
+	public String villageView(Locale locale, Model model,@RequestParam("bnNum") String bnNum) throws Exception {
+		//basv.updateVillageCnt(bnNum);	조회수
+		System.out.println(bnNum+"--컨트롤러단 공지사항 자세히보기");
+		BillyNoticeVO bnvo = basv.selectOneBillyNotice(bnNum);
+		model.addAttribute("bnvo",bnvo);
+		return "billyAdmin/billyNoticeView";
 	}
 	
 	
