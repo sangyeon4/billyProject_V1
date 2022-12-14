@@ -18,6 +18,7 @@ import com.billy.Service.IF_billyMemberService;
 import com.billy.Service.IF_billyService;
 import com.billy.Service.IF_villageService;
 import com.billy.VO.BillyMemberVO;
+import com.billy.mail.TempKey;
 import com.billy.util.FileDataUtil3;
 
 @Controller
@@ -61,15 +62,22 @@ public class billyMemberController {
 		System.out.println(bmvo.getName() + "---디버깅용도");
 
 		bmsv.insertMember(bmvo);
-		return "redirect:/home";
+		return "billyMember/emailAuthFail";
 	}
 	
 	
 	@RequestMapping(value = "/billyMemberModAction", method = RequestMethod.POST)
-	public String billyMemberModAction(Locale locale, Model model, BillyMemberVO bmvo, MultipartFile file) throws Exception {
+	public String billyMemberModAction(Locale locale, Model model, BillyMemberVO bmvo, MultipartFile file, String photo) throws Exception {
 		// 객체로 받을 때는 파라미터 이름과 객체의 변수의 이름이 일치하고 getter,setter가 있어야한다.>>자동매핑
 		System.out.println(bmvo.getName() + "---내 정보 수정 컨트롤러단 디버깅용도");
-		String photoName = fileDataUtil3.fileUpload(file);
+		System.out.println(file+"파일");
+		System.out.println(photo+"히든으로 넣어놓은 사진");
+		String photoName;
+		if(file==null) {
+			photoName = photo;
+		}else {
+			photoName= fileDataUtil3.fileUpload(file);
+		}
 		bmvo.setPhotoName(photoName);
 		bmsv.memberInfoUpdate(bmvo);
 		return "redirect:/home";
@@ -171,8 +179,62 @@ public class billyMemberController {
 		return "billyMember/myPage_Member_Info";
 	}
 	
+	@RequestMapping(value="/pwdSearch", method=RequestMethod.GET)
+	public String pwdSearch(HttpSession session,Model model) throws Exception {
+		System.out.println("--컨트롤러단 비밀번호찾기 페이지 이동");
+		//BillyMemberVO bmvo = bmsv.myPageInfo(id);
+		//model.addAttribute("myInfo",bmvo);
+	
+		return "billyMember/memberPwdSearch";
+	}
+	
+	@RequestMapping(value="/pwdSearchEmailChk", method=RequestMethod.POST)
+	@ResponseBody 
+	public String pwdSearchEmailChk(HttpSession session,Model model,String id, String email) throws Exception {
+		System.out.println(id+"/"+email+"--컨트롤러단 비밀번호찾기 이메일 확인");
+		BillyMemberVO bmvo = bmsv.myPageInfo(id);
+		String inEmail = bmvo.getEmail();
+		if(email.equals(inEmail)){	//입력한 이메일과 회원의 이메일이 같다면
+			//인증키 이메일 보내기
+			bmsv.pwdSearchEmailSend(bmvo);
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 	
+	@RequestMapping(value="/mailKeyChk", method=RequestMethod.POST)
+	@ResponseBody 
+	public String mailKeyChk(HttpSession session,Model model,String id, String email, String mailKey) throws Exception {
+		System.out.println("--컨트롤러단 비밀번호찾기 인증번호 확인");
+		BillyMemberVO bmvo = bmsv.myPageInfo(id);
+		String inMailKey = bmvo.getMailKey();
+		System.out.println("입력되어있는 인증키" + inMailKey);
+		System.out.println("입력할 인증키" +mailKey);
+		if(inMailKey.equals(mailKey)) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping(value="/memberPwdChange", method=RequestMethod.GET)
+	public String memberPwdChange(HttpSession session,Model model,String id) throws Exception {
+		System.out.println(id + "--컨트롤러단 비밀번호찾기 비번변경 아이디 데리고오는지");
+		model.addAttribute("id",id);
+		
+		return "billyMember/memberPwdChange";		
+	}
+	
+	@RequestMapping(value="/pwdModAction", method=RequestMethod.POST)
+	public String pwdModAction(HttpSession session,Model model,BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getId() + "--컨트롤러단 비번변경할때 아이디 데리고오는지");
+		bmsv.pwdModAction(bmvo);
+		
+		return "redirect:/home";		
+	}
 	
 
 	

@@ -54,7 +54,7 @@ public class billyAdminController {
 		System.out.println(bnList.size()); //5
 		model.addAttribute("bnList",bnList);
 		
-		return "redirect:/adminPage";
+		return "bbs/notice";
 	}
 	
 	@RequestMapping(value = "/billyNoticeView", method = RequestMethod.GET)

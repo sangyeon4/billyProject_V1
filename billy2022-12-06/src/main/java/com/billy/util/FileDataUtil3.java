@@ -72,8 +72,9 @@ public class FileDataUtil3 {
 		      File target = new File(uploadPath3, saveName);
 		      FileCopyUtils.copy(fileData, target);	// /tmp로 카피했다
 		      files=saveName; 
-		  }		  
-	  //}      
+		      
+		  }
+	  //}   
       return files;	//컨트롤러로 넘겨라
    }
 
