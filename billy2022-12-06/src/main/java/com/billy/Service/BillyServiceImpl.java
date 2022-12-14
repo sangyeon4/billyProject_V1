@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.billy.DAO.IF_billyDAO;
+import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyGoods_attachVO;
 import com.billy.VO.BillyGoods_likeVO;
@@ -39,25 +40,23 @@ public class BillyServiceImpl implements IF_billyService {
 	}
 
 	@Override
-	public List<BillyGoodsVO> selectBillyAll() throws Exception{  //모든 빌리+사진하나
-		List<BillyGoodsVO>bList=billyDao.selectBillyAll();
-		System.out.println(bList.get(0).getgNum()+"-----service단 전체보기시 번호 디버깅");
-		List<BillyGoods_attachVO>baList=billyDao.selectBilly_attach();
-		if(baList.size()!=0) {
-			for(int i=0; i<bList.size();i++){
-				String[] temp= new String[1];
-				for(int j=0;j<baList.size();j++) {
-					if(bList.get(i).getgNum()==baList.get(j).getgNum()) {
-						temp[0]=baList.get(j).getfName(); //사진하나받아오기
-						bList.get(i).setFiles(temp);
-						System.out.println(temp[0]+"----service단 빌리 전체보기 디버깅");
-						System.out.println(bList.get(i).getFiles()[0]+"----service단 빌리 전체보기 디버깅");
-						return bList;
-					}
+	public List<BillyGoodsVO> selectBillyAll() throws Exception { // 모든 빌리+사진하나
+		List<BillyGoodsVO> bList = billyDao.selectBillyAll();
+		System.out.println(bList.get(0).getgNum() + "-----service단 전체보기시 번호 디버깅");
+		List<BillyGoods_attachVO> baList = billyDao.selectBilly_attach();
+		for (int i = 0; i < bList.size(); i++) {
+			String[] temp = new String[1];
+			for (int j = 0; j < baList.size(); j++) {
+				if (bList.get(i).getgNum() == baList.get(j).getgNum()) {
+					temp[0] = baList.get(j).getfName(); // 사진하나받아오기
+					bList.get(i).setFiles(temp);
+					System.out.println(temp[0] + "----service단 빌리 전체보기 디버깅");
+					System.out.println(bList.get(i).getFiles()[0] + "----service단 빌리 전체보기 디버깅");
 				}
-			}			
+			}
 		}
-		return null;
+		return bList;
+
 	}
 	@Override
 	public BillyGoodsVO selectBillyOne(String vno) throws Exception {
@@ -66,10 +65,10 @@ public class BillyServiceImpl implements IF_billyService {
 		bvo.setName(billyDao.selectOnebilly_name(vno));
 		List<BillyGoods_attachVO>baList=billyDao.selectOneBilly_attach(vno);
 		System.out.println(baList.size()+"----service단 빌리 자세히보기(파일)사이즈 디버깅");
-		if(baList.size()!=0) {
-			String[] temp= new String[2];
+		if(baList.size()!=0) { //해당글에 저장되어있는 사진 개수
+			String[] temp= new String[baList.size()]; //리스트 자료형에 담겨있는 사진들을 배열 자료형으로 바꿔주기 위함
 			for(int i=0; i<baList.size();i++) {
-				temp[i]=baList.get(i).getfName();				
+				temp[i]=baList.get(i).getfName();				 
 			}
 			bvo.setFiles(temp);
 		}
@@ -102,6 +101,20 @@ public class BillyServiceImpl implements IF_billyService {
 	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception {
 		billyDao.billyLikeDown(blvo);
 		System.out.println(blvo.getgNum()+"---service단 likeDown디버깅");
+	}
+	@Override
+	public void insertBilleyTransaction(BillyGoodsRentVO brvo) throws Exception {
+		billyDao.insertBilleyTransaction(brvo);
+		System.out.println(brvo.getId()+"----service단 insertBilleyTransaction 디버깅");		
+	}
+	@Override
+	public String selectBillyRentdate(String gNum) throws Exception {
+		List<String>temp=billyDao.selectBillyRentdate(gNum);
+		String rDate=null; //여러날짜를 하나의 날짜로 보내기위해 만들어주는 작업
+		for(int i=0; i<temp.size();i++) {
+			rDate+=temp.get(i)+","; //JS에서 마지막배열에 있는 ,는 제거해줄것*
+		}
+		return rDate;
 	}
 
 	

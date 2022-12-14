@@ -41,6 +41,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		update billyGoods set id='admin1' where id=#{id}
    </update>
    
+   <!-- 빌리기 시  트랜잭션 추가 -->
+   <insert id="insertBillyTransaction" parameterType="com.billy.VO.BillyGoodsRentVO">
+   		insert into Transaction values(#{id}, #{gNum}, #{tIndate},#{tPrice})
+   </insert>   
+   <!-- 트랜잭션에서 해당 빌리의 대여된 날짜 가져오기 -->
+   <select id="selectBillyRentdate" parameterType="String" resultType="String">
+   		select tIndate from Transaction where gNum=#{gNum}
+   </select>
+   
    	<!-- 좋아요 클릭유무 -->
 	<select id="selectCntBilly_like" resultType="int" parameterType="com.billy.VO.BillyGoods_likeVO">
 		select count(*) from billyBookmark where id = #{id} and gNum = #{gNum}

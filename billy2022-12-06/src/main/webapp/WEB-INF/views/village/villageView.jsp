@@ -9,11 +9,11 @@
 </head>
 <style>
 #join {
-	font-size: 30px;
+   font-size: 30px;
 }
 
 #joinTop {
-	margin-left: 250px;
+   margin-left: 250px;
 }
 
 </style>
@@ -26,21 +26,21 @@
 <%@ include file="../bbs/nav.jsp"%>
 
 <br>
-	<div id="joinTop">
-			<img src="resources/img/logo.png" alt="Logo" width="100" height="50">
-			<span id="join">빌리지 내용</span>
-	</div>
-	<br>
-   <div align="center">								
+   <div id="joinTop">
+         <img src="resources/img/logo.png" alt="Logo" width="100" height="50">
+         <span id="join">빌리지 내용</span>
+   </div>
+   <br>
+   <div align="center">                        
          <table>
-         	<tr>
-         		<th>글번호</th>
-         		<td><input type="text" class="form-control" name="vNum" value="${vvo.vNum}" readonly></td>
-         	</tr>
-         	<tr>
-         		<th>작성자</th>
-         		<td><input type="text" class="form-control" name="vId" value="${vvo.name}" readonly></td>
-         	</tr>
+            <tr>
+               <th>글번호</th>
+               <td><input type="text" class="form-control" name="vNum" value="${vvo.vNum}" readonly></td>
+            </tr>
+            <tr>
+               <th>작성자</th>
+               <td><input type="text" class="form-control" name="vId" value="${vvo.name}" readonly></td>
+            </tr>
             <tr>
                <th>제목</th>
                <td><input type="text" size="70" name="vTitle" class="form-control" value="${vvo.vTitle}" readonly></td>
@@ -51,29 +51,29 @@
                 ${vvo.vText}
                 <br>
                 <c:forEach items="${attach}" var="fname">
-               		<img src="download2?filename=${fname}" style="width:600px; height:350px;">
-               		<br>
-               	</c:forEach>
+                     <img src="download2?filename=${fname}" style="width:600px; height:350px;">
+                     <br>
+                  </c:forEach>
                </td>
             </tr>
-			<c:if test="${login.equals(vvo.vId)}">
-				<tr style="text-align:center">
-					<td colspan="2">
-						<br> 
-						<form action="villageBoardDelAction" method="get" style="float: right; padding-left:10px">
-							<input type="hidden" name="vNum" value="${vvo.vNum}">
-							<input type="submit" class="btn btn-primary" value="삭제"> 
-						</form>
-						<form action="villageBoardModBtn" method="get" style="float: right">
-							<input type="hidden" name="vNum" value="${vvo.vNum}">
-							<input type="hidden" name="vTitle" value="${vvo.vTitle}">
-							<input type="hidden" name="vText" value="${vvo.vText}">
-							<input type="submit" class="btn btn-primary" value="수정">
-						</form>
-					</td>
-				</tr>
-			</c:if>
-		 </table>
+         <c:if test="${login.equals(vvo.vId)}">
+            <tr style="text-align:center">
+               <td colspan="2">
+                  <br> 
+                  <form action="villageBoardDelAction" method="get" style="float: right; padding-left:10px">
+                     <input type="hidden" name="vNum" value="${vvo.vNum}">
+                     <input type="submit" class="btn btn-primary" value="삭제"> 
+                  </form>
+                  <form action="villageBoardModBtn" method="get" style="float: right">
+                     <input type="hidden" name="vNum" value="${vvo.vNum}">
+                     <input type="hidden" name="vTitle" value="${vvo.vTitle}">
+                     <input type="hidden" name="vText" value="${vvo.vText}">
+                     <input type="submit" class="btn btn-primary" value="수정">
+                  </form>
+               </td>
+            </tr>
+         </c:if>
+       </table>
          <hr>
          ${replyNum-1}개의 댓글<br>
          <form action="villageReply_1Action" method="post" name="replyForm">
@@ -104,14 +104,12 @@
          		</td>
          	</tr>
          	<tr>
-         	
          		<td>
          		<input type="hidden" id="vNum${status.index}" value="${vvo.vNum}">
 				<input type="hidden" id="r1Num${status.index}" value="${rList.r1Num}">
          		<span id = "r1Text${status.index}">${rList.r1Text}</span>
          		<span id ="r1TextInput${status.index}"></span>
          		</td>
-         	
          		<c:if test="${rList.r1Id eq login}">
          			<td style="padding-left:300px">
 						<div class="btn-group">
