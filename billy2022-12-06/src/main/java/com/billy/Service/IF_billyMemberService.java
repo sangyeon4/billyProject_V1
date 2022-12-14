@@ -17,6 +17,8 @@ public interface IF_billyMemberService {
    
    public void memberInfoUpdate(BillyMemberVO bmvo) throws Exception;
    
+   public void pwdModAction(BillyMemberVO bmvo) throws Exception;
+   
    public void deleteMember(String id) throws Exception;
    
    //회원 가입시 이메일 인증을 위한 랜덤번호 저장
@@ -27,4 +29,9 @@ public interface IF_billyMemberService {
   
    //이메일 인증을 안 했으면 0을 반환, 로그인 시 인증했나 안 했나 체크하기 위함
    public int emailAuthFail(String id) throws Exception; 
+   
+   //비밀번호 찾기용 이메일 인증키 발송
+   public void pwdSearchEmailSend(BillyMemberVO bmvo) throws Exception;
+   
+   
 }

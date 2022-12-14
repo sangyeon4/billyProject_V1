@@ -18,6 +18,9 @@
    height: 800px;
 }
 
+#joinForm .form-control{
+	width:400px;
+}
 #joinTable {
    margin: 0px auto;
 }

@@ -78,4 +78,11 @@ public class BillyMemberDAOImpl implements IF_billyMemberDAO {
 		return sqlSession.selectOne(mapperQuery + ".emailAuthFail", id);
 	}
 
+	@Override
+	public void pwdModAction(BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getId()+"--dao단 비밀번호 변경 디버깅");
+		sqlSession.insert(mapperQuery+".pwdModAction",bmvo);
+		
+	}
+
 }

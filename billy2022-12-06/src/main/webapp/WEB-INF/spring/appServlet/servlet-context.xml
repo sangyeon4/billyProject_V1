@@ -43,6 +43,11 @@
 			<exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/download1**" />
 			<exclude-mapping path="/member/**"/>
+			<exclude-mapping path="/pwdSearch/**"/>
+			<exclude-mapping path="/pwdSearchEmailChk/**"/>			
+			<exclude-mapping path="/mailKeyChk/**"/>
+			<exclude-mapping path="/memberPwdChange/**"/>
+			<exclude-mapping path="/pwdModAction/**"/>			
 			<beans:ref bean="authenInterceptor"/>
 			</interceptor>
 	</interceptors>

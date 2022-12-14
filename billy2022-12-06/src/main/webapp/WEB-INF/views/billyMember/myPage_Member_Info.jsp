@@ -86,22 +86,19 @@
 	
 
 	<c:choose>
-		<c:when test="${myInfo.getPhotoName().equals('N')}">
-			<button id='imgBtn1' type='button'>
-			<img src='resources/img/basic.png' class='rounded mx-auto d-block' onclick="delImg1()">
-			</button>
+		<c:when test="${myInfo.getPhotoName().equals('N')}">		
+			<img src='resources/img/basic.png' class='profileImg'>
 		</c:when>
 		<c:otherwise>
-		<button id='imgBtn2' type='button'>
-		<img src="download3?filename=${myInfo.getPhotoName()}">
-		</button>
+		<img src="download3?filename=${myInfo.getPhotoName()}" class='profileImg'>
+		<input type="hidden" value="${myInfo.getPhotoName()}" name="photo">
 		</c:otherwise>
 	</c:choose>
 	<!-- <img src="resources/img/basic.png" class="rounded mx-auto d-block" alt="..."> -->
 	<!-- <input type="file" name="file" id ="uploadButton" class="form-control" accept="image/gif, image/jpeg, image/png"> -->
 	<span id="fileAttach"></span>
-	</div>
-	
+	<input type="button" value ="프로필사진 수정" id='imgModBtn' onclick = "delImg1()" class="btn btn-primary">
+	</div>	
          <table id="joinTable">
             <tr>
                <td align=center>아이디</td>
@@ -216,18 +213,12 @@
 </body>
 <script type="text/javascript">
 //------------------첨부파일수정-------------------
+
 function delImg1(){	
-		$('#imgBtn1').remove();
+		$('.profileImg').remove();
+		$('#imgModBtn').remove();
 		document.getElementById('fileAttach').innerHTML="<input type='file' name='file' id ='uploadButton' class='form-control' accept='image/gif, image/jpeg, image/png'>";
-		//document.getElementById('delImg0').innerHTML="<input type='hidden' name='delFiles' value='"+a+"'>";
 	}
-
-
-
-
-
-
-
 
 function sample5_execDaumPostcode() {
     new daum.Postcode({
@@ -241,8 +232,11 @@ function sample5_execDaumPostcode() {
  //-----------------------유효성 검사 완료해야 회원가입되게---------------------------------//
  var idChkFlag = false;
  var nameChkFlag = false;
+ var profileImgChkFlag = false;
  var getName="${myInfo.getName()}";
  function joinform_check(){
+
+	//--첨부파일수정
 
     //--비밀번호
     var inPwd = document.getElementById('pwd').value;
@@ -334,6 +328,7 @@ function sample5_execDaumPostcode() {
     }else{
        document.getElementById('answerHelpInline').innerHTML ="";
     } 
+
     
     //--모든게 만족하면 submit해라
     document.frm.submit();
