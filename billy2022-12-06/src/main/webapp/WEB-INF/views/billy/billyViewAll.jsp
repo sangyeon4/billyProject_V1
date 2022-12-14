@@ -20,7 +20,7 @@
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<%@ include file="../bbs/notice.jsp"%>
-
+	<section>
 	<c:forEach items="${bList}" var="bvo">
 
 		<a href='billyViewOne?vno=${bvo.getgNum()}&vid=${login}' style="float: left; margin: 50px;  ">
@@ -50,7 +50,7 @@
 	
 
 	</c:forEach>
-	
+	</section>
 
 	<%@ include file="../bbs/footer.jsp"%>
 </body>

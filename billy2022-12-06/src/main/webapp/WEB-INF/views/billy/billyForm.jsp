@@ -46,7 +46,7 @@
 				id="locHelpInline" class="form-text"></span>
 		</div>
       <div class="mb-3">
-         <label for="dateSelect" class="form-label">날짜 선택 </label><br> <input
+         <label for="dateSelect" class="form-label">날짜 선택 </label><br> <input 
             type="text" name="gStrDate" id="from" autocomplete="off"
             placeholder="시작일"> <input type="text" name="gEndDate"
             id="to" autocomplete="off" placeholder="종료일">
