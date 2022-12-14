@@ -76,46 +76,144 @@
        </table>
          <hr>
          ${replyNum-1}개의 댓글<br>
-         <form action="villageReply_1Action" method="post">
-         <input type="text" class="form-control" name="r1Text" placeholder="댓글을 남겨보세요!" style="width:550px;float:left;margin-left:310px;">
-         <input type="submit" value="작성" class="btn btn-primary" style="float:left">
+         <form action="villageReply_1Action" method="post" name="replyForm">
+         <input type="text" class="form-control" id="replyText" name="r1Text" placeholder="댓글을 남겨보세요!(15자 제한)" style="width:550px;float:left;margin-left:310px;">
+         <input type="button" value="작성" class="btn btn-primary" onclick="replyAction()" style="float:left">
          <input type="hidden" value="${vvo.vNum}" name="vNum">
          <input type="hidden" value="${login}" name="r1Id">
          <input type="hidden" value="${replyNum}" name="r1Num">
          </form>
          <br><br><hr>
-         <c:forEach items="${replyList}" var="rList">
+         <c:forEach items="${replyList}" var="rList" varStatus="status">
+         
+         <div class="modiC${status.index}">
          <table class="form-control" style="width:600px">
-            <c:if test="${rList.r1Id.equals(vvo.vId)}">
-            <tr>
-               <td>
-               ${rList.r1Id}(작성자)
-               </td>
-            </tr>
-            </c:if>
-            <c:if test="${rList.r1Id != vvo.vId}">
-            <tr>
-               <td>
-               ${rList.r1Id}
-               </td>
-            </tr>
-            </c:if>
-            <tr>
-               <td>
-               ${rList.r1Indate}
-               </td>
-            </tr>
-            <tr>
-               <td>
-               ${rList.r1Text}
-               </td>
-            </tr>
+         	<c:if test="${rList.r1Id.equals(vvo.vId)}">
+         	<tr><td>${rList.r1Id}(작성자)</td></tr>
+         	</c:if>
+         	<c:if test="${rList.r1Id != vvo.vId}">
+         	<tr>
+         		<td>
+         		${rList.r1Id}
+         		</td>
+         	</tr>
+         	</c:if>
+         	<tr>
+         		<td>
+         		${rList.r1Indate}
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         		<input type="hidden" id="vNum${status.index}" value="${vvo.vNum}">
+				<input type="hidden" id="r1Num${status.index}" value="${rList.r1Num}">
+         		<span id = "r1Text${status.index}">${rList.r1Text}</span>
+         		<span id ="r1TextInput${status.index}"></span>
+         		</td>
+         		<c:if test="${rList.r1Id eq login}">
+         			<td style="padding-left:300px">
+						<div class="btn-group">
+  							<button  type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:5px; background-color:rgb(13,110,253); border-style:none; color:white;">
+    							≡
+  							</button>
+  							<ul class="dropdown-menu">
+    							<li>
+									<input type="button" value="수정" onclick="replyModBtn(${status.index})" style="border-radius:5px; background-color:rgb(13,110,253); border-style:none; color:white;">
+    								<br>
+    								<form action="villageReplyDelAction" method="get" >
+										<input type="hidden" name="vNum" value="${vvo.vNum}">
+										<input type="hidden" name="r1Num" value="${rList.r1Num}">
+										<input type="submit"  value="삭제" style="border-radius:5px; background-color:rgb(13,110,253); border-style:none; color:white;"> 
+									</form>
+    							</li>
+  							</ul>
+						</div>
+         			</td>
+         		</c:if>
+         	</tr>
          </table>
          <br>
+         </div>
          </c:forEach>
          <input type="button" class="btn btn-primary" value="목록" onclick='location.href="villageBoard"'/>
    </div>
    <br>
    <%@ include file="../bbs/footer.jsp"%>
 </body>
+
+<script>
+function replyAction(){
+	var text = document.getElementById("replyText").value;
+	if(text != ""){
+		document.replyForm.submit();
+	}else{
+		alert("입력하세욧");
+	}
+}
+function replyModBtn(index){
+	let msg = "수정하시겠습니까?";
+    if(confirm(msg)!=0){ 
+		var text = document.getElementById("r1Text"+index+"").innerHTML;
+		var modiF = document.getElementById("r1TextInput"+index+"");
+		document.getElementById("r1Text"+index+"").remove();
+		modiF.innerHTML="<input type='text' id='input' value="+text+">";
+		modiF.innerHTML+="<input type='button' id='modBtn' onclick='modAction("+index+")' value='확인' style='border-radius:5px; background-color:rgb(13,110,253); border-style:none; color:white;'>";
+		modiF.innerHTML+="<input type='button' id='backBtn' onclick='back()' value='취소' style='border-radius:5px; background-color:rgb(13,110,253); border-style:none; color:white;'>";
+    	
+		$('html').click(function(e) { //모든 태그를 클릭했을시 함수 실행
+            var modForm = document.querySelector('.modiC'+index);
+            var click = e.target; //클릭한 곳을 의미합니다..
+            var flag = 0; 
+            
+            while(click != null){ //만약 클릭을 했다면
+            	click = click.parentNode; //클릭한 곳의 부모노드를 저장
+               	if(modForm == click) { //만약 클릭한 곳의 부모노드가  해당 댓글의 부모노드라면 아무것도 실행하지 않음
+               		flag = 1;
+                  	break;         
+               	} 
+            }
+            
+            if(flag == 0){ //다른 태그를 눌렀을 시
+                modiF.innerHTML = "";
+                modiF.innerHTML="<span id = 'r1Text"+index+"'>"+text+"</span>";
+            }
+            
+		});   
+		
+		 back=()=>{ //취소 버튼을 눌렀을 시
+        	modiF.innerHTML = "";
+        	modiF.innerHTML="<span id = 'r1Text"+index+"'>"+text+"</span>";
+        }
+    }
+}
+function modAction(index){
+	var modiF = document.getElementById("r1TextInput"+index+"");
+	var r1Text = $('#input').val();
+	var vNum = $('#vNum'+index).val();
+	var r1Num = $('#r1Num'+index).val();
+	if(r1Text != ""){
+		var data = {
+				r1Text : r1Text,
+				vNum : vNum,
+				r1Num : r1Num
+		}
+		$.ajax({
+			type : "post",
+			url : "villageReplyModAction",
+			data : data,
+			success : function(){
+				modiF.innerHTML = "";
+	        	modiF.innerHTML="<span id = 'r1Text"+index+"'>"+r1Text+"</span>";
+			},
+			error : function(){
+				alert("error");
+			}
+		});	
+	}else{
+		alert("입력하세욧");
+	}
+}
+
+
+</script>
 </html>

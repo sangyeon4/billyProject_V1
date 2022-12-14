@@ -44,4 +44,10 @@ public interface IF_villageService {
 	
 	public List<VillageVO> selectVillageSearch(VillagePageVO vpvo);
 	
+	public void deleteVillageReply(int vNum, int r1Num);
+	
+	public void updateVillageReply(VillageReplyVO vrvo);
+	
+	//public VillageReplyVO selectVillageReplyOne(VillageReplyVO vrvo);
+	
 }
