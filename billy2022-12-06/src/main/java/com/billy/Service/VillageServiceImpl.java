@@ -153,5 +153,27 @@ public class VillageServiceImpl implements IF_villageService{
 		}
 		return null;
 	}
+
+	@Override
+	public void deleteVillageReply(int vNum, int r1Num) {
+		System.out.println("서비스단 댓글 삭제 디버깅");
+		Map<String, String> map = new HashMap<>();
+		map.put("vNum",Integer.toString(vNum));
+		map.put("r1Num",Integer.toString(r1Num));
+		villageDao.deleteVillageReply(map);
+	}
+
+	@Override
+	public void updateVillageReply(VillageReplyVO vrvo) {
+		System.out.println("서비스단 댓글 업데이트 디버깅");
+		villageDao.updateVillageReply(vrvo);
+	}
+
+	/*
+	 * @Override public VillageReplyVO selectVillageReplyOne(VillageReplyVO vrvo) {
+	 * System.out.println("서비스단 댓글 하나 검색 디버깅"); return
+	 * villageDao.selectVillageReplyOne(vrvo); }
+	 */
+
 }
 

@@ -140,4 +140,22 @@ public class VillageDAOImpl implements IF_villageDAO {
 		System.out.println("--DAO단 빌리지 작성자 검색  디버깅");
 		return sqlSession.selectList(mapperQuery + ".selectVillageWriter", vpvo);
 	}
+
+	@Override
+	public void deleteVillageReply(Map<String, String> map) {
+		System.out.println("--DAO단 빌리지첨부파일 업데이트 디버깅");
+		sqlSession.update(mapperQuery + ".deleteVillageReply", map);
+	}
+
+	@Override
+	public void updateVillageReply(VillageReplyVO vrvo) {
+		System.out.println("--DAO단 댓글 업데이트 디버깅");
+		sqlSession.update(mapperQuery + ".updateVillageReply", vrvo);
+	}
+
+	/*
+	 * @Override public VillageReplyVO selectVillageReplyOne(VillageReplyVO vrvo) {
+	 * System.out.println("--DAO단 댓글하나 검색 디버깅"); return
+	 * sqlSession.selectOne(mapperQuery + ".selectVillageReplyOne", vrvo); }
+	 */
 }

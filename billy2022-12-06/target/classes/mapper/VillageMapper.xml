@@ -50,12 +50,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from villageReply_1 where vNum = #{vNum} order by r1Num asc
 	</select>
 	
+	<!-- <select id="selectVillageReplyOne" resultType="com.billy.VO.VillageReplyVO">
+		select * from villageReply_1 where vNum = #{vNum} and r1Num = #{r1Num}
+	</select> -->
+	
 	<select id="selectVillgeBoardCnt" resultType="int">
 		select count(*) from villageBoard
 	</select>
 	
 	<delete id="deleteVillageBoard">
 		delete from villageBoard where vNum = #{vNum}
+	</delete>
+	
+	<delete id="deleteVillageReply">
+		delete from villageReply_1 where vNum = #{vNum} and r1Num = #{r1Num}
 	</delete>
 	
 	<update id="updateVillageBoardMemberId">
@@ -69,6 +77,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시판 글 수정 쿼리 -->
 	<update id="updateVillageBoard">
 		update villageBoard set vTitle = #{vTitle}, vText = #{vText}, vIndate = default where vNum = #{vNum}
+	</update>
+	
+	<!-- 댓글 수정 쿼리 -->
+	<update id="updateVillageReply">
+		update villageReply_1 set r1Text = #{r1Text}, r1Indate = default where vNum = #{vNum} and r1Num = #{r1Num}
 	</update>
 	
 	<!-- 게시판 첨부파일 삭제 쿼리 -->

@@ -1,7 +1,9 @@
 package com.billy.main;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.billy.Service.IF_villageService;
@@ -125,5 +128,18 @@ public class villageController {
 			model.addAttribute("page",vpvo);
 		}
 		return "billy/villageBoard";
+	}
+	
+	@RequestMapping(value = "/villageReplyDelAction", method = RequestMethod.GET)
+	public String villageReplyDelAction(Locale locale, Model model, int vNum, int r1Num) {
+		ivs.deleteVillageReply(vNum, r1Num);
+		return "redirect:/villageView?vNum="+vNum;
+	}
+	
+	@RequestMapping(value = "/villageReplyModAction", method = RequestMethod.POST)
+	@ResponseBody
+	public String villageReplyModAction(Locale locale, Model model, VillageReplyVO vrvo){
+			ivs.updateVillageReply(vrvo);
+			return null;
 	}
 }
