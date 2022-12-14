@@ -73,6 +73,10 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 	@Override
 	public void memberInfoUpdate(BillyMemberVO bmvo) throws Exception {
 		System.out.println(bmvo.getId()+"--서비스단 정보수정 디버깅");
+		System.out.println(bmvo.getPhotoName()+"--서비스단 사진 안넘기면 값");
+		if(bmvo.getPhotoName()==null) {
+			bmvo.setPhotoName("N");
+		}		
 		bmdao.memberInfoUpdate(bmvo);
 		
 	}
@@ -101,6 +105,31 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 		System.out.println(id+"--서비스단 회원가입시 이메일 인증여부 체크 디버깅");
 		return bmdao.emailAuthFail(id);
 
+	}
+
+	@Override
+	public void pwdSearchEmailSend(BillyMemberVO bmvo) throws Exception {
+		String mailKey = new TempKey().getKey(10,false);//랜덤키 길이설정
+		bmvo.setMailKey(mailKey);
+		updateMailKey(bmvo);		
+		System.out.println("보낸 인증키 : " + mailKey);
+		
+		MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("[billy 비밀번호 찾기 인증키 입니다.]"); //메일제목
+        sendMail.setText(
+                "<h1>billy 비밀번호 찾기</h1>" +
+                "<br>아래 [인증키]를 비밀번호찾기 인증입력창에 적어주세요." +
+                "<br><p>" + mailKey + "</p>");
+        sendMail.setFrom("billyhuman0727@gmail.com", "빌리");
+        sendMail.setTo(bmvo.getEmail());
+        sendMail.send();
+		
+	}
+
+	@Override
+	public void pwdModAction(BillyMemberVO bmvo) throws Exception {
+		System.out.println(bmvo.getPwd()+"--서비스단 비번변경 비밀번호 디버깅");
+		bmdao.pwdModAction(bmvo);
 	}
 	
 }

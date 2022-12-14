@@ -30,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update billyMember set name = #{name},pwd = #{pwd},tel = #{tel},loc = #{loc},email = #{email},photoName = #{photoName},pwdQuiz = #{pwdQuiz},pwdAnswer = #{pwdAnswer}  where id =#{id}
 	</update>
 	
+	 <update id="pwdModAction">
+		update billyMember set pwd = #{pwd} where id =#{id}
+	</update>
+	
 	<delete id="deleteMember">
 		delete from billyMember where id = #{id}
 	</delete> 

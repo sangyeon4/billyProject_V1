@@ -16,6 +16,8 @@ public interface IF_billyMemberDAO {
    
    public void memberInfoUpdate(BillyMemberVO bmvo) throws Exception;
    
+   public void pwdModAction(BillyMemberVO bmvo) throws Exception;
+   
    public void deleteMember(String id) throws Exception;
    
    //회원 가입시 이메일 인증을 위한 랜덤번호 저장

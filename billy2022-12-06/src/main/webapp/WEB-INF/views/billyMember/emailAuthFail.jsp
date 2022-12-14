@@ -10,7 +10,7 @@
 
 </body>
 <script type="text/javascript">
-	alert("이메일 인증 후 다시 시도해주세요!");
+	alert("가입하신 이메일로 인증을 진행한 후 \n billy의 다양한 서비스를 이용해주세요!");
 	location.href="login";
 </script>
 </html>
