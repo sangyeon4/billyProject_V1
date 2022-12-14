@@ -49,4 +49,10 @@ public interface IF_villageDAO {
 	
 	public List<VillageVO> selectVillageWriter(VillagePageVO vpvo);
 	
+	public void deleteVillageReply(Map<String,String> map);
+	
+	public void updateVillageReply(VillageReplyVO vrvo);
+	
+	//public VillageReplyVO selectVillageReplyOne(VillageReplyVO vrvo);
+	
 }

@@ -39,6 +39,7 @@
 			<exclude-mapping path="/chkId**"/>
 			<exclude-mapping path="/chkName**"/>
 			<exclude-mapping path="/billyViewAll**"/>	
+			
 			<exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/download1**" />
 			<exclude-mapping path="/member/**"/>

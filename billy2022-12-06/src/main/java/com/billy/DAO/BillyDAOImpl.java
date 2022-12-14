@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyGoods_attachVO;
 import com.billy.VO.BillyGoods_likeVO;
@@ -100,5 +101,17 @@ public class BillyDAOImpl implements IF_billyDAO {
 	public String selectOnebilly_name(String vno) throws Exception {
 		System.out.println(vno+"----DAO단 selectOne name디버깅");
 		return sqlSession.selectOne(mapperQuery+".selectOnebilly_name", vno);
+	}
+
+	@Override
+	public void insertBilleyTransaction(BillyGoodsRentVO brvo) throws Exception {
+		System.out.println(brvo.getId()+"----DAO단 insertBilleyTransaction 디버깅");
+		sqlSession.insert(mapperQuery+".insertBillyTransaction", brvo);		
+	}
+
+	@Override
+	public List<String> selectBillyRentdate(String gNum) throws Exception {
+		System.out.println(gNum+"---DAO단 selectBillyRentdate 디버깅 ");
+		return sqlSession.selectList(mapperQuery+".selectBillyRentdate", gNum);
 	}
 }
