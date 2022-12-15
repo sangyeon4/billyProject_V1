@@ -8,6 +8,7 @@
 </head>
 <body>
 	<hr>
-	개발자 : 김진호, 박영신 , 문상연
+	<footer style="float: right; margin: 300px; "> 개발자 : 김진호, 박영신 , 문상연 </footer>
 </body>
+
 </html>

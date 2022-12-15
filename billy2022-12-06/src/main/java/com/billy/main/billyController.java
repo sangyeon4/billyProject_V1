@@ -114,6 +114,14 @@ public class billyController {
 		return "redirect:/billyViewOne?vno=" + bvo.getgNum()+"&vid="+bvo.getId();
 	}
 	
+	@RequestMapping(value = "/billyDeleteAction", method = RequestMethod.GET) //빌리삭제
+	public String billyDeleteAction(Locale locale, Model model, @RequestParam("vno") String vno) throws Exception {
+		BillyGoodsVO bvo = bsrv.selectBillyOne(vno);
+		System.out.println(bvo.getCateNum() + "---컨트롤러단 빌리수정하기(form) 디버깅");
+		model.addAttribute("bvo", bvo);
+		return "billy/billyModForm"; 
+	}
+	
 	@RequestMapping(value = "/billeyGoodsRentAction", method = RequestMethod.POST) //빌리기 액션
 	public String billeyGoodsRentAction(Locale locale, Model model, BillyGoodsRentVO brvo) throws Exception {		
 		System.out.println(brvo.gettPrice()+ "---컨트롤러단 빌리기액션(Rentaction) 디버깅");
