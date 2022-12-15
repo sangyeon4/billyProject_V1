@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.billy.DAO.IF_billyDAO;
 import com.billy.DAO.IF_billyMemberDAO;
+import com.billy.VO.BillyGoodsAttachVO;
 import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
-import com.billy.VO.BillyGoods_attachVO;
 import com.billy.VO.BillyMemberVO;
 import com.billy.mail.MailHandler;
 import com.billy.mail.TempKey;
@@ -146,7 +146,7 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 		System.out.println(id+"--서비스단 찜목록 불러오기 디버깅");
 		List<BillyGoodsVO> bList = bmdao.myBookmarkList(id);
 		System.out.println(bList.get(0).getgNum() + "-----service단 찜목록보기 번호 디버깅");
-		List<BillyGoods_attachVO> baList = billyDao.selectBilly_attach();
+		List<BillyGoodsAttachVO> baList = billyDao.selectBillyAttach();
 		for (int i = 0; i < bList.size(); i++) {
 			String[] temp = new String[1];
 			for (int j = 0; j < baList.size(); j++) {
@@ -166,7 +166,7 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 		System.out.println(id+"--서비스단 내가 등록한 빌리 디버깅");
 		List<BillyGoodsVO> bList = bmdao.selectMyBillyGoods(id);
 		System.out.println(bList.get(0).getgNum() + "-----service단 찜목록보기 번호 디버깅");
-		List<BillyGoods_attachVO> baList = billyDao.selectBilly_attach();
+		List<BillyGoodsAttachVO> baList = billyDao.selectBillyAttach();
 		for (int i = 0; i < bList.size(); i++) {
 			String[] temp = new String[1];
 			for (int j = 0; j < baList.size(); j++) {

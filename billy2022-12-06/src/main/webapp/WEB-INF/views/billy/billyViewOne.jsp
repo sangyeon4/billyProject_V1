@@ -35,11 +35,7 @@
 		integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<<<<<<< HEAD
 	<form name="frm" method="POST" action="billeyGoodsRentAction" onsubmit="return chkTotalPrice()" >
-=======
-	<form name="frm" method="POST" action="billeyGoodsRentAction">
->>>>>>> branch 'master' of https://github.com/Jinhokim7/billyProject_V1.git
 		<div class="mb-3">
 			<label for="gNumLB" class="form-label">글번호</label> <input type="text"
 				readonly class="form-control" name="gNum" value="${bvo.getgNum()}">
@@ -228,8 +224,10 @@
 //날짜를 선택하지 않았다면 빌리기 불가	
 function chkTotalPrice(){ 
 	if($('#tPrice').val()!=''){
+		alert('빌리기가 완료되었습니다');
 		return true;
 	}else{
+		alert('날짜를 선택해 주세요');
 		return false;
 	}
 }
