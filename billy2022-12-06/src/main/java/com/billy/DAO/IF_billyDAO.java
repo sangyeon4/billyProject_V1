@@ -25,6 +25,7 @@ public interface IF_billyDAO {
 	public void billyLikeUp(BillyGoods_likeVO blvo) throws Exception; //좋아요누르기
 	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception; //좋아요취소
 	public void insertBilleyTransaction(BillyGoodsRentVO brvo)throws Exception;//빌리기 대여내역입력
+	
 	public void deleteBillyAttach(BillyGoodsVO bvo)throws Exception;//빌리 첨부파일 삭제
 	public void updateBillyAttach(Map<String,String> map)throws Exception;//빌리 첨부파일 업데이트
 }

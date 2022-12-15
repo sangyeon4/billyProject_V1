@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.billy.Service.IF_billyService;
 import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
@@ -24,7 +25,8 @@ import com.billy.util.FileDataUtil1;
 public class billyController {
 
 	@Inject // 나 서비스 주입
-	private IF_billyService bsrv;
+	private IF_billyService bsrv;	
+	
 
 	@Inject
 	private FileDataUtil1 fileDataUtil1;
@@ -137,7 +139,8 @@ public class billyController {
 	public String billyDeleteAction(Locale locale, Model model, @RequestParam("vno") String vno) throws Exception {
 		BillyGoodsVO bvo = bsrv.selectBillyOne(vno);
 		System.out.println(bvo.getCateNum() + "---컨트롤러단 빌리수정하기(form) 디버깅");
-		model.addAttribute("bvo", bvo);
+		
+		
 		return "billy/billyModForm"; 
 	}
 	

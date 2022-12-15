@@ -41,9 +41,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cateNum=#{cateNum},gName=#{gName},gLoca=#{gLoca},gStrDate=#{gStrDate},gEndDate=#{gEndDate},
 		gPrice=#{gPrice}, gText=#{gText} where gNum=#{gNum}
    </update>
-   <delete id="deleteBilly" parameterType="com.billy.VO.BillyMemberVO">
-   		delete from   	
+   
+   <!-- 빌리삭제: 첨부파일은 삭제, 빌리트렌젝션은 준비된 빌리로 대체, 빌리삭제순으로.. -->
+   
+   <delete id="deleteBillyAttach" parameterType="String">
+   		delete from billyAttach where gNum=#{vno}
    </delete>
+   <delete id="updateBillyTransactionNo_1" parameterType="String">
+   		update billyAttach set gNum=1 where gNum=#{vno}
+   </delete>
+   <delete id="deleteBillyGoods" parameterType="String">
+   		delete from billyGoods where gNum=#{vno}
+   </delete> 
+   
    
    <update id="updateBillyMemberId" parameterType="String">
    		update billyGoods set id='admin1' where id=#{id}
