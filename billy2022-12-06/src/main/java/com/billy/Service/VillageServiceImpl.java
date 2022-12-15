@@ -21,10 +21,8 @@ public class VillageServiceImpl implements IF_villageService{
 
 	@Override
 	public void insertVillage(VillageVO vvo) throws Exception {
-		System.out.println("서비스단 시작");
-		System.out.println(vvo.getvId()+"서비스단 빌리지 인서트 디버깅");
 		villageDao.insertVillage(vvo);
-		String [] fname= vvo.getFiles();
+		String [] fname= vvo.getFiles(); //파일을 랜덤이름으로 변환 후 하드에 저장하고 배열에 저장
 		System.out.println(fname+"파일이름");
 		if(fname != null) {
 	         for(int i = 0 ; i < fname.length; i++) {

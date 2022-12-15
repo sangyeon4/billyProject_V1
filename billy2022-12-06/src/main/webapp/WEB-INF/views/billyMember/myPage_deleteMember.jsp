@@ -69,6 +69,8 @@
 	<%@ include file="../bbs/bootstrap.jsp" %>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
+	<%@ include file="../bbs/notice.jsp"%>
+	<br>
 	<form name="deleteForm" action="deleteMemberAction" method="POST" encType="multipart/form-data">
 		<section id="myInfo">
 			<div class="list-group">
@@ -76,7 +78,6 @@
 				<a href="myBookmarkList?id=${login}" class="list-group-item list-group-item-action">찜 목록</a> 
 				<a href="myBillyGoodsList?id=${login}" class="list-group-item list-group-item-action">등록한 물품</a> 
 				<a href="myBillyTransactionList?id=${login}" class="list-group-item list-group-item-action">대여한 물품</a>
-				<a href="#" class="list-group-item list-group-item-action">빌리 내역</a>
 				<a href="deleteMemberPage?id=${login}" class="list-group-item list-group-item-action active">회원탈퇴</a>
 			</div>		
 			<img src="resources/img/delImg.png">

@@ -1,7 +1,7 @@
 package com.billy.VO;
 
 
-public class BillyGoods_likeVO{
+public class BillyGoodsLikeVO{
 	String id;
 	int gNum;
 	

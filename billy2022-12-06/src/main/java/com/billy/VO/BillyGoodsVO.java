@@ -6,15 +6,13 @@ public class BillyGoodsVO {
 	private int gNum;
 	private int cateNum;
 	private String gName; //빌리상품명
-
 	private String gLoca; // 시+군구 (주소)
 	private String gStrDate; // 시작일
 	private String gEndDate; // 종료일
 	private int gPrice;
 	private String gText;
 	private String[] files; // 파일이름 (배열)
-	private String[] delFiles = null;
-	
+	private String[] delFiles = null; //파일삭제 시에 이용	
 	public String[] getDelFiles() {
 		return delFiles;
 	}
