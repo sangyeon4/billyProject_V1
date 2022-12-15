@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
  <style>
+ 		#web{
+ 			width : 1200px;
+ 		}
         html, body{
             padding: 0;
             margin: 0;
@@ -110,6 +113,7 @@
     </script>
 </head>
 <body>
+<div id="web">
 	<%@ page import="com.billy.VO.*"%>
     <div class="container">
         <div class="rollingbanner">
@@ -126,6 +130,7 @@
              	</ul>
             </div>
         </div>
+    </div>
     </div>
 </body>
 </html>

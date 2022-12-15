@@ -1,5 +1,9 @@
 package com.billy.Service;
 
+import java.util.List;
+
+import com.billy.VO.BillyGoodsRentVO;
+import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyMemberVO;
 
 public interface IF_billyMemberService {
@@ -21,6 +25,15 @@ public interface IF_billyMemberService {
    
    public void deleteMember(String id) throws Exception;
    
+   //나의 찜목록내역 불러오기
+   public List<BillyGoodsVO> myBookmarkList(String id) throws Exception;
+   
+   //내가 등록한 빌리
+   public List<BillyGoodsVO> selectMyBillyGoods(String id) throws Exception;
+   
+   //내가 빌린 빌리
+   public List<BillyGoodsRentVO> selectMyBillyTransactionList(String id) throws Exception;
+   
    //회원 가입시 이메일 인증을 위한 랜덤번호 저장
    public int updateMailKey(BillyMemberVO bmvo) throws Exception;
    
@@ -32,6 +45,8 @@ public interface IF_billyMemberService {
    
    //비밀번호 찾기용 이메일 인증키 발송
    public void pwdSearchEmailSend(BillyMemberVO bmvo) throws Exception;
+   
+   
    
    
 }

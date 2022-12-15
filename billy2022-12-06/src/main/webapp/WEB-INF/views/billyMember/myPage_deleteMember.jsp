@@ -29,7 +29,6 @@
 .list-group a {
 	font-size: 15px;
 }
-
 #myInfo {
 	width: 1200px;
 	height: 800px;
@@ -73,15 +72,13 @@
 	<form name="deleteForm" action="deleteMemberAction" method="POST" encType="multipart/form-data">
 		<section id="myInfo">
 			<div class="list-group">
-				<a href="myPage?id=${login}" class="list-group-item list-group-item-action "
-					aria-current="true">내 정보</a> <a href="#"
-					class="list-group-item list-group-item-action">찜 목록</a> <a href="#"
-					class="list-group-item list-group-item-action">등록한 물품</a> <a
-					href="#" class="list-group-item list-group-item-action">대여한 물품</a>
+				<a href="myPage?id=${login}" class="list-group-item list-group-item-action"aria-current="true">내 정보</a> 
+				<a href="myBookmarkList?id=${login}" class="list-group-item list-group-item-action">찜 목록</a> 
+				<a href="myBillyGoodsList?id=${login}" class="list-group-item list-group-item-action">등록한 물품</a> 
+				<a href="myBillyTransactionList?id=${login}" class="list-group-item list-group-item-action">대여한 물품</a>
 				<a href="#" class="list-group-item list-group-item-action">빌리 내역</a>
-				<a href="deleteMemberPage?id=${id}"
-					class="list-group-item list-group-item-action active">회원탈퇴</a>
-			</div>
+				<a href="deleteMemberPage?id=${login}" class="list-group-item list-group-item-action active">회원탈퇴</a>
+			</div>		
 			<img src="resources/img/delImg.png">
 			<div id="deleteMemberChkArea">
 				
