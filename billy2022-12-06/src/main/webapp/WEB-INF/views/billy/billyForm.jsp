@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>billy Form</title>
 </head>
 <body>
 	<%@ include file="../bbs/bootstrap.jsp" %>
@@ -73,7 +73,7 @@
 <script
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-
+//주소
 function sample5_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -83,7 +83,8 @@ function sample5_execDaumPostcode() {
         }
     }).open();
 }
-     
+
+//달력
 $(function() {     
     var dateFormat = "yy/mm/dd",
       from = $( "#from" )
