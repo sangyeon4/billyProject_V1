@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,13 +92,30 @@
          	<label for="gTextLB" class="form-label">내용</label>
          	<textarea class="form-control" name="gText" >${bvo.getgText()}</textarea>
       	</div>
-      	<div class="mb-3">
-         	<label for="goodsFile" class="form-label">사진올리기</label> 
-         	<input type="file" class="form-control" name="file"> 
-         	<input type="file" class="form-control" name="file">
+		
+		<div class="mb-3">
+         	<label for="goodsFile" class="form-label">사진올리기</label>
+         	<br>
+			<%
+				ArrayList list = (ArrayList) request.getAttribute("attachList");
+				for (int i = 0; i < list.size(); i++) {
+					out.print("<button id='imgBtn" + i + "' type='button'>");
+					out.print("<img src='download1?filename=" + list.get(i)+ "' style='width:150px; height:100px;' onclick=delImg" + i + "('" + list.get(i) + "')>");
+					out.print("</button>");
+					out.print("<br>");
+				}
+			%>
+			<span id="img0"></span>
+			<span id="img1"></span>
+			<span id="delImg0"></span>
+			<span id="delImg1"></span>
+			<input type='hidden' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>
+			<%
+				for (int i = 0; i + list.size() < 2; i++) {
+					out.print("<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>");
+				}
+			%>
       	</div>
-
-
       <input type="submit" class="btn btn-primary">
    </form>
    <%@ include file="../bbs/footer.jsp"%>
@@ -156,5 +174,16 @@ $(function() {
       return date;
     }
   } );
+  
+function delImg0(a){
+	$('#imgBtn0').remove();
+	document.getElementById('img0').innerHTML="<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>";
+	document.getElementById('delImg0').innerHTML="<input type='hidden' name='delFiles' value='"+a+"'>";
+}
+function delImg1(a){
+	$('#imgBtn1').remove();
+	document.getElementById('img1').innerHTML="<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>";
+	document.getElementById('delImg1').innerHTML="<input type='hidden' name='delFiles' value='"+a+"'>";
+}
   </script>
 </html>

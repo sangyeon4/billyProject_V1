@@ -12,6 +12,9 @@
       float:right;
       margin-right:100px;
    }
+   div a{
+   	text-decoration:none;
+   }
   </style>
   <body class="p-3 m-0 border-0 bd-example">
 

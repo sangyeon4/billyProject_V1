@@ -1,6 +1,8 @@
 package com.billy.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -116,7 +118,28 @@ public class BillyServiceImpl implements IF_billyService {
 		}
 		return rDate;
 	}
-
-	
-
+	@Override
+	public List<BillyGoods_attachVO> selectOneBilly_attach(String vno) throws Exception {
+		System.out.println("---service단 selectAttachOne디버깅");	
+		return billyDao.selectOneBilly_attach(vno);
+	}
+	@Override
+	public void deleteBillyAttach(BillyGoodsVO bvo) throws Exception {
+		System.out.println("---service단 deleteBillyAttach디버깅");	
+		billyDao.deleteBillyAttach(bvo);
+	}
+	@Override
+	public void updateBillyAttach(BillyGoodsVO bvo) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		for (int i = 0; i < bvo.getFiles().length; i++) {
+			String file = bvo.getFiles()[i];
+			System.out.println(file);
+			String num = Integer.toString(bvo.getgNum());
+			System.out.println(num);
+			map.put("vNum" + i, num);
+			map.put("file" + i, file);
+		}
+		System.out.println("---service단updateBillyAttach디버깅");	
+		billyDao.updateBillyAttach(map);
+	}
 }
