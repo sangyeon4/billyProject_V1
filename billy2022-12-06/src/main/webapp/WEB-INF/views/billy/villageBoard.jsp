@@ -16,6 +16,12 @@
 	#page{
 		margin-left:550px;
 	}
+	table tr td a{
+		text-decoration:none;
+	}
+	table tr th a{
+		text-decoration:none;
+	}
 </style>
 
 

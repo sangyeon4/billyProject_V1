@@ -16,8 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select max(gNum) as maxNum from billygoods   
    </select>
    <select id="selectAllBilly" resultType="com.billy.VO.BillyGoodsVO">
-   		select * from billygoods
-   </select>
+		select b.id, b.gNum, b.cateNum, b.gName, b.gLoca, b.gStrDate,
+		b.gEndDate,b.gPrice,b.gText,nvl(m.good,0)as gLike_cnt from billyGoods
+		b
+		left outer join (select gNum, count(*) as good from billyBookmark group by
+		gNum) m
+		on b.gNum=m.gNum order by b.gNum desc
+	</select>
     <select id="selectOneBilly" parameterType="String" resultType="com.billy.VO.BillyGoodsVO">
    		select * from billygoods where gNum= #{vno}
    </select>
@@ -36,6 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cateNum=#{cateNum},gName=#{gName},gLoca=#{gLoca},gStrDate=#{gStrDate},gEndDate=#{gEndDate},
 		gPrice=#{gPrice}, gText=#{gText} where gNum=#{gNum}
    </update>
+   <delete id="deleteBilly" parameterType="com.billy.VO.BillyMemberVO">
+   		delete from   	
+   </delete>
    
    <update id="updateBillyMemberId" parameterType="String">
    		update billyGoods set id='admin1' where id=#{id}
@@ -60,6 +68,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="billyLikeDown" parameterType="com.billy.VO.BillyGoods_likeVO">
 		delete from billyBookmark where id = #{id} and gNum =#{gNum}
 	</delete>
-  
+	
+	<!-- 빌리 첨부파일 삭제 쿼리 -->
+	<delete id="deleteBillyAttach">
+		delete from billyAttach where gNum = #{gNum} and
+		<foreach collection="delFiles" item="delFile" open="(" close=")" separator="OR"> 
+			fName = #{delFile}
+		</foreach>
+	</delete>
+	
+	<!-- 게시판 첨부파일  삽입 쿼리 -->
+	<insert id="updateBillyAttach">
+		<choose>
+			<when test='file1 != null'>
+			insert all
+				into billyAttach values (#{vNum0},#{file0},default)
+				into billyAttach values (#{vNum0},#{file1},default)
+			select * from sys.dual
+			</when>
+			<otherwise>
+				insert into billyAttach values (#{vNum0},#{file0},default)
+			</otherwise>
+		</choose>
+	</insert>
 
 </mapper>

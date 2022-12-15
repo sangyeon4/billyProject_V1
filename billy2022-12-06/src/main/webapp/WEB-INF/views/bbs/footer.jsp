@@ -5,23 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	#web{
-		width : 1200px;
-	}
-	
-	footer{
-		float : left;
-	}
-</style>
 </head>
 <body>
-<div id="web">
-<footer>
-	<hr>
-	개발자 : 김진호, 박영신 , 문상연
-</footer>
-</div>
-	
+
+	<footer style="float: right; margin: 300px; "> 개발자 : 김진호, 박영신 , 문상연 </footer>
+
 </body>
+
 </html>

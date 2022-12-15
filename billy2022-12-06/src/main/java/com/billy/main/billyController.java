@@ -1,5 +1,6 @@
 package com.billy.main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.billy.Service.IF_billyService;
 import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
+import com.billy.VO.BillyGoods_attachVO;
 import com.billy.VO.BillyGoods_likeVO;
 import com.billy.util.FileDataUtil1;
 
@@ -102,16 +104,41 @@ public class billyController {
 	@RequestMapping(value = "/billyModForm", method = RequestMethod.GET) //빌리수정폼
 	public String billyMod(Locale locale, Model model, @RequestParam("vno") String vno) throws Exception {
 		BillyGoodsVO bvo = bsrv.selectBillyOne(vno);
+		List<BillyGoods_attachVO> List = bsrv.selectOneBilly_attach(vno);
 		System.out.println(bvo.getCateNum() + "---컨트롤러단 빌리수정하기(form) 디버깅");
+		ArrayList<String> attachList = new ArrayList<>();
+		for(int i = 0; i<List.size(); i++) {
+			attachList.add(List.get(i).getfName());
+		}
 		model.addAttribute("bvo", bvo);
+		model.addAttribute("attachList",attachList);
 		return "billy/billyModForm"; 
 	}
 
 	@RequestMapping(value = "/billeyModAction", method = RequestMethod.POST) //빌리수정요청
-	public String billeyModAction(Locale locale, Model model, BillyGoodsVO bvo, MultipartFile[] file) throws Exception {
+	public String billeyModAction(Locale locale, Model model, BillyGoodsVO bvo, MultipartFile[] file, String[] delFiles) throws Exception {
 		bsrv.updateBilly(bvo);
+		String[] fileNames = fileDataUtil1.fileUpload(file);
+		bvo.setFiles(fileNames);
+		bvo.setDelFiles(delFiles);
+		if(bvo.getDelFiles() != null) {
+			bsrv.deleteBillyAttach(bvo);
+		}
+		if(bvo.getFiles().length != 0) {
+			if(fileNames[0] != null) {
+				bsrv.updateBillyAttach(bvo);
+			}
+		}
 		System.out.println(bvo.getCateNum() + "---컨트롤러단 빌리수정하기(action) 디버깅");
 		return "redirect:/billyViewOne?vno=" + bvo.getgNum()+"&vid="+bvo.getId();
+	}
+	
+	@RequestMapping(value = "/billyDeleteAction", method = RequestMethod.GET) //빌리삭제
+	public String billyDeleteAction(Locale locale, Model model, @RequestParam("vno") String vno) throws Exception {
+		BillyGoodsVO bvo = bsrv.selectBillyOne(vno);
+		System.out.println(bvo.getCateNum() + "---컨트롤러단 빌리수정하기(form) 디버깅");
+		model.addAttribute("bvo", bvo);
+		return "billy/billyModForm"; 
 	}
 	
 	@RequestMapping(value = "/billeyGoodsRentAction", method = RequestMethod.POST) //빌리기 액션
