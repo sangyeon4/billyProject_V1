@@ -144,8 +144,9 @@ public class BillyServiceImpl implements IF_billyService {
 	@Override
 	public void deleteBillyOne(String vno) throws Exception { //빌리삭제
 		System.out.println(vno+"---service단 deleteBillyOne 디버깅");
-		billyDao.deleteBillyAttachGnun(vno); //1. 파일삭제
+		billyDao.deleteBillyAttachGnum(vno); //1. 파일삭제
 		billyDao.updateBillyTransactionNo_1(vno);//2.트랜잭션에 있는 글번호를 0번으로 수정
-		billyDao.deleteBillyGoods(vno);//3.빌리삭제		
+		billyDao.deleteBillyBookmark(vno);//3.좋아요 삭제
+		billyDao.deleteBillyGoods(vno);//4.빌리삭제		
 	}
 }

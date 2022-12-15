@@ -35,7 +35,6 @@
 		<c:forEach items="${bmList}" var="bvo">
 			<a href='billyViewOne?vno=${bvo.getgNum()}&vid=${login}' style="float: left; margin: 50px;  ">
 				<div class="card" style="width: 18rem; height: 18rem;">
-			
 				<!-- 사진 파일유무 파악 -->			
 					<c:choose>
 						<c:when test="${bvo.getFiles()[0] ne null}">

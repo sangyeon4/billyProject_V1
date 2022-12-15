@@ -124,7 +124,7 @@ public class billyMemberController {
 			session.setAttribute("login", bmvo.getId());
 		}
 		
-		return "home";
+		return "redirect:/billyViewAll";
 	}
 	
 	@RequestMapping(value="/loginChk", method=RequestMethod.POST)
@@ -185,7 +185,12 @@ public class billyMemberController {
 	public String myBookmarkList(HttpSession session,Model model,String id) throws Exception {
 		System.out.println(id + "--컨트롤러단 찜목록 id받아오는지");
 		List<BillyGoodsVO> list = bmsv.myBookmarkList(id);
-		model.addAttribute("bmList",list);
+		System.out.println(list.size()+"----------");
+		if(list.size()==0){
+			return "billyMember/myListEmpty";
+		}else {
+			model.addAttribute("bmList",list);
+		}
 	
 		return "billyMember/myBookmarkList";
 	}
@@ -194,8 +199,13 @@ public class billyMemberController {
 	public String myBillyTransactionList(HttpSession session,Model model,String id) throws Exception {
 		System.out.println(id + "--컨트롤러단 빌린내역 id받아오는지");
 		List<BillyGoodsRentVO> list = bmsv.selectMyBillyTransactionList(id);
-		model.addAttribute("bmList",list);
-	
+		System.out.println(list.size()+"--사이즈");
+		String emptyList = "빌린 물건이 없습니다.";
+		if(list.size()==0){
+			return "billyMember/myListEmpty";
+		}else {
+			model.addAttribute("bmList",list);
+		}
 		return "billyMember/myBillyTransactionList";
 	}
 	
@@ -203,7 +213,12 @@ public class billyMemberController {
 	public String myBillyGoodsList(HttpSession session,Model model,String id) throws Exception {
 		System.out.println(id + "--컨트롤러단 내가 등록한 빌리 id받아오는지");
 		List<BillyGoodsVO> list = bmsv.selectMyBillyGoods(id);
-		model.addAttribute("bmList",list);
+		String emptyList = "빌린 물건이 없습니다.";
+		if(list.size()==0){
+			return "billyMember/myListEmpty";
+		}else {
+			model.addAttribute("bmList",list);
+		}
 	
 		return "billyMember/myBillyGoodsList";
 	}
