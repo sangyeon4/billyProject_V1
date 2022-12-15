@@ -205,7 +205,7 @@ public class billyMemberController {
 		List<BillyGoodsVO> list = bmsv.selectMyBillyGoods(id);
 		model.addAttribute("bmList",list);
 	
-		return "billyMember/myBookmarkList";
+		return "billyMember/myBillyGoodsList";
 	}
 	
 	@RequestMapping(value="/pwdSearch", method=RequestMethod.GET)

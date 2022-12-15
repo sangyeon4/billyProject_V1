@@ -6,14 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
 	<%@ include file="../bbs/bootstrap.jsp" %>
    <%@ include file="../bbs/header.jsp"%>
    <%@ include file="../bbs/nav.jsp"%>
    <%@ include file="../bbs/notice.jsp"%>
-
+<div style="height:900px">
 	<h1>글번호:${bvo.getgNum()} 수정하기</h1>
    <form name="frm" method="POST" action="billeyModAction"
       encType="multipart/form-data">
@@ -118,6 +117,7 @@
       	</div>
       <input type="submit" class="btn btn-primary">
    </form>
+   </div>
    <%@ include file="../bbs/footer.jsp"%>
 </body>
 <script

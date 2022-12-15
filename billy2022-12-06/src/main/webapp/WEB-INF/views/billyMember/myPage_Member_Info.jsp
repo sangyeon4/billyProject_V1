@@ -77,6 +77,8 @@
 	<%@ include file="../bbs/bootstrap.jsp" %>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
+	<%@ include file="../bbs/notice.jsp"%>
+	<br>
 	<%@ page import="com.billy.VO.*" %>
 	<% BillyMemberVO myInfo = (BillyMemberVO)request.getAttribute("myInfo"); %>
 	<form name="frm" action="billyMemberModAction" method="POST" encType="multipart/form-data">
@@ -86,7 +88,6 @@
 		<a href="myBookmarkList?id=${login}" class="list-group-item list-group-item-action">찜 목록</a> 
 		<a href="myBillyGoodsList?id=${login}" class="list-group-item list-group-item-action">등록한 물품</a> 
 		<a href="myBillyTransactionList?id=${login}" class="list-group-item list-group-item-action">대여한 물품</a>
-		<a href="#" class="list-group-item list-group-item-action">빌리 내역</a>
 		<a href="deleteMemberPage?id=${login}" class="list-group-item list-group-item-action">회원탈퇴</a>
 	</div>		
 	<h2>내 정보</h2>
@@ -104,8 +105,9 @@
 	<!-- <input type="file" name="file" id ="uploadButton" class="form-control" accept="image/gif, image/jpeg, image/png"> -->
 	<span id="fileAttach"></span>
 	<input type="button" value ="프로필사진 수정" id='imgModBtn' onclick = "delImg1()" class="btn btn-primary">
+	<input type="button" class="btn btn-primary" onclick="joinform_check();" value="수정하기">
 	</div>	
-         <table id="joinTable">
+         <table id="joinTable" style="width:700px;">
             <tr>
                <td align=center>아이디</td>
                <td><input type="text" name="id" id="id" class="form-control"
@@ -211,7 +213,7 @@
             
             </tr>
          </table>
-           <input type="button" class="btn btn-primary" onclick="joinform_check();" value="수정하기">
+           
          </form>   
 	</section>
 
