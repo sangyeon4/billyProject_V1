@@ -111,7 +111,7 @@
 			</div>
 			<div class="mb-3">
 				<c:forEach items="${bvo.getFiles()}" var="fname">
-					<img src="download1?filename=${fname}">
+					<img src="download1?filename=${fname}" style="width:600px; height:350px;">
 					<br>
 				</c:forEach>
 			</div>

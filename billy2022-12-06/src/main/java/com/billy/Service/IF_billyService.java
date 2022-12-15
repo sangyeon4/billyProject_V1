@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
+import com.billy.VO.BillyGoods_attachVO;
 import com.billy.VO.BillyGoods_likeVO;
 
 public interface IF_billyService {
@@ -19,4 +20,7 @@ public interface IF_billyService {
 	public void billyLikeUp(BillyGoods_likeVO blvo) throws Exception; //좋아요누르기
 	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception; //좋아요취소
 	public void insertBilleyTransaction(BillyGoodsRentVO brvo)throws Exception;//빌리기 대여내역입력
+	public List<BillyGoods_attachVO> selectOneBilly_attach(String vno)throws Exception;
+	public void deleteBillyAttach(BillyGoodsVO bvo)throws Exception;//빌리 첨부파일 삭제
+	public void updateBillyAttach(BillyGoodsVO bvo)throws Exception;//빌리 첨부파일 업데이트
 }
