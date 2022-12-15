@@ -125,7 +125,6 @@ public class VillageDAOImpl implements IF_villageDAO {
 	@Override
 	public List<VillageVO> selectVillageTitle(VillagePageVO vpvo) {
 		System.out.println("--DAO단 빌리지 제목 검색  디버깅");
-		System.out.println(vpvo.getSearchWord());
 		return sqlSession.selectList(mapperQuery + ".selectVillageTitle", vpvo);
 	}
 
