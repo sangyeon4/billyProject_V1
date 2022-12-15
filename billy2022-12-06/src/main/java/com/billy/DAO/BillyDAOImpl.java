@@ -35,7 +35,7 @@ public class BillyDAOImpl implements IF_billyDAO {
 
 	@Override
 	public void insertAttach(String filename) throws Exception {
-		sqlSession.insert(mapperQuery + ".billy_attach", filename);
+		sqlSession.insert(mapperQuery + ".billyAttach", filename);
 		System.out.println(filename + "-------DAO(파일네임 디버깅)");
 	}
 
@@ -127,9 +127,9 @@ public class BillyDAOImpl implements IF_billyDAO {
 	}
 
 	@Override
-	public void deleteBillyAttachGnun(String vno) throws Exception {
-		System.out.println(vno+"---DAO단 deleteBillyAttachGnun 디버깅 ");
-		sqlSession.delete(mapperQuery+".deleteBillyAttachGnun", vno);
+	public void deleteBillyAttachGnum(String vno) throws Exception {
+		System.out.println(vno+"---DAO단 deleteBillyAttachGnum 디버깅 ");
+		sqlSession.delete(mapperQuery+".deleteBillyAttachGnum", vno);
 	}
 
 	@Override
@@ -143,4 +143,10 @@ public class BillyDAOImpl implements IF_billyDAO {
 		System.out.println(vno+"---DAO단 deleteBillyGoods 디버깅 ");
 		sqlSession.delete(mapperQuery+".deleteBillyGoods", vno);		
 	}
+
+	@Override
+	public void deleteBillyBookmark(String vno) throws Exception {
+		sqlSession.delete(mapperQuery+".deleteBillyBookmark", vno);		
+	}
+
 }

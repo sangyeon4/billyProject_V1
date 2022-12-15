@@ -47,9 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    
    <!-- 빌리삭제: 첨부파일은 삭제, 빌리트렌젝션은 준비된 빌리로 대체, 빌리삭제순으로.. -->   
-   <delete id="deleteBillyAttachGnun" parameterType="String">
+   <delete id="deleteBillyAttachGnum" parameterType="String">
    		delete from billyAttach where gNum=#{vno}
    </delete>
+   
+   <delete id="deleteBillyBookmark" parameterType="String">
+   		delete from billybookmark where gNum=#{vno}
+   </delete>
+   
    <delete id="updateBillyTransactionNo_1" parameterType="String">
    		update Transaction set gNum=1 where gNum=#{vno}
    </delete>

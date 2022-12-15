@@ -24,8 +24,10 @@
    <%@ include file="../bbs/nav.jsp"%>
    <%@ include file="../bbs/notice.jsp"%>
    <section>
-   		<img src=resources/img/개발자.jpg class="developer">
+
    		<img src=resources/img/developer.png class="developer">
+   		<img src=resources/img/개발자.jpg class="developer">
+   		
    </section>
    
    <%@ include file="../bbs/footer.jsp"%>
