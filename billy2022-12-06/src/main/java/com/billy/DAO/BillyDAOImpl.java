@@ -1,6 +1,7 @@
 package com.billy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -113,5 +114,17 @@ public class BillyDAOImpl implements IF_billyDAO {
 	public List<String> selectBillyRentdate(String gNum) throws Exception {
 		System.out.println(gNum+"---DAO단 selectBillyRentdate 디버깅 ");
 		return sqlSession.selectList(mapperQuery+".selectBillyRentdate", gNum);
+	}
+
+	@Override
+	public void deleteBillyAttach(BillyGoodsVO bvo) throws Exception {
+		System.out.println("---DAO단 deleteBillyAttach 디버깅 ");
+		sqlSession.delete(mapperQuery+".deleteBillyAttach", bvo);	
+	}
+
+	@Override
+	public void updateBillyAttach(Map<String,String> map) throws Exception {
+		System.out.println("---DAO단 updateBillyAttach 디버깅 ");
+		sqlSession.delete(mapperQuery+".updateBillyAttach", map);	
 	}
 }

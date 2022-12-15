@@ -13,6 +13,16 @@ public class BillyGoodsVO {
 	private int gPrice;
 	private String gText;
 	private String[] files; // 파일이름 (배열)
+	private String[] delFiles = null;
+	
+	public String[] getDelFiles() {
+		return delFiles;
+	}
+
+	public void setDelFiles(String[] delFiles) {
+		this.delFiles = delFiles;
+	}
+
 	private int gLike_cnt; // 좋아요
 
 	public String getId() {
