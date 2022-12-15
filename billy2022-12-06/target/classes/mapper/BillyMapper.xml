@@ -16,8 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select max(gNum) as maxNum from billygoods   
    </select>
    <select id="selectAllBilly" resultType="com.billy.VO.BillyGoodsVO">
-   		select * from billygoods
-   </select>
+		select b.id, b.gNum, b.cateNum, b.gName, b.gLoca, b.gStrDate,
+		b.gEndDate,b.gPrice,b.gText,nvl(m.good,0)as gLike_cnt from billyGoods
+		b
+		left outer join (select gNum, count(*) as good from billyBookmark group by
+		gNum) m
+		on b.gNum=m.gNum order by b.gNum desc
+	</select>
     <select id="selectOneBilly" parameterType="String" resultType="com.billy.VO.BillyGoodsVO">
    		select * from billygoods where gNum= #{vno}
    </select>
@@ -36,6 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cateNum=#{cateNum},gName=#{gName},gLoca=#{gLoca},gStrDate=#{gStrDate},gEndDate=#{gEndDate},
 		gPrice=#{gPrice}, gText=#{gText} where gNum=#{gNum}
    </update>
+   <delete id="deleteBilly" parameterType="com.billy.VO.BillyMemberVO">
+   		delete from   	
+   </delete>
    
    <update id="updateBillyMemberId" parameterType="String">
    		update billyGoods set id='admin1' where id=#{id}
