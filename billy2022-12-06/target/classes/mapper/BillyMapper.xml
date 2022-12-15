@@ -8,13 +8,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <insert id="insertBilly" parameterType="com.billy.VO.BillyGoodsVO">
       insert into billyGoods values(#{id},#{gNum},#{cateNum},#{gName},#{gLoca},#{gStrDate},#{gEndDate},#{gPrice},#{gText}) 
    </insert>
-   <insert id="billy_attach" parameterType="String">
+   <insert id="billyAttach" parameterType="String">
    insert into billyAttach values((select max(gNum) from billyGoods), #{filename},
    default)
    </insert>
    <select id="selectMaxCnt" resultType="int">
       select max(gNum) as maxNum from billygoods   
    </select>
+   
+   <!-- 빌리게시판 전체보기 요청시. billyGoods(글정보), billyAttch(사진), billyBookmark(좋아요 개수노출) 응답-->
    <select id="selectAllBilly" resultType="com.billy.VO.BillyGoodsVO">
 		select b.id, b.gNum, b.cateNum, b.gName, b.gLoca, b.gStrDate,
 		b.gEndDate,b.gPrice,b.gText,nvl(m.good,0)as gLike_cnt from billyGoods
@@ -23,16 +25,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gNum) m
 		on b.gNum=m.gNum order by b.gNum desc
 	</select>
+	
     <select id="selectOneBilly" parameterType="String" resultType="com.billy.VO.BillyGoodsVO">
    		select * from billygoods where gNum= #{vno}
    </select>
-   <select id="selectOnebilly_name" parameterType="String" resultType="String">
+   <select id="selectOnebillyName" parameterType="String" resultType="String">
   		 select m.name from billyMember m inner Join billyGoods g on(m.id=g.id) where g.gNum=#{vno}
    </select>
-     <select id="selectAllBilly_attach" resultType="com.billy.VO.BillyGoods_attachVO">
+     <select id="selectAllBillyAttach" resultType="com.billy.VO.BillyGoodsAttachVO">
    		select * from billyAttach
    </select>
-   <select id="selectOneBilly_attach" parameterType="String" resultType="com.billy.VO.BillyGoods_attachVO">
+   <select id="selectOneBillyAttach" parameterType="String" resultType="com.billy.VO.BillyGoodsAttachVO">
    		select fName from billyAttach where gNum=#{vno}
    </select>
    
@@ -41,9 +44,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cateNum=#{cateNum},gName=#{gName},gLoca=#{gLoca},gStrDate=#{gStrDate},gEndDate=#{gEndDate},
 		gPrice=#{gPrice}, gText=#{gText} where gNum=#{gNum}
    </update>
-   <delete id="deleteBilly" parameterType="com.billy.VO.BillyMemberVO">
-   		delete from   	
+   
+   
+   <!-- 빌리삭제: 첨부파일은 삭제, 빌리트렌젝션은 준비된 빌리로 대체, 빌리삭제순으로.. -->   
+   <delete id="deleteBillyAttachGnun" parameterType="String">
+   		delete from billyAttach where gNum=#{vno}
    </delete>
+   <delete id="updateBillyTransactionNo_1" parameterType="String">
+   		update Transaction set gNum=1 where gNum=#{vno}
+   </delete>
+   <delete id="deleteBillyGoods" parameterType="String">
+   		delete from billyGoods where gNum=#{vno}
+   </delete>    
    
    <update id="updateBillyMemberId" parameterType="String">
    		update billyGoods set id='admin1' where id=#{id}
@@ -59,13 +71,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </select>
    
    	<!-- 좋아요 클릭유무 -->
-	<select id="selectCntBilly_like" resultType="int" parameterType="com.billy.VO.BillyGoods_likeVO">
+	<select id="selectCntBillyLike" resultType="int" parameterType="com.billy.VO.BillyGoodsLikeVO">
 		select count(*) from billyBookmark where id = #{id} and gNum = #{gNum}
 	</select>
-   <insert id="billyLikeUp" parameterType="com.billy.VO.BillyGoods_likeVO" >
+   <insert id="billyLikeUp" parameterType="com.billy.VO.BillyGoodsLikeVO" >
 		insert into billyBookmark values(#{id}, #{gNum})
 	</insert>
-	<delete id="billyLikeDown" parameterType="com.billy.VO.BillyGoods_likeVO">
+	<delete id="billyLikeDown" parameterType="com.billy.VO.BillyGoodsLikeVO">
 		delete from billyBookmark where id = #{id} and gNum =#{gNum}
 	</delete>
 	

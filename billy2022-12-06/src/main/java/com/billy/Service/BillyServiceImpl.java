@@ -9,10 +9,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.billy.DAO.IF_billyDAO;
+import com.billy.VO.BillyGoodsAttachVO;
+import com.billy.VO.BillyGoodsLikeVO;
 import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
-import com.billy.VO.BillyGoods_attachVO;
-import com.billy.VO.BillyGoods_likeVO;
 
 @Service
 public class BillyServiceImpl implements IF_billyService {
@@ -25,15 +25,14 @@ public class BillyServiceImpl implements IF_billyService {
 	public void insertBilly(BillyGoodsVO bvo) throws Exception {
 		billyDao.insertBilly(bvo);
 		System.out.println(bvo.getId() + "-------service단 빌리등록 디버깅");
-		String[] fname = bvo.getFiles();
+		String[] fname = bvo.getFiles(); //파일이름 받아오기
 		if (fname != null) {
 			for (int i = 0; i < fname.length; i++) {
 				if (fname[i] != null) {
-					billyDao.insertAttach(fname[i]);
+					billyDao.insertAttach(fname[i]); //파일이름을 DB에 저장
 				}
 			}
 		}
-
 	}
 	@Override
 	public int selectMaxCnt() throws Exception {
@@ -42,10 +41,10 @@ public class BillyServiceImpl implements IF_billyService {
 	}
 
 	@Override
-	public List<BillyGoodsVO> selectBillyAll() throws Exception { // 모든 빌리+사진하나
+	public List<BillyGoodsVO> selectBillyAll() throws Exception { 
 		List<BillyGoodsVO> bList = billyDao.selectBillyAll();
 		System.out.println(bList.get(0).getgNum() + "-----service단 전체보기시 번호 디버깅");
-		List<BillyGoods_attachVO> baList = billyDao.selectBilly_attach();
+		List<BillyGoodsAttachVO> baList = billyDao.selectBillyAttach();
 		for (int i = 0; i < bList.size(); i++) {
 			String[] temp = new String[1]; 
 			for (int j = 0; j < baList.size(); j++) {
@@ -64,8 +63,8 @@ public class BillyServiceImpl implements IF_billyService {
 	public BillyGoodsVO selectBillyOne(String vno) throws Exception {
 		System.out.println(billyDao.selectBillyOne(vno).getgNum()+"service단 빌리자세히보기 디버깅");		
 		BillyGoodsVO bvo=billyDao.selectBillyOne(vno);
-		bvo.setName(billyDao.selectOnebilly_name(vno));
-		List<BillyGoods_attachVO>baList=billyDao.selectOneBilly_attach(vno);
+		bvo.setName(billyDao.selectOnebillyName(vno));
+		List<BillyGoodsAttachVO>baList=billyDao.selectOneBillyAttach(vno);
 		System.out.println(baList.size()+"----service단 빌리 자세히보기(파일)사이즈 디버깅");
 		if(baList.size()!=0) { //해당글에 저장되어있는 사진 개수
 			String[] temp= new String[baList.size()]; //리스트 자료형에 담겨있는 사진들을 배열 자료형으로 바꿔주기 위함
@@ -90,17 +89,17 @@ public class BillyServiceImpl implements IF_billyService {
 		
 	}
 	@Override
-	public int selectCntBilly_like(BillyGoods_likeVO blvo) throws Exception {
+	public int selectCntBillyLike(BillyGoodsLikeVO blvo) throws Exception {
 		System.out.println(blvo.getgNum()+"----service단 빌리자세히보기(좋아요클릭유무) gNum디버깅");
-		return billyDao.selectCntBilly_like(blvo);
+		return billyDao.selectCntBillyLike(blvo);
 	}
 	@Override
-	public void billyLikeUp(BillyGoods_likeVO blvo) throws Exception {
+	public void billyLikeUp(BillyGoodsLikeVO blvo) throws Exception {
 		billyDao.billyLikeUp(blvo);
 		System.out.println(blvo.getgNum()+"---service단 likeUp디버깅");		
 	}
 	@Override
-	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception {
+	public void billyLikeDown(BillyGoodsLikeVO blvo) throws Exception {
 		billyDao.billyLikeDown(blvo);
 		System.out.println(blvo.getgNum()+"---service단 likeDown디버깅");
 	}
@@ -119,9 +118,9 @@ public class BillyServiceImpl implements IF_billyService {
 		return rDate;
 	}
 	@Override
-	public List<BillyGoods_attachVO> selectOneBilly_attach(String vno) throws Exception {
+	public List<BillyGoodsAttachVO> selectOneBillyAttach(String vno) throws Exception {
 		System.out.println("---service단 selectAttachOne디버깅");	
-		return billyDao.selectOneBilly_attach(vno);
+		return billyDao.selectOneBillyAttach(vno);
 	}
 	@Override
 	public void deleteBillyAttach(BillyGoodsVO bvo) throws Exception {
@@ -141,5 +140,12 @@ public class BillyServiceImpl implements IF_billyService {
 		}
 		System.out.println("---service단updateBillyAttach디버깅");	
 		billyDao.updateBillyAttach(map);
+	}
+	@Override
+	public void deleteBillyOne(String vno) throws Exception { //빌리삭제
+		System.out.println(vno+"---service단 deleteBillyOne 디버깅");
+		billyDao.deleteBillyAttachGnun(vno); //1. 파일삭제
+		billyDao.updateBillyTransactionNo_1(vno);//2.트랜잭션에 있는 글번호를 0번으로 수정
+		billyDao.deleteBillyGoods(vno);//3.빌리삭제		
 	}
 }

@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Bootstrap Example</title>
+<title>billy View One</title>
 
 </head>
 <body class="p-3 m-0 border-0 bd-example">
@@ -35,7 +35,7 @@
 		integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-	<form name="frm" method="POST" action="billeyGoodsRentAction">
+	<form name="frm" method="POST" action="billeyGoodsRentAction" onsubmit="return chkTotalPrice()" >
 		<div class="mb-3">
 			<label for="gNumLB" class="form-label">글번호</label> <input type="text"
 				readonly class="form-control" name="gNum" value="${bvo.getgNum()}">
@@ -87,10 +87,9 @@
 					value="${bvo.getgLoca()}">
 			</div>
 			<div class="mb-3">
-				<label for="dateSelect" class="form-label">날짜 선택 </label><br> <input 
-					type="text" class="datepicker"
-					placeholder="빌리데이를 선택하시오"
-					name="tIndate" >
+				<label for="dateSelect" class="form-label">날짜 선택 </label><br> <input
+					type="text" class="datepicker" placeholder="빌리데이를 선택하시오"
+					name="tIndate">
 			</div>
 			<div class="mb-3">
 				<label for="gPriceLB" class="form-label">하루당 가격</label> <input
@@ -110,7 +109,8 @@
 			</div>
 			<div class="mb-3">
 				<c:forEach items="${bvo.getFiles()}" var="fname">
-					<img src="download1?filename=${fname}" style="width:600px; height:350px;">
+					<img src="download1?filename=${fname}"
+						style="width: 600px; height: 350px;">
 					<br>
 				</c:forEach>
 			</div>
@@ -148,82 +148,88 @@
 </body>
 
 <script type="text/javascript">
+	var today = new Date(); //오늘
+	var strDate = new Date('${bvo.getgStrDate()}'); //시작일
+	var endDate = new Date('${bvo.getgEndDate()}'); //종료일
+	var gPrice = ${bvo.getgPrice()}; //하루당 가격
+	var tempRdate = '${rDate}'; //임시 종료일
+	var datesForDisable = tempRdate.split(',');
+	datesForDisable.pop();//종료일을 배열로 나누는 작업&마지막배열에서 ',' 제거
 
-var today=new Date(); //오늘
-var strDate=new Date('${bvo.getgStrDate()}'); //시작일
-var endDate=new Date('${bvo.getgEndDate()}'); //종료일
-var gPrice=${bvo.getgPrice()}; //하루당 가격
-var tempRdate='${rDate}'; //임시 종료일
-var datesForDisable=tempRdate.split(','); datesForDisable.pop();//종료일을 배열로 나누는 작업&마지막배열에서 ',' 제거
+	//이미 지난 날짜는 선택 불가위한 if문
+	if (today >= strDate) {
+		strDate = today;
+	}
 
-//이미 지난 날짜는 선택 불가위한 if문
-if(today>=strDate){
-	strDate=today;
-}
-
-
-var likeval = ${like};
-var id='${login}';
-var gNum = ${bvo.getgNum()};
-var likeImg=document.getElementById("likeImg");
-var data= {
-		id:id,
-		gNum:gNum
-}
-console.log(gNum + "--gNum디버깅");
-console.log(id + "--id디버깅");	
-$('.LikeBtn').click(function() {
+	var likeval = ${like};
+	var id = '${login}';
+	var gNum = ${bvo.getgNum()};
+	var likeImg = document.getElementById("likeImg");
+	var data = {
+		id : id,
+		gNum : gNum
+	}
+	console.log(gNum + "--gNum디버깅");
+	console.log(id + "--id디버깅");
+	$('.LikeBtn').click(function() {
 		if (likeval > 0) {
 			likeval = 0;
-			likeImg.src = "resources/img/star.svg";		
+			likeImg.src = "resources/img/star.svg";
 			$.ajax({
 				type : 'post',
 				url : 'likeDown',
-				data : data,
-				success : function(data) {
+				data : data,				
+				error : function(data) {
 					alert('취소');
 				}
 			})// 아작스 끝
 		} else {
-			likeImg.src = "resources/img/star-fill.svg";		
+			likeImg.src = "resources/img/star-fill.svg";
 			likeval = 1;
 			$.ajax({
 				type : 'post',
 				url : 'likeUp',
 				data : data,
-				success : function(data) {
+				error : function(data) {
 					alert('좋아요');
 				}
 			})// 아작스 끝
 		}
 	});
 
+	$('.datepicker').datepicker({ //날짜선택
+		clearBtn : true,
+		format : 'yyyy-mm-dd',
+		startDate : strDate,
+		endDate : endDate,
+		multidate : true,
+		multidateSeparator : ",",
+		todayHighlight : true,
+		templates : {
+			leftArrow : '&laquo;',
+			rightArrow : '&raquo;',
+		},
+		datesDisabled : datesForDisable, //선택불가 날짜
+		language : "ko"
 
-$('.datepicker').datepicker({ //날짜선택
-    clearBtn: true,
-    format: 'yyyy-mm-dd',
-    startDate: strDate,
-    endDate: endDate,  
-    multidate: true,
-    multidateSeparator: ",",
-    todayHighlight: true,
-    templates: {
-        leftArrow: '&laquo;',
-        rightArrow: '&raquo;',
-     }, 
-    datesDisabled: datesForDisable, //선택불가 날짜
-    language : "ko"
-    
-}).on( "change", function() { //총액 계산을 위한 작업
-    let tempStr =$('.datepicker').val();  
-    console.log($('.datepicker').val());
-    let tempArr=tempStr.split(',');
-    let totalPrice= tempArr.length*gPrice;
-    console.log(totalPrice);
-    $('#tPrice').attr("value",totalPrice);  
-   
-});
+	}).on("change", function() { //총액 계산을 위한 작업
+		let tempStr = $('.datepicker').val();
+		console.log($('.datepicker').val());
+		let tempArr = tempStr.split(',');
+		let totalPrice = tempArr.length * gPrice;
+		console.log(totalPrice);
+		$('#tPrice').attr("value", totalPrice);
 
-
+	});
+//날짜를 선택하지 않았다면 빌리기 불가	
+function chkTotalPrice(){ 
+	if($('#tPrice').val()!=''){
+		alert('빌리기가 완료되었습니다');
+		return true;
+	}else{
+		alert('날짜를 선택해 주세요');
+		return false;
+	}
+}
 </script>
 </html>

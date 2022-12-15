@@ -1,6 +1,6 @@
 package com.billy.VO;
 
-public class BillyGoods_attachVO {
+public class BillyGoodsAttachVO {
 	private int gNum;
 	private String fName;
 	private String fIndate;

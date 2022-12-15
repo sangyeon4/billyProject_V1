@@ -6,14 +6,12 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.billy.VO.BillyGoodsAttachVO;
+import com.billy.VO.BillyGoodsLikeVO;
 import com.billy.VO.BillyGoodsRentVO;
 import com.billy.VO.BillyGoodsVO;
-import com.billy.VO.BillyGoods_attachVO;
-import com.billy.VO.BillyGoods_likeVO;
 
 @Repository
 public class BillyDAOImpl implements IF_billyDAO {
@@ -48,9 +46,9 @@ public class BillyDAOImpl implements IF_billyDAO {
 	}
 
 	@Override
-	public List<BillyGoods_attachVO> selectBilly_attach() {
-		System.out.println(sqlSession.selectList(mapperQuery+".selectAllBilly_attach")+"DAO단 All빌리첨부파일 디버깅");		
-		return sqlSession.selectList(mapperQuery+".selectAllBilly_attach");
+	public List<BillyGoodsAttachVO> selectBillyAttach() {
+		System.out.println(sqlSession.selectList(mapperQuery+".selectAllBillyAttach")+"DAO단 All빌리첨부파일 디버깅");		
+		return sqlSession.selectList(mapperQuery+".selectAllBillyAttach");
 	}
 	
 
@@ -62,9 +60,9 @@ public class BillyDAOImpl implements IF_billyDAO {
 
 
 	@Override
-	public List<BillyGoods_attachVO> selectOneBilly_attach(String vno) {
+	public List<BillyGoodsAttachVO> selectOneBillyAttach(String vno) {
 		System.out.println(vno+"----DAO단 빌리자세히보기(파일)글번호값 디버깅");
-		return sqlSession.selectList(mapperQuery+".selectOneBilly_attach",vno);
+		return sqlSession.selectList(mapperQuery+".selectOneBillyAttach",vno);
 	}
 
 	@Override
@@ -81,27 +79,27 @@ public class BillyDAOImpl implements IF_billyDAO {
 	}
 
 	@Override
-	public int selectCntBilly_like(BillyGoods_likeVO blvo) throws Exception {
+	public int selectCntBillyLike(BillyGoodsLikeVO blvo) throws Exception {
 		System.out.println(blvo.getgNum()+"----DAO단 빌리자세히보기(좋아요클릭유무) gNum디버깅");
-		return sqlSession.selectOne(mapperQuery+".selectCntBilly_like", blvo);
+		return sqlSession.selectOne(mapperQuery+".selectCntBillyLike", blvo);
 	}
 
 	@Override
-	public void billyLikeUp(BillyGoods_likeVO blvo) throws Exception {
+	public void billyLikeUp(BillyGoodsLikeVO blvo) throws Exception {
 		sqlSession.insert(mapperQuery+".billyLikeUp", blvo);
 		System.out.println(blvo.getgNum()+"---DAO단 likeUp디버깅");		
 	}
 
 	@Override
-	public void billyLikeDown(BillyGoods_likeVO blvo) throws Exception {
+	public void billyLikeDown(BillyGoodsLikeVO blvo) throws Exception {
 		sqlSession.delete(mapperQuery+".billyLikeDown", blvo);
 		System.out.println(blvo.getgNum()+"---DAO단 likeDown디버깅");				
 	}
 
 	@Override
-	public String selectOnebilly_name(String vno) throws Exception {
+	public String selectOnebillyName(String vno) throws Exception {
 		System.out.println(vno+"----DAO단 selectOne name디버깅");
-		return sqlSession.selectOne(mapperQuery+".selectOnebilly_name", vno);
+		return sqlSession.selectOne(mapperQuery+".selectOnebillyName", vno);
 	}
 
 	@Override
@@ -126,5 +124,23 @@ public class BillyDAOImpl implements IF_billyDAO {
 	public void updateBillyAttach(Map<String,String> map) throws Exception {
 		System.out.println("---DAO단 updateBillyAttach 디버깅 ");
 		sqlSession.delete(mapperQuery+".updateBillyAttach", map);	
+	}
+
+	@Override
+	public void deleteBillyAttachGnun(String vno) throws Exception {
+		System.out.println(vno+"---DAO단 deleteBillyAttachGnun 디버깅 ");
+		sqlSession.delete(mapperQuery+".deleteBillyAttachGnun", vno);
+	}
+
+	@Override
+	public void updateBillyTransactionNo_1(String vno) throws Exception {
+		System.out.println(vno+"---DAO단 updateBillyTransactionNo_1 디버깅 ");
+		sqlSession.update(mapperQuery+".updateBillyTransactionNo_1", vno);		
+	}
+
+	@Override
+	public void deleteBillyGoods(String vno) throws Exception {
+		System.out.println(vno+"---DAO단 deleteBillyGoods 디버깅 ");
+		sqlSession.delete(mapperQuery+".deleteBillyGoods", vno);		
 	}
 }
