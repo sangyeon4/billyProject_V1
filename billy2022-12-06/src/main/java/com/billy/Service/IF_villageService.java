@@ -67,5 +67,4 @@ public interface IF_villageService {
 	
 	//게시글 번호와 댓글 번호로 특정 댓글을 수정하는 메서드
 	public void updateVillageReply(VillageReplyVO vrvo);
-	
 }

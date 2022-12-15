@@ -5,6 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>Bootstrap Example</title>
@@ -12,79 +13,85 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.js"
    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
    crossorigin="anonymous"></script>
+   
    <script
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
-	.list-group{
-		width:200px;
-		float:left;
-	}
-	.list-group a{
-		font-size : 15px;
-	}
-	#myInfo{
-		width : 1200px;
-		height : 800px;
-	}
-	#profile{
-      	width : 250px;
-      	float:left;
-	}
-	#myInfo h2{
-		text-align: center;
-	}
-	#myInfo img{
-		width : 200px;
-		float : center;
-		padding-left:30px;	
-	}
-	#uploadButton{
-      width: 200px;
-      float:left;
-    }
-   
-	#joinTable {
-   		width : 750px;
-   		float:right;
-	}
-	.form-control {
-   		margin-left: 50px;
-   		margin-top: 15px;
-	}
+.list-group {
+	width: 200px;
+	float: left;
+}
 
-	.form-text {
-   		margin-left: 50px;
-	}
+.list-group a {
+	font-size: 15px;
+}
 
-	.form-select {
-   		margin-left: 50px;
-   		margin-top: 15px;
-	}
-	
+#myInfo {
+	width: 1050px;
+
+}
+
+#profile {
+	width: 150px;
+	float: left;
+}
+
+#myInfo h2 {
+	text-align: center;
+}
+
+#myInfo img {
+	width: 150px;
+	float: center;
+	padding-left: 30px;
+}
+
+#uploadButton {
+	width: 200px;
+	float: left;
+}
+
+#joinTable {
+	width: 750px;
+	float: right;
+}
+
+.form-control {
+	margin-left: 50px;
+	margin-top: 15px;
+}
+
+.form-text {
+	margin-left: 50px;
+}
+
+.form-select {
+	margin-left: 50px;
+	margin-top: 15px;
+}
 </style>
 <body>
+<div id="web">
+	
 	<%@ include file="../bbs/bootstrap.jsp" %>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
+	<%@ include file="../bbs/notice.jsp"%>
+	<br>
 	<%@ page import="com.billy.VO.*" %>
 	<% BillyMemberVO myInfo = (BillyMemberVO)request.getAttribute("myInfo"); %>
 	<form name="frm" action="billyMemberModAction" method="POST" encType="multipart/form-data">
 	<section id="myInfo">
 	<div class="list-group">
-	<a href="myPage?id=${login}" class="list-group-item list-group-item-action active" aria-current="true">내 정보</a>
-  	<a href="#" class="list-group-item list-group-item-action">찜 목록</a>
-  	<a href="#" class="list-group-item list-group-item-action">등록한 물품</a>
-  	<a href="#" class="list-group-item list-group-item-action">대여한 물품</a>
-  	<a href="#" class="list-group-item list-group-item-action">빌리 내역</a>
-  	<a href="deleteMemberPage?id=${myInfo.getId()}" class="list-group-item list-group-item-action">회원탈퇴</a>
-	</div>
-	
-	
+		<a href="myPage?id=${login}" class="list-group-item list-group-item-action active"aria-current="true">내 정보</a> 
+		<a href="myBookmarkList?id=${login}" class="list-group-item list-group-item-action">찜 목록</a> 
+		<a href="myBillyGoodsList?id=${login}" class="list-group-item list-group-item-action">등록한 물품</a> 
+		<a href="myBillyTransactionList?id=${login}" class="list-group-item list-group-item-action">대여한 물품</a>
+		<a href="deleteMemberPage?id=${login}" class="list-group-item list-group-item-action">회원탈퇴</a>
+	</div>		
 	<h2>내 정보</h2>
 	<div id="profile">
-	
-
 	<c:choose>
 		<c:when test="${myInfo.getPhotoName().equals('N')}">		
 			<img src='resources/img/basic.png' class='profileImg'>
@@ -98,8 +105,9 @@
 	<!-- <input type="file" name="file" id ="uploadButton" class="form-control" accept="image/gif, image/jpeg, image/png"> -->
 	<span id="fileAttach"></span>
 	<input type="button" value ="프로필사진 수정" id='imgModBtn' onclick = "delImg1()" class="btn btn-primary">
+	<input type="button" class="btn btn-primary" onclick="joinform_check();" value="수정하기">
 	</div>	
-         <table id="joinTable">
+         <table id="joinTable" style="width:700px;">
             <tr>
                <td align=center>아이디</td>
                <td><input type="text" name="id" id="id" class="form-control"
@@ -205,11 +213,12 @@
             
             </tr>
          </table>
-           <input type="button" class="btn btn-primary" onclick="joinform_check();" value="수정하기">
+           
          </form>   
 	</section>
 
 	<%@ include file="../bbs/footer.jsp"%>
+	</div>
 </body>
 <script type="text/javascript">
 //------------------첨부파일수정-------------------

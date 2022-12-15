@@ -2,6 +2,7 @@ package com.billy.VO;
 
 public class BillyMemberVO {
 
+	private String mid;
 	private String id;
 	private String pwd;
 	private String pwdChk;
@@ -14,6 +15,15 @@ public class BillyMemberVO {
 	private String pwdAnswer;
 	private String mailAuth;
 	private String mailKey;
+	
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
 
 	public String getMailAuth() {
 		return mailAuth;

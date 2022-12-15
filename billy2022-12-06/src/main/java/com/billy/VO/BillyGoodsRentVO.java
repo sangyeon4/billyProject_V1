@@ -3,9 +3,16 @@ package com.billy.VO;
 public class BillyGoodsRentVO {
 	String id; //빌린사람의 id
 	String gNum; //대여한 글
+	String gName;//대여한 제품이름
 	String tIndate; //대여한 날짜들
 	int tPrice; //총 가격
 	
+	public String getgName() {
+		return gName;
+	}
+	public void setgName(String gName) {
+		this.gName = gName;
+	}
 	public String getId() {
 		return id;
 	}

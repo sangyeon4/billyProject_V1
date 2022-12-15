@@ -13,7 +13,7 @@
    <%@ include file="../bbs/notice.jsp"%>
    
    
-
+<div id = "aa" style="height:750px;">
    <form name="frm" method="POST" action="billeyAction"
       encType="multipart/form-data">
       <div class="mb-3">
@@ -68,6 +68,7 @@
 
       <input type="submit" class="btn btn-primary">
    </form>
+   </div>
    <%@ include file="../bbs/footer.jsp"%>
 </body>
 <script

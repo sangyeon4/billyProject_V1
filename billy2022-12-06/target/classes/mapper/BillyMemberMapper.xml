@@ -52,5 +52,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="emailAuthFail" parameterType="String" resultType="int">
     	select count(*) from billyMember where id=#{id} and mailAuth=1
 	</select>
+	
+	<!-- 나의 찜목록 불러오기 -->
+	<select id="selectMyBookmarkList" parameterType="String" resultType="com.billy.VO.BillyGoodsVO">
+		select * from myBookmarkList where mid = #{mid}	
+	</select>
+	
+	<!--내가 등록한 빌리 -->
+	<select id="selectMyBillyGoods" resultType="com.billy.VO.BillyGoodsVO">
+		select * from billyGoods where id = #{id}
+	</select>
+	
+	<!--내가 빌린 빌리 -->
+	<select id="selectMyBillyTransactionList" resultType="com.billy.VO.BillyGoodsRentVO">
+		select * from myBillyTransaction where id=#{id} 
+	</select>
    
 </mapper>
