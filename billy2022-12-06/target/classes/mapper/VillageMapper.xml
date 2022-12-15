@@ -30,7 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where rnum between #{startNo} and #{endNo}
 	</select>
 	
-	<select id="selectNum" resultType="int">
+	<!-- 게시글의 가장큰번호를 가져온다 만약 0이라면 null값이 나오기때문에 nvl함수로 null치환함 -->
+	<select id="selectNum" resultType="int"> 
 		select nvl(max(vNum),0) from villageBoard
 	</select>
 	

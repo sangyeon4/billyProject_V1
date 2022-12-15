@@ -7,7 +7,7 @@ import com.billy.VO.VillagePageVO;
 
 public interface IF_billyAdminDAO {
 
-	public int selectBillyNotice();
+	public int selectBillyNotice(); // 
 	
 	public void insertBillyNotice(BillyNoticeVO bnvo) throws Exception;
 	

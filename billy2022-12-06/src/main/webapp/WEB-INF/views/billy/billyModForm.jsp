@@ -5,15 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>billy Mod Form</title>
 
+=======
+<title>Insert title here</title>
+>>>>>>> branch 'master' of https://github.com/Jinhokim7/billyProject_V1.git
 </head>
 <body>
+<<<<<<< HEAD
 	<%@ include file="../bbs/bootstrap.jsp"%>
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<%@ include file="../bbs/notice.jsp"%>
 
+=======
+	<%@ include file="../bbs/bootstrap.jsp" %>
+   <%@ include file="../bbs/header.jsp"%>
+   <%@ include file="../bbs/nav.jsp"%>
+   <%@ include file="../bbs/notice.jsp"%>
+<div style="height:900px">
+>>>>>>> branch 'master' of https://github.com/Jinhokim7/billyProject_V1.git
 	<h1>글번호:${bvo.getgNum()} 수정하기</h1>
 	<form name="frm" method="POST" action="billeyModAction"
 		encType="multipart/form-data">
@@ -115,10 +127,18 @@
 							"<input type='file' class='form-control' name='file' accept='image/gif, image/jpeg, image/png'>");
 				}
 			%>
+<<<<<<< HEAD
 		</div>
 		<input type="submit" class="btn btn-primary">
 	</form>
 	<%@ include file="../bbs/footer.jsp"%>
+=======
+      	</div>
+      <input type="submit" class="btn btn-primary">
+   </form>
+   </div>
+   <%@ include file="../bbs/footer.jsp"%>
+>>>>>>> branch 'master' of https://github.com/Jinhokim7/billyProject_V1.git
 </body>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

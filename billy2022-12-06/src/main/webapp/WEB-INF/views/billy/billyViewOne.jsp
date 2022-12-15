@@ -11,7 +11,6 @@
 	<%@ include file="../bbs/header.jsp"%>
 	<%@ include file="../bbs/nav.jsp"%>
 	<%@ include file="../bbs/notice.jsp"%>
-
 	<!-- jQuery library -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -36,7 +35,11 @@
 		integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<<<<<<< HEAD
 	<form name="frm" method="POST" action="billeyGoodsRentAction" onsubmit="return chkTotalPrice()" >
+=======
+	<form name="frm" method="POST" action="billeyGoodsRentAction">
+>>>>>>> branch 'master' of https://github.com/Jinhokim7/billyProject_V1.git
 		<div class="mb-3">
 			<label for="gNumLB" class="form-label">글번호</label> <input type="text"
 				readonly class="form-control" name="gNum" value="${bvo.getgNum()}">
@@ -145,8 +148,7 @@
 			</c:if>
 		</div>
 	</form>
-	<%@ include file="../bbs/footer.jsp"%>
-
+<!-- <%@ include file="../bbs/footer.jsp"%>  -->
 </body>
 
 <script type="text/javascript">

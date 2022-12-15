@@ -1,10 +1,14 @@
 package com.billy.DAO;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.billy.VO.BillyGoodsRentVO;
+import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyMemberVO;
 
 @Repository
@@ -81,8 +85,26 @@ public class BillyMemberDAOImpl implements IF_billyMemberDAO {
 	@Override
 	public void pwdModAction(BillyMemberVO bmvo) throws Exception {
 		System.out.println(bmvo.getId()+"--dao단 비밀번호 변경 디버깅");
-		sqlSession.insert(mapperQuery+".pwdModAction",bmvo);
+		sqlSession.update(mapperQuery+".pwdModAction",bmvo);
 		
+	}
+
+	@Override
+	public List<BillyGoodsVO> myBookmarkList(String id) throws Exception {
+		System.out.println(id+"--dao단 찜목록불러오기 디버깅");
+		return sqlSession.selectList(mapperQuery+".selectMyBookmarkList",id);
+	}
+
+	@Override
+	public List<BillyGoodsVO> selectMyBillyGoods(String id) throws Exception {
+		System.out.println(id+"--dao단 내가 등록한 빌리");
+		return sqlSession.selectList(mapperQuery+".selectMyBillyGoods",id);
+	}
+
+	@Override
+	public List<BillyGoodsRentVO> selectMyBillyTransactionList(String id) throws Exception {
+		System.out.println(id+"--dao단 내가 빌린 빌리");
+		return sqlSession.selectList(mapperQuery+".selectMyBillyTransactionList",id);
 	}
 
 }

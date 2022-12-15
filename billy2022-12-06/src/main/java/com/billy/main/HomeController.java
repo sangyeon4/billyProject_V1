@@ -16,7 +16,7 @@ import com.billy.VO.BillyGoodsVO;
 @Controller
 public class HomeController {
 	
-	@Inject // 나 서비스 주입
+	@Inject // 나 서비 스 주입
 	private IF_billyService bsrv;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)

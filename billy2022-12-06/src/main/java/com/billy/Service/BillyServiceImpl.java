@@ -46,7 +46,7 @@ public class BillyServiceImpl implements IF_billyService {
 		System.out.println(bList.get(0).getgNum() + "-----service단 전체보기시 번호 디버깅");
 		List<BillyGoodsAttachVO> baList = billyDao.selectBillyAttach();
 		for (int i = 0; i < bList.size(); i++) {
-			String[] temp = new String[1];
+			String[] temp = new String[1]; 
 			for (int j = 0; j < baList.size(); j++) {
 				if (bList.get(i).getgNum() == baList.get(j).getgNum()) {
 					temp[0] = baList.get(j).getfName(); // 사진하나받아오기

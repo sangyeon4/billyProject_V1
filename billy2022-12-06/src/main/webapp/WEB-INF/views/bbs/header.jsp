@@ -8,6 +8,9 @@
     <title>Bootstrap Example</title>
   </head>
   <style>
+   #web{
+   	width : 1200px;
+   }
    #login{
       float:right;
       margin-right:100px;
@@ -16,6 +19,7 @@
    	text-decoration:none;
    }
   </style>
+  <div id="web">
   <body class="p-3 m-0 border-0 bd-example">
 
     <!-- Example Code -->
@@ -53,6 +57,7 @@
     
     <!-- End Example Code -->
   </body>
+  </div>
   <!-- <script language="JavaScript">
 		var SetTime = 1800;		// 최초 설정 시간(기본 : 초)
 		function msg_time() {	// 1초씩 카운트

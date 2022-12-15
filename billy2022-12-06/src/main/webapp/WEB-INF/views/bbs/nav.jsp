@@ -11,12 +11,17 @@
 
   </head>
   <style>
-     .nav-item{
+  	#web{
+  		width : 1200px;
+  	}
+    .nav-item{
         padding-right : 150px;
-     }
+    }
+     
   </style>
+  
   <body class="p-3 m-0 border-0 bd-example">
-
+	<div id="web">
     <!-- Example Code -->
     
     <ul class="nav justify-content-center">
@@ -35,5 +40,6 @@
     </ul>
     <hr>
     <!-- End Example Code -->
+    </div>
   </body>
 </html>

@@ -1,5 +1,6 @@
 package com.billy.main;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -17,8 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.billy.Service.IF_billyMemberService;
 import com.billy.Service.IF_billyService;
 import com.billy.Service.IF_villageService;
+import com.billy.VO.BillyGoodsRentVO;
+import com.billy.VO.BillyGoodsVO;
 import com.billy.VO.BillyMemberVO;
-import com.billy.mail.TempKey;
 import com.billy.util.FileDataUtil3;
 
 @Controller
@@ -37,19 +39,19 @@ public class billyMemberController {
 	private FileDataUtil3 fileDataUtil3;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) throws Exception {
+	public String login(Locale locale, Model model) throws Exception {	//빌리 로그인
 
 		return "billyMember/login";
 	}
 
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
-	public String joinForm(Locale locale, Model model) {
+	public String joinForm(Locale locale, Model model) {	//빌리 회원가입화면으로 이동
 
 		return "billyMember/joinForm";
 	}
 	
 	@GetMapping("/registerEmail")
-	public String emailConfirm(BillyMemberVO bmvo)throws Exception{
+	public String emailConfirm(BillyMemberVO bmvo)throws Exception{	//회원가입 이메일 인증
 		System.out.println(bmvo.getEmail()+"이메일인증완료 컨트롤러단");
 	    bmsv.updateMailAuth(bmvo);
 
@@ -57,7 +59,7 @@ public class billyMemberController {
 	}
 
 	@RequestMapping(value = "/joinAction", method = RequestMethod.POST)
-	public String joinAction(Locale locale, Model model, BillyMemberVO bmvo, MultipartFile[] file) throws Exception {
+	public String joinAction(Locale locale, Model model, BillyMemberVO bmvo, MultipartFile[] file) throws Exception {	//회원가입하기
 		// 객체로 받을 때는 파라미터 이름과 객체의 변수의 이름이 일치하고 getter,setter가 있어야한다.>>자동매핑
 		System.out.println(bmvo.getName() + "---디버깅용도");
 
@@ -179,6 +181,33 @@ public class billyMemberController {
 		return "billyMember/myPage_Member_Info";
 	}
 	
+	@RequestMapping(value="/myBookmarkList", method=RequestMethod.GET)
+	public String myBookmarkList(HttpSession session,Model model,String id) throws Exception {
+		System.out.println(id + "--컨트롤러단 찜목록 id받아오는지");
+		List<BillyGoodsVO> list = bmsv.myBookmarkList(id);
+		model.addAttribute("bmList",list);
+	
+		return "billyMember/myBookmarkList";
+	}
+	
+	@RequestMapping(value="/myBillyTransactionList", method=RequestMethod.GET)
+	public String myBillyTransactionList(HttpSession session,Model model,String id) throws Exception {
+		System.out.println(id + "--컨트롤러단 빌린내역 id받아오는지");
+		List<BillyGoodsRentVO> list = bmsv.selectMyBillyTransactionList(id);
+		model.addAttribute("bmList",list);
+	
+		return "billyMember/myBillyTransactionList";
+	}
+	
+	@RequestMapping(value="/myBillyGoodsList", method=RequestMethod.GET)
+	public String myBillyGoodsList(HttpSession session,Model model,String id) throws Exception {
+		System.out.println(id + "--컨트롤러단 내가 등록한 빌리 id받아오는지");
+		List<BillyGoodsVO> list = bmsv.selectMyBillyGoods(id);
+		model.addAttribute("bmList",list);
+	
+		return "billyMember/myBillyGoodsList";
+	}
+	
 	@RequestMapping(value="/pwdSearch", method=RequestMethod.GET)
 	public String pwdSearch(HttpSession session,Model model) throws Exception {
 		System.out.println("--컨트롤러단 비밀번호찾기 페이지 이동");
@@ -216,8 +245,7 @@ public class billyMemberController {
 			return "success";
 		}else {
 			return "fail";
-		}
-		
+		}		
 	}
 	
 	@RequestMapping(value="/memberPwdChange", method=RequestMethod.GET)
