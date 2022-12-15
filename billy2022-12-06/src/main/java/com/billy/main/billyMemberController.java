@@ -124,7 +124,7 @@ public class billyMemberController {
 			session.setAttribute("login", bmvo.getId());
 		}
 		
-		return "home";
+		return "redirect:/billyViewAll";
 	}
 	
 	@RequestMapping(value="/loginChk", method=RequestMethod.POST)
@@ -205,7 +205,7 @@ public class billyMemberController {
 		List<BillyGoodsVO> list = bmsv.selectMyBillyGoods(id);
 		model.addAttribute("bmList",list);
 	
-		return "billyMember/myBookmarkList";
+		return "billyMember/myBillyGoodsList";
 	}
 	
 	@RequestMapping(value="/pwdSearch", method=RequestMethod.GET)

@@ -121,11 +121,11 @@
             <div class="wrap">            
                 <ul>
                 <%
-                	out.print("<li><a href='billyNoticeView?bnNum="+5+"'>billy 가족이 되신 것을 환영합니다!</a></li>");
-                	out.print("<li class='next'><a href='billyNoticeView?bnNum="+4+"'>들린다 들려 합격의 소리</a></li>");
-                	out.print("<li class='current'><a href='billyNoticeView?bnNum="+3+"'>billy 가족에게 폭언을 하지마세요</a></li>");
-                	out.print("<li><a href='billyNoticeView?bnNum="+2+"'>대여기간을 준수합니다</a></li>");
-                	out.print("<li class='prev'><a href='billyNoticeView?bnNum="+1+"'>공사중~</a></li>");
+                	out.print("<li><a href='billyNoticeView?bnNum="+5+"'>$$$광고문의$$$[010-0000-0000]</a></li>");
+                	out.print("<li class='next'><a href='billyNoticeView?bnNum="+4+"'>다음 고객님을 위해 물건을 깨끗하게 사용해주세요</a></li>");
+                	out.print("<li class='current'><a href='billyNoticeView?bnNum="+3+"'>billy 이용방법</a></li>");
+                	out.print("<li><a href='billyNoticeView?bnNum="+2+"'>billy 가족에게 폭언을 하지마세요</a></li>");
+                	out.print("<li class='prev'><a href='billyNoticeView?bnNum="+1+"'>billy가족이 되신 여러분 환영합니다!</a></li>");
                  %>
              	</ul>
             </div>
