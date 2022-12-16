@@ -164,7 +164,6 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 	public List<BillyGoodsVO> selectMyBillyGoods(String id) throws Exception {
 		System.out.println(id+"--서비스단 내가 등록한 빌리 디버깅");
 		List<BillyGoodsVO> bList = bmdao.selectMyBillyGoods(id);
-		System.out.println(bList.get(0).getgNum() + "-----service단 찜목록보기 번호 디버깅");
 		List<BillyGoodsAttachVO> baList = billyDao.selectBillyAttach();
 		for (int i = 0; i < bList.size(); i++) {
 			String[] temp = new String[1];
