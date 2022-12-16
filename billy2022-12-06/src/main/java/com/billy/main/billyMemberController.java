@@ -213,7 +213,7 @@ public class billyMemberController {
 	public String myBillyGoodsList(HttpSession session,Model model,String id) throws Exception {
 		System.out.println(id + "--컨트롤러단 내가 등록한 빌리 id받아오는지");
 		List<BillyGoodsVO> list = bmsv.selectMyBillyGoods(id);
-		String emptyList = "빌린 물건이 없습니다.";
+		System.out.println(list.size());
 		if(list.size()==0){
 			return "billyMember/myListEmpty";
 		}else {
