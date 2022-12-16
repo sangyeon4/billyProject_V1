@@ -144,8 +144,7 @@ public class BillyMemberServiceImpl implements IF_billyMemberService {
 	@Override
 	public List<BillyGoodsVO> myBookmarkList(String id) throws Exception {
 		System.out.println(id+"--서비스단 찜목록 불러오기 디버깅");
-		List<BillyGoodsVO> bList = bmdao.myBookmarkList(id);
-		System.out.println(bList.get(0).getgNum() + "-----service단 찜목록보기 번호 디버깅");
+		List<BillyGoodsVO> bList = bmdao.myBookmarkList(id);	
 		List<BillyGoodsAttachVO> baList = billyDao.selectBillyAttach();
 		for (int i = 0; i < bList.size(); i++) {
 			String[] temp = new String[1];

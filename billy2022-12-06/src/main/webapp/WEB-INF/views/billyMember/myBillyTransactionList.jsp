@@ -49,6 +49,7 @@
 				<th>대여날짜</th>
 				<th>총 대여금액</th>
 			</tr>
+			<c:if test="${bmList.size()!=0}">
 			<c:forEach items="${bmList}" var="bmList">
 				<tr class='record'>
 					<td><a href="billyViewOne?vno=${bmList.gNum}&vid=${login}">${bmList.gName}</a></td>
@@ -56,6 +57,7 @@
 					<td>${bmList.tPrice}</td>
 				</tr>
 			</c:forEach>
+			</c:if>
 			</table>
 		</div>
 	</div>

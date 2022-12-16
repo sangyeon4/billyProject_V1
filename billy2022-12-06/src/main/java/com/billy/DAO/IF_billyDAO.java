@@ -17,8 +17,9 @@ public interface IF_billyDAO {
 	public List<BillyGoodsAttachVO> selectBillyAttach()throws Exception; //빌리게시판 전체 사진불러오기
 	public BillyGoodsVO selectBillyOne(String vno)throws Exception; //빌리 자세히보기
 	public String selectOnebillyName(String vno) throws Exception; //빌리자세히 보기 시 해당글의 주인의 이름	
-	public void deleteBillyAttachGnun(String vno)throws Exception; //빌리 삭제 시  해당글의 첨부파일삭제
+	public void deleteBillyAttachGnum(String vno)throws Exception; //빌리 삭제 시  해당글의 첨부파일삭제
 	public void updateBillyTransactionNo_1(String vno)throws Exception; //빌리 삭제 시  트랜잭션의 글번호를 0번으로 수정	
+	public void deleteBillyBookmark(String vno)throws Exception;//빌리 삭제 시 좋아요 제거
 	public void deleteBillyGoods(String vno)throws Exception; //빌리 삭제
 	public List<String> selectBillyRentdate(String gNum)throws Exception; //빌리자세히 보기 시 해당글의 이미 대여된 날짜들
 	public List<BillyGoodsAttachVO>selectOneBillyAttach(String vno)throws Exception;//빌리자세히보기 사진정보 불러오기	
