@@ -119,22 +119,24 @@
 
 			<!-- 세션아이디체크 -->
 			<!-- 세션아이디가 해당글에 좋아요 클릭유무 -->
-			<c:if test="${bvo.getId()!=login}">
-				<input type="submit" class="btn btn-primary" value="빌리기">
-				<c:choose>
-					<c:when test="${like>0}">
-						<button type="button" class="LikeBtn">
-							<img id="likeImg" src="resources/img/star-fill.svg" width="25"
-								height="25">
-						</button>
-					</c:when>
-					<c:otherwise>
-						<button type="button" class="LikeBtn">
-							<img id="likeImg" src="resources/img/star.svg" width="25"
-								height="25">
-						</button>
-					</c:otherwise>
-				</c:choose>
+			<c:if test="${bvo.getgNum()!=0}">
+				<c:if test="${bvo.getId()!=login}">
+					<input type="submit" class="btn btn-primary" value="빌리기">
+					<c:choose>
+						<c:when test="${like>0}">
+							<button type="button" class="LikeBtn">
+								<img id="likeImg" src="resources/img/star-fill.svg" width="25"
+									height="25">
+							</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="LikeBtn">
+								<img id="likeImg" src="resources/img/star.svg" width="25"
+									height="25">
+							</button>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 			</c:if>
 			<c:if test="${bvo.getId()==login}">
 				<input type="button" class="btn btn-primary" value="수정"
